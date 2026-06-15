@@ -1,0 +1,39 @@
+# configs/default_config.yaml
+
+project:
+  name: "ct_sdm_ai_pipeline"
+  seed: 42
+  metrics_tracking: true # Activa el guardado de tiempos y errores de todas las fases
+
+paths:
+  raw_data: "data/raw/"
+  processed_data: "data/processed/"
+  test_ood_data: "data/test_ood/"
+  models_dir: "saved_models/"
+  logs_dir: "logs/"
+
+data:
+  input_specs: ["SNDR", "Bw", "Power"]
+  target_metrics: ["SNDR", "Bw", "Power", "FoMs"]
+
+phases_benchmarks:
+  phase1_ood:
+    models: ["IsolationForest", "OneClassSVM", "GMM", "DenseAutoencoder"]
+    metrics: ["ROC-AUC", "Inference_Time"]
+  
+  phase2_router:
+    models: ["LogisticRegression", "NaiveBayes", "KNN", "SVM_RBF", "RandomForest", "ExtraTrees", "XGBoost", "LightGBM", "CatBoost", "MLP", "StackingEnsemble"]
+    metrics: ["Top3_Accuracy", "LogLoss", "Training_Time"]
+    heuristic_penalty_lambda: 0.5 # Parámetro λ para penalizar arquitecturas complejas
+  
+  phase3_generative:
+    models: ["cVAE", "MDN"]
+    metrics: ["Masked_MSE", "Masked_NLL", "KL_Divergence"]
+    epochs: 200
+    batch_size: 256
+  
+  phase4_surrogate:
+    models: ["DeepMLP", "MultiOutputXGBoost", "PINN"]
+    metrics: ["MAE", "R2_Score", "Physical_Violation_Rate"]
+    epochs: 500
+    batch_size: 512
