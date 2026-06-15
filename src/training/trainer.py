@@ -19,17 +19,20 @@ class GenericTrainer:
             self.optimizer.zero_grad()
             
             if is_masked:
-                # Específico para Fase 3 (MDN o cVAE)
-                cond, y_true, mask = batch['cond'].to(self.device), batch['y'].to(self.device), batch['mask'].to(self.device)
+                # Fase 3: Entrenamiento MDN
+                cond = batch['cond'].to(self.device)
+                y_true = batch['y'].to(self.device)
+                mask = batch['mask'].to(self.device)
                 
-                # Asumiendo MDN para el ejemplo
                 pi, mu, sigma = self.model(cond)
                 loss = self.criterion(pi, mu, sigma, y_true, mask)
             else:
-                # Específico para Fase 4 (MLP Surrogate)
-                x, y_true = batch['x'].to(self.device), batch['y'].to(self.device)
+                # Fase 4: Entrenamiento Surrogate
+                x = batch['x'].to(self.device)
+                y_true = batch['y'].to(self.device)
                 y_pred = self.model(x)
-                loss = self.criterion(x, y_pred, y_true) # Incluye X por si usamos PINN Loss
+                
+                loss = self.criterion(x, y_pred, y_true) # PINNSurrogateLoss acepta 'x' para límites físicos
                 
             loss.backward()
             self.optimizer.step()
@@ -40,4 +43,3 @@ class GenericTrainer:
     def save_model(self, path):
         os.makedirs(os.path.dirname(path), exist_ok=True)
         torch.save(self.model.state_dict(), path)
-        print(f"Modelo guardado en {path}")
