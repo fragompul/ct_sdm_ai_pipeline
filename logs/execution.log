@@ -1,0 +1,7 @@
+2026-06-16 08:33:17,647 | INFO     | Iniciando Pipeline. Dispositivo detectado: cpu
+2026-06-16 08:33:17,647 | INFO     | [INICIO] Entrenamiento Fase 1 (Detección OOD)...
+2026-06-16 08:59:41,051 | INFO     |   -> IsolationForest ROC-AUC: 0.9282
+2026-06-16 08:59:41,051 | INFO     |   -> OneClassSVM ROC-AUC: 0.9963
+2026-06-16 08:59:41,051 | INFO     |   -> GMM ROC-AUC: 0.9157
+2026-06-16 08:59:41,051 | INFO     | [FIN] Entrenamiento Fase 1 (Detección OOD) completado en 1583.4037 segundos.
+2026-06-16 08:59:41,051 | INFO     | [INICIO] Entrenamiento Fase 2 (Stacking Router)...
