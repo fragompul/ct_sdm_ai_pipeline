@@ -10,12 +10,14 @@ import joblib
 from torch.utils.data import DataLoader
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import log_loss
+from sklearn.model_selection import train_test_split
 
 sys.path.append('src')
 
 from utils.logger import set_global_seeds, setup_logger, Timer, save_metrics_to_json
+from utils.metrics_plotter import plot_roc_curve, plot_confusion_matrix
 from models.phase1_ood import OODDetectorBenchmark
-from models.phase2_router import TopologicalRouter
+from models.phase2_router import TopologicalRouterBenchmark
 from models.phase3_gen import MixtureDensityNetwork
 from models.phase4_surrogate import SurrogateMLP, PINNSurrogateLoss
 from data.dataloaders import Phase3GenerativeDataset, Phase4SurrogateDataset
@@ -28,29 +30,61 @@ def load_config():
 
 def run_phase1_ood(config):
     logger = setup_logger(name="phase1_logger", log_file="logs/phase1_ood.log")
-    metrics = {"training_times_seconds": {}, "phase1_ood_roc_auc": {}}
+    metrics = {"training_times_seconds": {}, "phase1_ood_metrics": {}}
     models_dir = config['paths']['models_dir']
+    plots_dir = "logs/plots/phase1/"
     spec_cols = config["data"]["input_specs"]
     
     try:
-        with Timer("Entrenamiento Fase 1 (Detección OOD)", logger, metrics["training_times_seconds"], "phase1_ood"):
+        with Timer("Optimizacion y Entrenamiento Fase 1 (Detección OOD)", logger, metrics["training_times_seconds"], "phase1_ood"):
             df_ood = pd.read_csv(os.path.join(config["paths"]["test_ood_data"], "phase1_ood_data.csv"))
-            X_valid = df_ood[df_ood['label'] == 1][spec_cols].values
             
-            scaler_specs = StandardScaler()
-            X_valid_scaled = scaler_specs.fit_transform(X_valid)
-            joblib.dump(scaler_specs, os.path.join(models_dir, 'scaler_specs.pkl'))
+            # 1. Separar datos válidos para entrenamiento y validación OOD
+            valid_data = df_ood[df_ood['label'] == 1]
+            anomalies = df_ood[df_ood['label'] == -1]
             
-            ood_benchmark = OODDetectorBenchmark(random_state=config['project']['seed'])
-            ood_benchmark.train_baselines(X_valid_scaled)
-            joblib.dump(ood_benchmark.fitted_models, os.path.join(models_dir, 'phase1_ood_models.pkl'))
+            X_valid_train, X_valid_val = train_test_split(valid_data[spec_cols].values, test_size=0.2, random_state=42)
             
-            X_test_scaled = scaler_specs.transform(df_ood[spec_cols].values)
-            roc_results = ood_benchmark.evaluate(X_test_scaled, df_ood['label'].values)
-            metrics["phase1_ood_roc_auc"] = roc_results
+            # Para la validación necesitamos mezclar anomalías para que Optuna pueda medir ROC-AUC
+            X_val_combined = np.vstack((X_valid_val, anomalies[spec_cols].values))
+            y_val_combined = np.array([1]*len(X_valid_val) + [-1]*len(anomalies))
             
-            for model_name, roc in roc_results.items():
-                logger.info(f"  -> {model_name} ROC-AUC: {roc:.4f}")
+            scaler = StandardScaler()
+            X_valid_train_scaled = scaler.fit_transform(X_valid_train)
+            X_val_combined_scaled = scaler.transform(X_val_combined)
+            joblib.dump(scaler, os.path.join(models_dir, 'scaler_specs.pkl'))
+            
+            benchmark = OODDetectorBenchmark(random_state=config['project']['seed'])
+            # HPO de 10 trials
+            benchmark.train_all(X_valid_train_scaled, X_val_combined_scaled, y_val_combined, n_trials=10)
+            
+            # 2. Evaluar y Guardar Plots
+            # Simulamos un Test Set para gráficas usando el Validation Set aquí por simplicidad
+            results, y_true_binary = benchmark.evaluate_and_get_scores(X_val_combined_scaled, y_val_combined)
+            
+            best_model_name = None
+            best_auc = 0
+            
+            for name, data in results.items():
+                logger.info(f"[{name}] AUC: {data['metrics']['ROC-AUC']:.4f} | F1: {data['metrics']['F1']:.4f}")
+                plot_roc_curve(y_true_binary, data["scores"], name, "Phase1", plots_dir)
+                plot_confusion_matrix(y_true_binary, data["y_pred_bin"], name, "Phase1", plots_dir, class_names=["Anomaly", "Valid"])
+                
+                metrics["phase1_ood_metrics"][name] = data['metrics']
+                if data['metrics']['ROC-AUC'] > best_auc:
+                    best_auc = data['metrics']['ROC-AUC']
+                    best_model_name = name
+                    
+            logger.info(f"Mejor Modelo Fase 1: {best_model_name} (AUC: {best_auc:.4f})")
+            metrics["best_model"] = best_model_name
+            metrics["timings_detailed"] = benchmark.timings
+            
+            # Guardamos el mejor modelo
+            if best_model_name == "DenseAutoencoder":
+                torch.save(benchmark.ae_model.state_dict(), os.path.join(models_dir, 'phase1_ood_ae.pth'))
+            else:
+                joblib.dump(benchmark.fitted_models[best_model_name], os.path.join(models_dir, 'phase1_ood_model.pkl'))
+                
     except Exception as e:
         logger.error("Error en Fase 1", exc_info=True)
     finally:
@@ -60,25 +94,45 @@ def run_phase2_router(config):
     logger = setup_logger(name="phase2_logger", log_file="logs/phase2_router.log")
     metrics = {"training_times_seconds": {}, "phase2_router_metrics": {}}
     models_dir = config['paths']['models_dir']
+    plots_dir = "logs/plots/phase2/"
     spec_cols = config["data"]["input_specs"]
     
     try:
-        with Timer("Entrenamiento Fase 2 (Stacking Router)", logger, metrics["training_times_seconds"], "phase2_router"):
+        with Timer("Optimizacion y Entrenamiento Fase 2 (Router)", logger, metrics["training_times_seconds"], "phase2_router"):
             df_unified = pd.read_csv(os.path.join(config["paths"]["processed_data"], "unified_ct_sdm_dataset.csv"))
             scaler_specs = joblib.load(os.path.join(models_dir, 'scaler_specs.pkl'))
             
-            X_router = scaler_specs.transform(df_unified[spec_cols].values)
-            y_router = df_unified['topology_id'].values
+            X_all = scaler_specs.transform(df_unified[spec_cols].values)
+            y_all = df_unified['topology_id'].values - 1 # Para que empiece en 0
             
-            router = TopologicalRouter(random_state=config['project']['seed'], 
-                                       lambda_penalty=config['phases_benchmarks']['phase2_router']['heuristic_penalty_lambda'])
-            router.train(X_router, y_router)
-            joblib.dump(router.model, os.path.join(models_dir, 'phase2_router_model.pkl'))
+            X_train, X_test, y_train, y_test = train_test_split(X_all, y_all, test_size=0.2, random_state=42, stratify=y_all)
+            X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=42, stratify=y_train)
             
-            y_pred_proba = router.model.predict_proba(X_router)
-            train_log_loss = log_loss(y_router, y_pred_proba)
-            metrics["phase2_router_metrics"]["train_log_loss"] = train_log_loss
-            logger.info(f"  -> Stacking Ensemble Train Log-Loss: {train_log_loss:.4f}")
+            benchmark = TopologicalRouterBenchmark(random_state=config['project']['seed'])
+            benchmark.optimize_and_train_all(X_train, y_train, X_val, y_val, n_trials=5)
+            
+            results = benchmark.evaluate_all(X_test, y_test)
+            
+            best_model_name = None
+            best_logloss = float('inf')
+            
+            class_names = [f"Top {i+1}" for i in range(12)]
+            
+            for name, data in results.items():
+                logger.info(f"[{name}] Acc: {data['metrics']['Accuracy']:.4f} | Top3: {data['metrics']['Top3_Accuracy']:.4f} | LogLoss: {data['metrics']['LogLoss']:.4f}")
+                plot_confusion_matrix(y_test, data["y_pred"], name, "Phase2", plots_dir, class_names=class_names)
+                
+                metrics["phase2_router_metrics"][name] = data['metrics']
+                if data['metrics']['LogLoss'] < best_logloss:
+                    best_logloss = data['metrics']['LogLoss']
+                    best_model_name = name
+                    
+            logger.info(f"Mejor Modelo Fase 2: {best_model_name} (LogLoss: {best_logloss:.4f})")
+            metrics["best_model"] = best_model_name
+            metrics["timings_detailed"] = benchmark.timings
+            
+            joblib.dump(benchmark.trained_models[best_model_name], os.path.join(models_dir, 'phase2_router_model.pkl'))
+            
     except Exception as e:
         logger.error("Error en Fase 2", exc_info=True)
     finally:
@@ -168,7 +222,7 @@ def main():
     # DESCOMENTA LA FASE QUE QUIERAS EJECUTAR
     # ==========================================
     
-    # run_phase1_ood(config)
+    run_phase1_ood(config)
     # run_phase2_router(config)
     # run_phase3_mdn(config, device)
     # run_phase4_surrogate(config, device)

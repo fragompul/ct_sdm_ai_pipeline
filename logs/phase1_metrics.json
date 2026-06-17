@@ -1,0 +1,45 @@
+{
+    "training_times_seconds": {
+        "phase1_ood": 9221.426673412323
+    },
+    "phase1_ood_metrics": {
+        "IsolationForest": {
+            "ROC-AUC": 0.9201231037664319,
+            "Precision": 0.9558861155960227,
+            "Recall": 0.9897320653712991,
+            "F1": 0.9725146986221445
+        },
+        "OneClassSVM": {
+            "ROC-AUC": 0.998342357057378,
+            "Precision": 1.0,
+            "Recall": 0.9680268939497748,
+            "F1": 0.983753725038759
+        },
+        "GMM": {
+            "ROC-AUC": 0.9916559693788994,
+            "Precision": 0.9917971731513753,
+            "Recall": 0.9852375601779532,
+            "F1": 0.9885064845790752
+        },
+        "DenseAutoencoder": {
+            "ROC-AUC": 0.933225470689797,
+            "Precision": 0.9597951132486688,
+            "Recall": 0.9534471575908722,
+            "F1": 0.9566106044635901
+        }
+    },
+    "best_model": "OneClassSVM",
+    "timings_detailed": {
+        "IsolationForest_hpo_time": 29.63220500946045,
+        "OneClassSVM_hpo_time": 8451.516828298569,
+        "GMM_hpo_time": 15.860172748565674,
+        "IsolationForest_train_time": 0.6691172122955322,
+        "OneClassSVM_train_time": 476.8489818572998,
+        "GMM_train_time": 0.1978282928466797,
+        "DenseAutoencoder_train_time": 196.12533140182495,
+        "IsolationForest_inference_time": 0.3049633502960205,
+        "OneClassSVM_inference_time": 48.41597628593445,
+        "GMM_inference_time": 0.004397869110107422,
+        "DenseAutoencoder_inference_time": 0.0029861927032470703
+    }
+}
