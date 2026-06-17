@@ -1,0 +1,445 @@
+2026-06-17 08:42:55,136 | INFO     | INICIANDO BENCHMARK DE INFERENCIA AUTOMÁTICO
+2026-06-17 08:42:56,927 | INFO     | Test 1/100 | Specs: SNDR=102.3, Bw=35.0M, Pwr=5.7m
+2026-06-17 08:42:56,945 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:42:57,505 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 164.56 dB
+2026-06-17 08:42:57,575 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 166.27 dB
+2026-06-17 08:42:57,645 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 168.92 dB
+2026-06-17 08:42:57,645 | INFO     | Test 2/100 | Specs: SNDR=84.2, Bw=44.7M, Pwr=4.1m
+2026-06-17 08:42:57,662 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:42:57,728 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 142.69 dB
+2026-06-17 08:42:57,813 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 142.99 dB
+2026-06-17 08:42:57,874 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 129.87 dB
+2026-06-17 08:42:57,875 | INFO     | Test 3/100 | Specs: SNDR=74.1, Bw=30.0M, Pwr=4.0m
+2026-06-17 08:42:57,890 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:42:57,988 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 154.02 dB
+2026-06-17 08:42:58,066 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 149.08 dB
+2026-06-17 08:42:58,133 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 150.32 dB
+2026-06-17 08:42:58,134 | INFO     | Test 4/100 | Specs: SNDR=70.4, Bw=6.3M, Pwr=3.8m
+2026-06-17 08:42:58,149 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:42:58,218 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 150.80 dB
+2026-06-17 08:42:58,283 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 151.88 dB
+2026-06-17 08:42:58,414 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 87.54 dB
+2026-06-17 08:42:58,414 | INFO     | Test 5/100 | Specs: SNDR=101.7, Bw=36.6M, Pwr=6.3m
+2026-06-17 08:42:58,429 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:42:58,503 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 162.14 dB
+2026-06-17 08:42:58,571 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 168.30 dB
+2026-06-17 08:42:58,647 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 158.64 dB
+2026-06-17 08:42:58,648 | INFO     | Test 6/100 | Specs: SNDR=74.6, Bw=16.3M, Pwr=1.9m
+2026-06-17 08:42:58,664 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:42:58,735 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 146.87 dB
+2026-06-17 08:42:58,796 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 141.57 dB
+2026-06-17 08:42:58,871 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 149.49 dB
+2026-06-17 08:42:58,872 | INFO     | Test 7/100 | Specs: SNDR=89.5, Bw=24.3M, Pwr=2.8m
+2026-06-17 08:42:58,891 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:42:58,969 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 170.78 dB
+2026-06-17 08:42:59,036 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 146.95 dB
+2026-06-17 08:42:59,104 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 168.96 dB
+2026-06-17 08:42:59,104 | INFO     | Test 8/100 | Specs: SNDR=97.5, Bw=43.7M, Pwr=5.4m
+2026-06-17 08:42:59,124 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:42:59,198 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 145.54 dB
+2026-06-17 08:42:59,267 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 190.66 dB
+2026-06-17 08:42:59,349 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 152.81 dB
+2026-06-17 08:42:59,349 | INFO     | Test 9/100 | Specs: SNDR=109.6, Bw=7.6M, Pwr=5.1m
+2026-06-17 08:42:59,350 | WARNING  |   -> Test 9 descartado por OOD Guardrails.
+2026-06-17 08:42:59,351 | INFO     | Test 10/100 | Specs: SNDR=74.1, Bw=8.9M, Pwr=2.1m
+2026-06-17 08:42:59,365 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:42:59,430 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 146.83 dB
+2026-06-17 08:42:59,500 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 124.57 dB
+2026-06-17 08:42:59,565 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 134.30 dB
+2026-06-17 08:42:59,565 | INFO     | Test 11/100 | Specs: SNDR=69.7, Bw=42.8M, Pwr=9.1m
+2026-06-17 08:42:59,586 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:42:59,661 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 147.05 dB
+2026-06-17 08:42:59,735 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 149.41 dB
+2026-06-17 08:42:59,804 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 84.14 dB
+2026-06-17 08:42:59,805 | INFO     | Test 12/100 | Specs: SNDR=83.1, Bw=47.2M, Pwr=6.6m
+2026-06-17 08:42:59,820 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:42:59,918 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 151.23 dB
+2026-06-17 08:42:59,985 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 131.14 dB
+2026-06-17 08:43:00,056 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 148.65 dB
+2026-06-17 08:43:00,056 | INFO     | Test 13/100 | Specs: SNDR=65.9, Bw=41.1M, Pwr=9.0m
+2026-06-17 08:43:00,071 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:00,152 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 139.29 dB
+2026-06-17 08:43:00,234 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 147.43 dB
+2026-06-17 08:43:00,299 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 83.94 dB
+2026-06-17 08:43:00,299 | INFO     | Test 14/100 | Specs: SNDR=88.0, Bw=20.8M, Pwr=1.0m
+2026-06-17 08:43:00,315 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:00,383 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 167.22 dB
+2026-06-17 08:43:00,453 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 155.52 dB
+2026-06-17 08:43:00,527 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 150.66 dB
+2026-06-17 08:43:00,527 | INFO     | Test 15/100 | Specs: SNDR=110.9, Bw=9.4M, Pwr=5.5m
+2026-06-17 08:43:00,528 | WARNING  |   -> Test 15 descartado por OOD Guardrails.
+2026-06-17 08:43:00,528 | INFO     | Test 16/100 | Specs: SNDR=81.5, Bw=23.5M, Pwr=7.0m
+2026-06-17 08:43:00,545 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:00,612 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 85.36 dB
+2026-06-17 08:43:00,675 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 71.08 dB
+2026-06-17 08:43:00,742 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 165.31 dB
+2026-06-17 08:43:00,742 | INFO     | Test 17/100 | Specs: SNDR=67.6, Bw=35.7M, Pwr=0.7m
+2026-06-17 08:43:00,761 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:00,829 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 149.86 dB
+2026-06-17 08:43:00,900 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 148.20 dB
+2026-06-17 08:43:00,978 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 107.62 dB
+2026-06-17 08:43:00,978 | INFO     | Test 18/100 | Specs: SNDR=88.0, Bw=40.5M, Pwr=9.8m
+2026-06-17 08:43:01,000 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:01,073 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 154.38 dB
+2026-06-17 08:43:01,144 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 145.16 dB
+2026-06-17 08:43:01,221 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 163.83 dB
+2026-06-17 08:43:01,221 | INFO     | Test 19/100 | Specs: SNDR=90.6, Bw=47.2M, Pwr=8.2m
+2026-06-17 08:43:01,235 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:01,312 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 147.60 dB
+2026-06-17 08:43:01,387 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 159.87 dB
+2026-06-17 08:43:01,475 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 178.79 dB
+2026-06-17 08:43:01,475 | INFO     | Test 20/100 | Specs: SNDR=82.5, Bw=16.3M, Pwr=8.6m
+2026-06-17 08:43:01,489 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:01,564 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 87.03 dB
+2026-06-17 08:43:01,641 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 83.85 dB
+2026-06-17 08:43:01,718 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 162.67 dB
+2026-06-17 08:43:01,718 | INFO     | Test 21/100 | Specs: SNDR=96.2, Bw=30.4M, Pwr=8.3m
+2026-06-17 08:43:01,733 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:01,808 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 142.39 dB
+2026-06-17 08:43:01,888 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 184.50 dB
+2026-06-17 08:43:01,965 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 157.71 dB
+2026-06-17 08:43:01,966 | INFO     | Test 22/100 | Specs: SNDR=68.0, Bw=49.0M, Pwr=6.3m
+2026-06-17 08:43:01,987 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:02,069 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 133.18 dB
+2026-06-17 08:43:02,159 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 156.01 dB
+2026-06-17 08:43:02,231 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 111.59 dB
+2026-06-17 08:43:02,231 | INFO     | Test 23/100 | Specs: SNDR=76.4, Bw=14.6M, Pwr=4.5m
+2026-06-17 08:43:02,246 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:02,348 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 153.44 dB
+2026-06-17 08:43:02,473 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 110.76 dB
+2026-06-17 08:43:02,548 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 128.54 dB
+2026-06-17 08:43:02,548 | INFO     | Test 24/100 | Specs: SNDR=92.2, Bw=33.0M, Pwr=1.4m
+2026-06-17 08:43:02,563 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:02,631 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 138.43 dB
+2026-06-17 08:43:02,705 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 175.51 dB
+2026-06-17 08:43:02,776 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 164.69 dB
+2026-06-17 08:43:02,776 | INFO     | Test 25/100 | Specs: SNDR=80.0, Bw=21.0M, Pwr=8.9m
+2026-06-17 08:43:02,796 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:02,889 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 145.64 dB
+2026-06-17 08:43:02,963 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 73.03 dB
+2026-06-17 08:43:03,034 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 153.78 dB
+2026-06-17 08:43:03,034 | INFO     | Test 26/100 | Specs: SNDR=80.0, Bw=32.0M, Pwr=6.5m
+2026-06-17 08:43:03,051 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:03,134 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 137.38 dB
+2026-06-17 08:43:03,210 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 107.84 dB
+2026-06-17 08:43:03,271 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 151.43 dB
+2026-06-17 08:43:03,271 | INFO     | Test 27/100 | Specs: SNDR=62.3, Bw=18.8M, Pwr=8.3m
+2026-06-17 08:43:03,286 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:03,365 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 149.99 dB
+2026-06-17 08:43:03,441 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 136.39 dB
+2026-06-17 08:43:03,509 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 81.12 dB
+2026-06-17 08:43:03,510 | INFO     | Test 28/100 | Specs: SNDR=66.2, Bw=47.7M, Pwr=6.1m
+2026-06-17 08:43:03,527 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:03,636 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 144.86 dB
+2026-06-17 08:43:03,700 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 146.95 dB
+2026-06-17 08:43:03,783 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 133.76 dB
+2026-06-17 08:43:03,783 | INFO     | Test 29/100 | Specs: SNDR=71.9, Bw=25.1M, Pwr=8.7m
+2026-06-17 08:43:03,803 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:03,903 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 137.39 dB
+2026-06-17 08:43:03,973 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 153.32 dB
+2026-06-17 08:43:04,038 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 107.36 dB
+2026-06-17 08:43:04,038 | INFO     | Test 30/100 | Specs: SNDR=92.0, Bw=21.8M, Pwr=5.4m
+2026-06-17 08:43:04,057 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:04,123 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 157.08 dB
+2026-06-17 08:43:04,197 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 175.46 dB
+2026-06-17 08:43:04,282 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 166.22 dB
+2026-06-17 08:43:04,282 | INFO     | Test 31/100 | Specs: SNDR=87.4, Bw=23.5M, Pwr=7.4m
+2026-06-17 08:43:04,301 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:04,411 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 149.92 dB
+2026-06-17 08:43:04,479 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 154.34 dB
+2026-06-17 08:43:04,566 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 155.61 dB
+2026-06-17 08:43:04,567 | INFO     | Test 32/100 | Specs: SNDR=114.8, Bw=23.1M, Pwr=4.6m
+2026-06-17 08:43:04,568 | WARNING  |   -> Test 32 descartado por OOD Guardrails.
+2026-06-17 08:43:04,568 | INFO     | Test 33/100 | Specs: SNDR=96.3, Bw=48.5M, Pwr=9.0m
+2026-06-17 08:43:04,587 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:04,670 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 150.99 dB
+2026-06-17 08:43:04,738 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 185.68 dB
+2026-06-17 08:43:04,824 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 155.64 dB
+2026-06-17 08:43:04,824 | INFO     | Test 34/100 | Specs: SNDR=81.8, Bw=44.7M, Pwr=4.3m
+2026-06-17 08:43:04,840 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:04,910 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 80.10 dB
+2026-06-17 08:43:05,003 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 115.14 dB
+2026-06-17 08:43:05,076 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 157.59 dB
+2026-06-17 08:43:05,077 | INFO     | Test 35/100 | Specs: SNDR=103.2, Bw=21.6M, Pwr=8.7m
+2026-06-17 08:43:05,096 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:05,180 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 162.92 dB
+2026-06-17 08:43:05,247 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 165.97 dB
+2026-06-17 08:43:05,315 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 149.81 dB
+2026-06-17 08:43:05,315 | INFO     | Test 36/100 | Specs: SNDR=102.7, Bw=1.7M, Pwr=9.9m
+2026-06-17 08:43:05,316 | WARNING  |   -> Test 36 descartado por OOD Guardrails.
+2026-06-17 08:43:05,316 | INFO     | Test 37/100 | Specs: SNDR=77.0, Bw=25.2M, Pwr=1.8m
+2026-06-17 08:43:05,331 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:05,424 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 146.58 dB
+2026-06-17 08:43:05,494 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 69.39 dB
+2026-06-17 08:43:05,557 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 148.79 dB
+2026-06-17 08:43:05,558 | INFO     | Test 38/100 | Specs: SNDR=60.4, Bw=11.0M, Pwr=8.3m
+2026-06-17 08:43:05,573 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:05,652 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 145.14 dB
+2026-06-17 08:43:05,728 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 137.66 dB
+2026-06-17 08:43:05,797 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 144.94 dB
+2026-06-17 08:43:05,797 | INFO     | Test 39/100 | Specs: SNDR=69.9, Bw=40.7M, Pwr=5.6m
+2026-06-17 08:43:05,812 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:05,899 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 149.71 dB
+2026-06-17 08:43:05,968 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 154.89 dB
+2026-06-17 08:43:06,039 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 85.30 dB
+2026-06-17 08:43:06,040 | INFO     | Test 40/100 | Specs: SNDR=78.5, Bw=46.2M, Pwr=1.0m
+2026-06-17 08:43:06,059 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:06,151 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 150.81 dB
+2026-06-17 08:43:06,222 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 69.62 dB
+2026-06-17 08:43:06,284 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 162.93 dB
+2026-06-17 08:43:06,284 | INFO     | Test 41/100 | Specs: SNDR=114.9, Bw=9.1M, Pwr=1.2m
+2026-06-17 08:43:06,285 | WARNING  |   -> Test 41 descartado por OOD Guardrails.
+2026-06-17 08:43:06,286 | INFO     | Test 42/100 | Specs: SNDR=99.4, Bw=47.7M, Pwr=4.7m
+2026-06-17 08:43:06,301 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:06,371 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 154.61 dB
+2026-06-17 08:43:06,438 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 178.58 dB
+2026-06-17 08:43:06,515 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 157.09 dB
+2026-06-17 08:43:06,515 | INFO     | Test 43/100 | Specs: SNDR=99.5, Bw=14.6M, Pwr=4.3m
+2026-06-17 08:43:06,531 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:06,616 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 148.97 dB
+2026-06-17 08:43:06,685 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 195.61 dB
+2026-06-17 08:43:06,760 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 169.54 dB
+2026-06-17 08:43:06,760 | INFO     | Test 44/100 | Specs: SNDR=83.9, Bw=42.7M, Pwr=8.2m
+2026-06-17 08:43:06,781 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:06,854 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 144.29 dB
+2026-06-17 08:43:06,940 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 149.64 dB
+2026-06-17 08:43:07,021 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 143.47 dB
+2026-06-17 08:43:07,021 | INFO     | Test 45/100 | Specs: SNDR=63.0, Bw=39.9M, Pwr=2.4m
+2026-06-17 08:43:07,045 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:07,118 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 144.14 dB
+2026-06-17 08:43:07,194 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 139.05 dB
+2026-06-17 08:43:07,265 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 164.49 dB
+2026-06-17 08:43:07,265 | INFO     | Test 46/100 | Specs: SNDR=97.4, Bw=9.7M, Pwr=3.6m
+2026-06-17 08:43:07,280 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:07,357 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 151.76 dB
+2026-06-17 08:43:07,443 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 193.07 dB
+2026-06-17 08:43:07,510 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 158.01 dB
+2026-06-17 08:43:07,510 | INFO     | Test 47/100 | Specs: SNDR=78.7, Bw=2.3M, Pwr=9.5m
+2026-06-17 08:43:07,524 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:07,612 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 146.78 dB
+2026-06-17 08:43:07,692 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 79.25 dB
+2026-06-17 08:43:07,768 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 144.49 dB
+2026-06-17 08:43:07,768 | INFO     | Test 48/100 | Specs: SNDR=117.4, Bw=28.8M, Pwr=5.4m
+2026-06-17 08:43:07,769 | WARNING  |   -> Test 48 descartado por OOD Guardrails.
+2026-06-17 08:43:07,770 | INFO     | Test 49/100 | Specs: SNDR=90.8, Bw=40.3M, Pwr=5.5m
+2026-06-17 08:43:07,784 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:07,857 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 147.68 dB
+2026-06-17 08:43:07,925 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 166.53 dB
+2026-06-17 08:43:07,996 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 175.58 dB
+2026-06-17 08:43:07,996 | INFO     | Test 50/100 | Specs: SNDR=92.1, Bw=7.8M, Pwr=0.7m
+2026-06-17 08:43:08,011 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:08,092 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 159.39 dB
+2026-06-17 08:43:08,159 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 177.11 dB
+2026-06-17 08:43:08,226 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 161.74 dB
+2026-06-17 08:43:08,226 | INFO     | Test 51/100 | Specs: SNDR=60.8, Bw=17.6M, Pwr=9.6m
+2026-06-17 08:43:08,242 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:08,325 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 146.93 dB
+2026-06-17 08:43:08,393 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 135.68 dB
+2026-06-17 08:43:08,481 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 127.44 dB
+2026-06-17 08:43:08,481 | INFO     | Test 52/100 | Specs: SNDR=92.0, Bw=42.6M, Pwr=5.5m
+2026-06-17 08:43:08,497 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:08,568 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 145.33 dB
+2026-06-17 08:43:08,636 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 175.30 dB
+2026-06-17 08:43:08,717 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 170.03 dB
+2026-06-17 08:43:08,718 | INFO     | Test 53/100 | Specs: SNDR=70.6, Bw=6.3M, Pwr=6.4m
+2026-06-17 08:43:08,732 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:08,813 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 155.88 dB
+2026-06-17 08:43:08,881 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 150.34 dB
+2026-06-17 08:43:08,953 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 122.11 dB
+2026-06-17 08:43:08,953 | INFO     | Test 54/100 | Specs: SNDR=67.6, Bw=14.8M, Pwr=7.3m
+2026-06-17 08:43:08,971 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:09,045 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 140.57 dB
+2026-06-17 08:43:09,121 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 158.39 dB
+2026-06-17 08:43:09,207 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 89.33 dB
+2026-06-17 08:43:09,207 | INFO     | Test 55/100 | Specs: SNDR=84.5, Bw=29.5M, Pwr=4.7m
+2026-06-17 08:43:09,229 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:09,309 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 136.37 dB
+2026-06-17 08:43:09,382 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 127.40 dB
+2026-06-17 08:43:09,448 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 187.41 dB
+2026-06-17 08:43:09,448 | INFO     | Test 56/100 | Specs: SNDR=119.8, Bw=21.1M, Pwr=7.4m
+2026-06-17 08:43:09,450 | WARNING  |   -> Test 56 descartado por OOD Guardrails.
+2026-06-17 08:43:09,450 | INFO     | Test 57/100 | Specs: SNDR=74.9, Bw=38.2M, Pwr=2.9m
+2026-06-17 08:43:09,467 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:09,554 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 161.93 dB
+2026-06-17 08:43:09,631 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 153.57 dB
+2026-06-17 08:43:09,696 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 144.01 dB
+2026-06-17 08:43:09,696 | INFO     | Test 58/100 | Specs: SNDR=66.2, Bw=10.5M, Pwr=1.3m
+2026-06-17 08:43:09,711 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:09,790 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 136.66 dB
+2026-06-17 08:43:09,860 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 140.17 dB
+2026-06-17 08:43:09,940 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 92.25 dB
+2026-06-17 08:43:09,940 | INFO     | Test 59/100 | Specs: SNDR=87.8, Bw=21.5M, Pwr=6.7m
+2026-06-17 08:43:09,954 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:10,026 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 149.02 dB
+2026-06-17 08:43:10,108 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 159.61 dB
+2026-06-17 08:43:10,178 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 143.18 dB
+2026-06-17 08:43:10,179 | INFO     | Test 60/100 | Specs: SNDR=96.8, Bw=30.9M, Pwr=5.7m
+2026-06-17 08:43:10,195 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:10,261 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 144.39 dB
+2026-06-17 08:43:10,332 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 189.18 dB
+2026-06-17 08:43:10,411 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 163.73 dB
+2026-06-17 08:43:10,411 | INFO     | Test 61/100 | Specs: SNDR=60.3, Bw=34.8M, Pwr=6.8m
+2026-06-17 08:43:10,431 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:10,511 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 141.37 dB
+2026-06-17 08:43:10,581 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 100.98 dB
+2026-06-17 08:43:10,669 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 141.93 dB
+2026-06-17 08:43:10,669 | INFO     | Test 62/100 | Specs: SNDR=65.4, Bw=32.3M, Pwr=8.4m
+2026-06-17 08:43:10,691 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:10,768 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 136.78 dB
+2026-06-17 08:43:10,834 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 160.04 dB
+2026-06-17 08:43:10,904 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 85.59 dB
+2026-06-17 08:43:10,904 | INFO     | Test 63/100 | Specs: SNDR=112.5, Bw=47.4M, Pwr=4.3m
+2026-06-17 08:43:10,905 | WARNING  |   -> Test 63 descartado por OOD Guardrails.
+2026-06-17 08:43:10,905 | INFO     | Test 64/100 | Specs: SNDR=72.6, Bw=45.6M, Pwr=8.1m
+2026-06-17 08:43:10,921 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:10,989 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 164.40 dB
+2026-06-17 08:43:11,062 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 146.72 dB
+2026-06-17 08:43:11,132 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 128.48 dB
+2026-06-17 08:43:11,132 | INFO     | Test 65/100 | Specs: SNDR=81.3, Bw=37.1M, Pwr=9.9m
+2026-06-17 08:43:11,146 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:11,219 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 97.09 dB
+2026-06-17 08:43:11,305 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 132.91 dB
+2026-06-17 08:43:11,370 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 169.11 dB
+2026-06-17 08:43:11,371 | INFO     | Test 66/100 | Specs: SNDR=109.4, Bw=30.0M, Pwr=8.9m
+2026-06-17 08:43:11,391 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:11,487 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 169.82 dB
+2026-06-17 08:43:11,584 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 200.18 dB
+2026-06-17 08:43:11,657 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 161.88 dB
+2026-06-17 08:43:11,658 | INFO     | Test 67/100 | Specs: SNDR=109.1, Bw=25.2M, Pwr=3.6m
+2026-06-17 08:43:11,677 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:11,748 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 168.04 dB
+2026-06-17 08:43:11,814 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 196.92 dB
+2026-06-17 08:43:11,885 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 161.83 dB
+2026-06-17 08:43:11,885 | INFO     | Test 68/100 | Specs: SNDR=76.1, Bw=30.4M, Pwr=4.6m
+2026-06-17 08:43:11,901 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:11,974 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 148.20 dB
+2026-06-17 08:43:12,046 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 147.73 dB
+2026-06-17 08:43:12,114 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 145.24 dB
+2026-06-17 08:43:12,115 | INFO     | Test 69/100 | Specs: SNDR=118.9, Bw=19.6M, Pwr=9.0m
+2026-06-17 08:43:12,116 | WARNING  |   -> Test 69 descartado por OOD Guardrails.
+2026-06-17 08:43:12,116 | INFO     | Test 70/100 | Specs: SNDR=79.2, Bw=17.0M, Pwr=0.8m
+2026-06-17 08:43:12,131 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:12,206 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 155.89 dB
+2026-06-17 08:43:12,273 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 69.31 dB
+2026-06-17 08:43:12,354 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 151.80 dB
+2026-06-17 08:43:12,354 | INFO     | Test 71/100 | Specs: SNDR=118.8, Bw=10.2M, Pwr=5.0m
+2026-06-17 08:43:12,355 | WARNING  |   -> Test 71 descartado por OOD Guardrails.
+2026-06-17 08:43:12,356 | INFO     | Test 72/100 | Specs: SNDR=99.3, Bw=14.8M, Pwr=9.3m
+2026-06-17 08:43:12,377 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:12,463 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 144.82 dB
+2026-06-17 08:43:12,527 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 195.60 dB
+2026-06-17 08:43:12,601 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 161.25 dB
+2026-06-17 08:43:12,602 | INFO     | Test 73/100 | Specs: SNDR=115.3, Bw=11.4M, Pwr=4.0m
+2026-06-17 08:43:12,603 | WARNING  |   -> Test 73 descartado por OOD Guardrails.
+2026-06-17 08:43:12,604 | INFO     | Test 74/100 | Specs: SNDR=89.7, Bw=15.4M, Pwr=3.7m
+2026-06-17 08:43:12,619 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:12,694 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 158.55 dB
+2026-06-17 08:43:12,776 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 149.62 dB
+2026-06-17 08:43:12,857 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 169.39 dB
+2026-06-17 08:43:12,858 | INFO     | Test 75/100 | Specs: SNDR=104.6, Bw=2.9M, Pwr=0.7m
+2026-06-17 08:43:12,859 | WARNING  |   -> Test 75 descartado por OOD Guardrails.
+2026-06-17 08:43:12,859 | INFO     | Test 76/100 | Specs: SNDR=75.5, Bw=11.5M, Pwr=9.3m
+2026-06-17 08:43:12,874 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:12,962 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 152.33 dB
+2026-06-17 08:43:13,028 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 136.17 dB
+2026-06-17 08:43:13,095 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 157.50 dB
+2026-06-17 08:43:13,096 | INFO     | Test 77/100 | Specs: SNDR=102.1, Bw=40.8M, Pwr=4.7m
+2026-06-17 08:43:13,117 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:13,185 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 171.08 dB
+2026-06-17 08:43:13,250 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 167.91 dB
+2026-06-17 08:43:13,319 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 150.44 dB
+2026-06-17 08:43:13,319 | INFO     | Test 78/100 | Specs: SNDR=87.1, Bw=20.7M, Pwr=7.7m
+2026-06-17 08:43:13,339 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:13,407 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 147.42 dB
+2026-06-17 08:43:13,484 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 153.93 dB
+2026-06-17 08:43:13,578 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 160.44 dB
+2026-06-17 08:43:13,578 | INFO     | Test 79/100 | Specs: SNDR=97.1, Bw=9.4M, Pwr=7.6m
+2026-06-17 08:43:13,598 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:13,692 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 146.81 dB
+2026-06-17 08:43:13,762 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 192.47 dB
+2026-06-17 08:43:13,836 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 165.55 dB
+2026-06-17 08:43:13,836 | INFO     | Test 80/100 | Specs: SNDR=119.6, Bw=47.0M, Pwr=0.7m
+2026-06-17 08:43:13,837 | WARNING  |   -> Test 80 descartado por OOD Guardrails.
+2026-06-17 08:43:13,837 | INFO     | Test 81/100 | Specs: SNDR=115.6, Bw=1.3M, Pwr=2.9m
+2026-06-17 08:43:13,838 | WARNING  |   -> Test 81 descartado por OOD Guardrails.
+2026-06-17 08:43:13,838 | INFO     | Test 82/100 | Specs: SNDR=107.2, Bw=40.7M, Pwr=6.3m
+2026-06-17 08:43:13,839 | WARNING  |   -> Test 82 descartado por OOD Guardrails.
+2026-06-17 08:43:13,839 | INFO     | Test 83/100 | Specs: SNDR=78.9, Bw=47.8M, Pwr=8.6m
+2026-06-17 08:43:13,854 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:13,924 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 143.15 dB
+2026-06-17 08:43:13,987 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 237.22 dB
+2026-06-17 08:43:14,061 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 141.21 dB
+2026-06-17 08:43:14,061 | INFO     | Test 84/100 | Specs: SNDR=68.4, Bw=18.7M, Pwr=5.2m
+2026-06-17 08:43:14,078 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:14,151 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 144.52 dB
+2026-06-17 08:43:14,231 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 152.37 dB
+2026-06-17 08:43:14,306 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 90.18 dB
+2026-06-17 08:43:14,306 | INFO     | Test 85/100 | Specs: SNDR=63.3, Bw=25.5M, Pwr=0.6m
+2026-06-17 08:43:14,325 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:14,392 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 144.67 dB
+2026-06-17 08:43:14,460 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 132.41 dB
+2026-06-17 08:43:14,524 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 81.50 dB
+2026-06-17 08:43:14,525 | INFO     | Test 86/100 | Specs: SNDR=116.1, Bw=15.5M, Pwr=3.5m
+2026-06-17 08:43:14,526 | WARNING  |   -> Test 86 descartado por OOD Guardrails.
+2026-06-17 08:43:14,526 | INFO     | Test 87/100 | Specs: SNDR=95.3, Bw=41.7M, Pwr=2.6m
+2026-06-17 08:43:14,545 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:14,621 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 141.07 dB
+2026-06-17 08:43:14,696 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 183.13 dB
+2026-06-17 08:43:14,763 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 149.41 dB
+2026-06-17 08:43:14,763 | INFO     | Test 88/100 | Specs: SNDR=98.4, Bw=9.2M, Pwr=3.1m
+2026-06-17 08:43:14,778 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:14,857 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 142.82 dB
+2026-06-17 08:43:14,919 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 193.73 dB
+2026-06-17 08:43:14,991 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 168.11 dB
+2026-06-17 08:43:14,991 | INFO     | Test 89/100 | Specs: SNDR=82.9, Bw=16.1M, Pwr=0.8m
+2026-06-17 08:43:15,005 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:15,071 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 138.57 dB
+2026-06-17 08:43:15,140 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 171.91 dB
+2026-06-17 08:43:15,211 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 148.15 dB
+2026-06-17 08:43:15,211 | INFO     | Test 90/100 | Specs: SNDR=86.3, Bw=45.5M, Pwr=0.8m
+2026-06-17 08:43:15,225 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:15,292 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 142.28 dB
+2026-06-17 08:43:15,371 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 143.61 dB
+2026-06-17 08:43:15,436 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 163.63 dB
+2026-06-17 08:43:15,437 | INFO     | Test 91/100 | Specs: SNDR=60.3, Bw=43.2M, Pwr=2.6m
+2026-06-17 08:43:15,459 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:15,552 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 143.70 dB
+2026-06-17 08:43:15,626 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 139.19 dB
+2026-06-17 08:43:15,711 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 127.98 dB
+2026-06-17 08:43:15,711 | INFO     | Test 92/100 | Specs: SNDR=115.8, Bw=36.9M, Pwr=6.2m
+2026-06-17 08:43:15,712 | WARNING  |   -> Test 92 descartado por OOD Guardrails.
+2026-06-17 08:43:15,712 | INFO     | Test 93/100 | Specs: SNDR=69.3, Bw=25.5M, Pwr=9.0m
+2026-06-17 08:43:15,726 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:15,817 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 139.08 dB
+2026-06-17 08:43:15,885 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 151.21 dB
+2026-06-17 08:43:15,953 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 84.92 dB
+2026-06-17 08:43:15,953 | INFO     | Test 94/100 | Specs: SNDR=104.5, Bw=45.5M, Pwr=4.2m
+2026-06-17 08:43:15,955 | WARNING  |   -> Test 94 descartado por OOD Guardrails.
+2026-06-17 08:43:15,955 | INFO     | Test 95/100 | Specs: SNDR=72.2, Bw=21.4M, Pwr=2.9m
+2026-06-17 08:43:15,969 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:16,053 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 137.73 dB
+2026-06-17 08:43:16,138 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 164.37 dB
+2026-06-17 08:43:16,211 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 105.78 dB
+2026-06-17 08:43:16,211 | INFO     | Test 96/100 | Specs: SNDR=107.1, Bw=45.8M, Pwr=3.1m
+2026-06-17 08:43:16,213 | WARNING  |   -> Test 96 descartado por OOD Guardrails.
+2026-06-17 08:43:16,213 | INFO     | Test 97/100 | Specs: SNDR=70.5, Bw=20.4M, Pwr=6.2m
+2026-06-17 08:43:16,233 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:16,307 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 146.44 dB
+2026-06-17 08:43:16,378 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 142.54 dB
+2026-06-17 08:43:16,459 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 87.79 dB
+2026-06-17 08:43:16,459 | INFO     | Test 98/100 | Specs: SNDR=117.8, Bw=16.7M, Pwr=1.6m
+2026-06-17 08:43:16,460 | WARNING  |   -> Test 98 descartado por OOD Guardrails.
+2026-06-17 08:43:16,460 | INFO     | Test 99/100 | Specs: SNDR=93.2, Bw=7.6M, Pwr=8.3m
+2026-06-17 08:43:16,479 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(8), np.int64(3), np.int64(1)]
+2026-06-17 08:43:16,557 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 159.85 dB
+2026-06-17 08:43:16,630 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 179.33 dB
+2026-06-17 08:43:16,704 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 139.20 dB
+2026-06-17 08:43:16,705 | INFO     | Test 100/100 | Specs: SNDR=67.5, Bw=33.8M, Pwr=9.8m
+2026-06-17 08:43:16,722 | INFO     |   -> Top-3 IDs Seleccionados: [np.int64(3), np.int64(8), np.int64(1)]
+2026-06-17 08:43:16,788 | INFO     |      * Top 3 optimizada. FoMs Predictivo: 154.39 dB
+2026-06-17 08:43:16,866 | INFO     |      * Top 8 optimizada. FoMs Predictivo: 159.55 dB
+2026-06-17 08:43:16,933 | INFO     |      * Top 1 optimizada. FoMs Predictivo: 104.20 dB
+2026-06-17 08:43:16,933 | INFO     | ==================================================
+2026-06-17 08:43:16,933 | INFO     | BENCHMARK COMPLETADO.
+2026-06-17 08:43:16,933 | INFO     | Total pruebas: 100 | Validadas (In-Distribution): 80
+2026-06-17 08:43:16,933 | INFO     | Tiempo Total: 20.01 segundos (0.200s por inferencia completa).

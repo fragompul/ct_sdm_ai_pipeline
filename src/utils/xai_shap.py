@@ -57,7 +57,7 @@ class ShapleyExplainer:
         
         plt.title(f"Lógica de Decisión para Topología {predicted_topology_index + 1}")
         plt.tight_layout()
-        plt.savefig(f"shap_explanation_top_{predicted_topology_index + 1}.png")
+        plt.savefig(f"xai/shap_explanation_top_{predicted_topology_index + 1}.png")
         plt.close()
         
         print(f"Force plot generado para la clase {predicted_topology_index + 1}.")

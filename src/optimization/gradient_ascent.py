@@ -2,40 +2,45 @@
 
 import torch
 import torch.optim as optim
+import numpy as np
 
 class DifferentiableSearch:
-    def __init__(self, surrogate_model, mask_matrix):
-        """
-        surrogate_model: El modelo MLP de la Fase 4 entrenado y con pesos congelados.
-        mask_matrix: Para asegurar que el optimizador no cambie el zero-padding.
-        """
-        self.surrogate = surrogate_model
-        self.surrogate.eval() # Modo inferencia
+    def __init__(self, surrogate_model, scaler_metrics, device='cpu'):
+        self.surrogate = surrogate_model.to(device)
+        self.surrogate.eval()
         for param in self.surrogate.parameters():
-            param.requires_grad = False # Congelamos la red
+            param.requires_grad = False
             
-        self.mask_matrix = mask_matrix
+        self.scaler_metrics = scaler_metrics
+        self.device = device
 
-    def _calculate_fom(self, metrics):
-        """Calcula el Figure of Merit de Schreier.
-        Asumiendo metrics = [SNDR, Bw, Power]
-        FoMs = SNDR + 10 * log10(Bw / Power)
-        """
-        sndr = metrics[:, 0]
-        bw = metrics[:, 1]
-        power = metrics[:, 2]
+    def _calculate_fom(self, scaled_metrics):
+        """Destransforma las métricas para calcular el FoMs real[cite: 143]."""
+        # 1. Pasar a CPU y Numpy para usar el scaler de scikit-learn
+        metrics_np = scaled_metrics.detach().cpu().numpy()
+        real_metrics = self.scaler_metrics.inverse_transform(metrics_np)
         
-        # Prevenir logaritmos negativos
+        # 2. Volver a PyTorch preservando el grafo de computación
+        # Esto es un truco avanzado: calculamos la diferencia entre el escalado y el real
+        # para aplicar la operación de forma diferenciable.
+        means = torch.tensor(self.scaler_metrics.mean_, dtype=torch.float32, device=self.device)
+        scales = torch.tensor(self.scaler_metrics.scale_, dtype=torch.float32, device=self.device)
+        
+        # metrics = (scaled_metrics * scales) + means
+        real_metrics_tensor = (scaled_metrics * scales) + means
+        
+        sndr = real_metrics_tensor[:, 0]
+        bw = real_metrics_tensor[:, 1]
+        power = real_metrics_tensor[:, 2] # Asumiendo W o un factor constante
+        
         fom = sndr + 10 * torch.log10((bw / (power + 1e-12)) + 1e-12)
         return fom
 
-    def optimize(self, initial_y_design, topology_onehot, target_specs, steps=100, lr=0.01):
-        """
-        Ajusta iterativamente initial_y_design para maximizar el FoMs.
-        """
-        # initial_y_design viene de muestrear la Fase 3
-        # Clonamos y habilitamos el gradiente sobre los datos de ENTRADA
-        y_opt = initial_y_design.clone().detach().requires_grad_(True)
+    def optimize(self, initial_y_scaled, topology_onehot, mask, steps=100, lr=0.05):
+        """Ascenso del gradiente acotado por la máscara topológica [cite: 148-154]."""
+        y_opt = initial_y_scaled.clone().detach().to(self.device).requires_grad_(True)
+        topology_t = topology_onehot.clone().detach().to(self.device)
+        mask_t = torch.tensor(mask, dtype=torch.float32, device=self.device)
         
         optimizer = optim.Adam([y_opt], lr=lr)
         
@@ -45,28 +50,19 @@ class DifferentiableSearch:
         for step in range(steps):
             optimizer.zero_grad()
             
-            # Concatenamos la topología estática con las variables optimizables
-            x_surrogate = torch.cat([topology_onehot, y_opt], dim=1)
+            x_surrogate = torch.cat([topology_t, y_opt], dim=1)
+            predicted_metrics_scaled = self.surrogate(x_surrogate)
             
-            # Predicción rápida del surrogate
-            predicted_metrics = self.surrogate(x_surrogate)
-            
-            # Queremos MAXIMIZAR FoM, así que minimizamos -FoM
-            foms = self._calculate_fom(predicted_metrics)
-            loss = -torch.mean(foms) 
+            foms = self._calculate_fom(predicted_metrics_scaled)
+            loss = -torch.mean(foms) # Maximizar FoM
             
             loss.backward()
             
-            # Aplicar la máscara al gradiente antes del step para no actualizar el zero-padding
-            y_opt.grad *= self.mask_matrix
+            # Anular gradiente de variables zero-padded
+            y_opt.grad *= mask_t
             
             optimizer.step()
             
-            # Opcional: Proyección para asegurar que los componentes (C, R, gm) sean positivos
-            with torch.no_grad():
-                y_opt.clamp_(min=1e-15) 
-            
-            # Guardamos el mejor candidato
             current_fom = foms.mean().item()
             if current_fom > best_fom:
                 best_fom = current_fom
