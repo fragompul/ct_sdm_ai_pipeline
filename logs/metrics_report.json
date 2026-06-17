@@ -1,0 +1,25 @@
+{
+    "hardware": {
+        "device": "cpu"
+    },
+    "training_times_seconds": {
+        "phase1_ood": 1583.403720855713,
+        "phase2_router": 28838.626263141632,
+        "phase3_mdn": 2299.8654403686523,
+        "phase4_surrogate": 2013.565122127533
+    },
+    "phase1_ood_roc_auc": {
+        "IsolationForest": 0.9282311809038339,
+        "OneClassSVM": 0.9962793181506755,
+        "GMM": 0.9157019149149972
+    },
+    "phase2_router_metrics": {
+        "train_log_loss": 0.02666272975329721
+    },
+    "phase3_generative_loss": {
+        "final_masked_nll": 19.811313609532966
+    },
+    "phase4_surrogate_loss": {
+        "final_surrogate_loss": 0.2519782434696349
+    }
+}

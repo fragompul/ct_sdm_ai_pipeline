@@ -5,3 +5,28 @@
 2026-06-16 08:59:41,051 | INFO     |   -> GMM ROC-AUC: 0.9157
 2026-06-16 08:59:41,051 | INFO     | [FIN] Entrenamiento Fase 1 (Detección OOD) completado en 1583.4037 segundos.
 2026-06-16 08:59:41,051 | INFO     | [INICIO] Entrenamiento Fase 2 (Stacking Router)...
+2026-06-16 17:00:19,677 | INFO     |   -> Stacking Ensemble Train Log-Loss: 0.0267
+2026-06-16 17:00:19,677 | INFO     | [FIN] Entrenamiento Fase 2 (Stacking Router) completado en 28838.6263 segundos.
+2026-06-16 17:00:19,677 | INFO     | [INICIO] Escalado de Variables de Diseño...
+2026-06-16 17:00:19,677 | INFO     | Dimensión del Súper-Vector: 35
+2026-06-16 17:00:20,006 | INFO     | [FIN] Escalado de Variables de Diseño completado en 0.3288 segundos.
+2026-06-16 17:00:20,006 | INFO     | [INICIO] Entrenamiento Fase 3 (MDN)...
+2026-06-16 17:09:31,949 | INFO     | [Fase 3] Epoch 50/200 | Loss: 19.867691 | Tiempo Epoch: 9.7072s
+2026-06-16 17:19:54,703 | INFO     | [Fase 3] Epoch 100/200 | Loss: 20.243801 | Tiempo Epoch: 9.3165s
+2026-06-16 17:30:30,259 | INFO     | [Fase 3] Epoch 150/200 | Loss: 20.561966 | Tiempo Epoch: 21.9204s
+2026-06-16 17:38:39,870 | INFO     | [Fase 3] Epoch 200/200 | Loss: 19.811314 | Tiempo Epoch: 8.7332s
+2026-06-16 17:38:39,871 | INFO     | [FIN] Entrenamiento Fase 3 (MDN) completado en 2299.8654 segundos.
+2026-06-16 17:38:39,871 | INFO     | [INICIO] Entrenamiento Fase 4 (MLP Surrogate)...
+2026-06-16 17:41:57,793 | INFO     | [Fase 4] Epoch 50/500 | Loss: 0.352815 | Tiempo Epoch: 3.6415s
+2026-06-16 17:45:13,302 | INFO     | [Fase 4] Epoch 100/500 | Loss: 0.305928 | Tiempo Epoch: 4.8622s
+2026-06-16 17:48:28,995 | INFO     | [Fase 4] Epoch 150/500 | Loss: 0.289864 | Tiempo Epoch: 3.7739s
+2026-06-16 17:51:49,500 | INFO     | [Fase 4] Epoch 200/500 | Loss: 0.282866 | Tiempo Epoch: 3.7998s
+2026-06-16 17:55:20,359 | INFO     | [Fase 4] Epoch 250/500 | Loss: 0.269274 | Tiempo Epoch: 3.6468s
+2026-06-16 17:58:38,053 | INFO     | [Fase 4] Epoch 300/500 | Loss: 0.267931 | Tiempo Epoch: 3.8318s
+2026-06-16 18:01:51,379 | INFO     | [Fase 4] Epoch 350/500 | Loss: 0.259349 | Tiempo Epoch: 3.8439s
+2026-06-16 18:05:11,815 | INFO     | [Fase 4] Epoch 400/500 | Loss: 0.259547 | Tiempo Epoch: 6.5951s
+2026-06-16 18:08:46,939 | INFO     | [Fase 4] Epoch 450/500 | Loss: 0.248895 | Tiempo Epoch: 3.8935s
+2026-06-16 18:12:13,436 | INFO     | [Fase 4] Epoch 500/500 | Loss: 0.251978 | Tiempo Epoch: 3.8892s
+2026-06-16 18:12:13,437 | INFO     | [FIN] Entrenamiento Fase 4 (MLP Surrogate) completado en 2013.5651 segundos.
+2026-06-16 18:12:13,437 | INFO     | ¡Entrenamiento finalizado con éxito!
+2026-06-16 18:12:13,437 | INFO     | Métricas guardadas en logs/metrics_report.json
