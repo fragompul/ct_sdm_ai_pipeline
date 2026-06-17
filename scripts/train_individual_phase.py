@@ -103,23 +103,33 @@ def run_phase2_router(config):
             scaler_specs = joblib.load(os.path.join(models_dir, 'scaler_specs.pkl'))
             
             X_all = scaler_specs.transform(df_unified[spec_cols].values)
-            y_all = df_unified['topology_id'].values - 1 # Para que empiece en 0
+            y_all = df_unified['topology_id'].values - 1 # Clases de 0 a 11
             
             X_train, X_test, y_train, y_test = train_test_split(X_all, y_all, test_size=0.2, random_state=42, stratify=y_all)
             X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=42, stratify=y_train)
             
             benchmark = TopologicalRouterBenchmark(random_state=config['project']['seed'])
-            benchmark.optimize_and_train_all(X_train, y_train, X_val, y_val, n_trials=5)
+            
+            # n_trials=10 es un buen balance para la Fase 2 masiva. 
+            benchmark.optimize_and_train_all(X_train, y_train, X_val, y_val, n_trials=10)
             
             results = benchmark.evaluate_all(X_test, y_test)
             
             best_model_name = None
             best_logloss = float('inf')
             
-            class_names = [f"Top {i+1}" for i in range(12)]
+            # Nombres extraídos para la Matriz de Confusión
+            class_names = []
+            for i in range(12):
+                if (i+1) in benchmark.mapping_info:
+                    class_names.append(benchmark.mapping_info[i+1]['name'])
+                else:
+                    class_names.append(f"Top_{i+1}")
             
             for name, data in results.items():
                 logger.info(f"[{name}] Acc: {data['metrics']['Accuracy']:.4f} | Top3: {data['metrics']['Top3_Accuracy']:.4f} | LogLoss: {data['metrics']['LogLoss']:.4f}")
+                
+                plot_roc_curve(y_test, data["y_proba"], name, "Phase2", plots_dir, n_classes=12)
                 plot_confusion_matrix(y_test, data["y_pred"], name, "Phase2", plots_dir, class_names=class_names)
                 
                 metrics["phase2_router_metrics"][name] = data['metrics']
@@ -222,8 +232,8 @@ def main():
     # DESCOMENTA LA FASE QUE QUIERAS EJECUTAR
     # ==========================================
     
-    run_phase1_ood(config)
-    # run_phase2_router(config)
+    # run_phase1_ood(config)
+    run_phase2_router(config)
     # run_phase3_mdn(config, device)
     # run_phase4_surrogate(config, device)
 
