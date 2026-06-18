@@ -56,3 +56,21 @@ def plot_confusion_matrix(y_true, y_pred, model_name, phase, out_dir, class_name
     plt.title(f'Confusion Matrix - {model_name} ({phase})')
     plt.savefig(os.path.join(out_dir, f"{phase}_{model_name}_CM.png"), dpi=300, bbox_inches='tight')
     plt.close()
+
+def plot_training_curves(train_losses, val_losses, model_name, phase, out_dir):
+    """Genera curvas de Loss para las redes generativas y surrogadas."""
+    os.makedirs(out_dir, exist_ok=True)
+    plt.figure(figsize=(10, 6))
+    epochs = range(1, len(train_losses) + 1)
+    
+    plt.plot(epochs, train_losses, 'b-', label='Training Loss', linewidth=2)
+    if len(val_losses) > 0:
+        plt.plot(epochs, val_losses, 'r--', label='Validation Loss', linewidth=2)
+        
+    plt.title(f'Training & Validation Loss - {model_name} ({phase})')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.savefig(os.path.join(out_dir, f"{phase}_{model_name}_LearningCurve.png"), dpi=300, bbox_inches='tight')
+    plt.close()

@@ -15,14 +15,14 @@ from sklearn.model_selection import train_test_split
 sys.path.append('src')
 
 from utils.logger import set_global_seeds, setup_logger, Timer, save_metrics_to_json
-from utils.metrics_plotter import plot_roc_curve, plot_confusion_matrix
+from utils.metrics_plotter import plot_roc_curve, plot_confusion_matrix, plot_training_curves
 from models.phase1_ood import OODDetectorBenchmark
 from models.phase2_router import TopologicalRouterBenchmark
-from models.phase3_gen import MixtureDensityNetwork
+from models.phase3_gen import MixtureDensityNetwork, ConditionalVAE, MCDropoutResNet, cGANGenerator, cGANDiscriminator, TabularDDPM
 from models.phase4_surrogate import SurrogateMLP, PINNSurrogateLoss
 from data.dataloaders import Phase3GenerativeDataset, Phase4SurrogateDataset
-from training.custom_losses import MaskedNLLLoss
-from training.trainer import GenericTrainer
+from training.custom_losses import MaskedNLLLoss, MaskedMSELoss, MaskedVAELoss
+from training.trainer import GenerativeTrainer
 
 def load_config():
     with open("configs/default_config.yaml", "r") as f:
@@ -162,29 +162,120 @@ def prepare_data_phase3_4(config, df_unified, models_dir, spec_cols, logger):
     
     return df_unified_scaled, super_vector_dim
 
-def run_phase3_mdn(config, device):
-    logger = setup_logger(name="phase3_logger", log_file="logs/phase3_mdn.log")
-    metrics = {"training_times_seconds": {}, "phase3_generative_loss": {}}
+def run_phase3_generative(config, device):
+    logger = setup_logger(name="phase3_logger", log_file="logs/phase3_generative.log")
+    metrics = {"training_times_seconds": {}, "phase3_generative_metrics": {}}
     models_dir = config['paths']['models_dir']
+    plots_dir = "logs/plots/phase3/"
     spec_cols = config["data"]["input_specs"]
     
     try:
-        with Timer("Entrenamiento Fase 3 (MDN)", logger, metrics["training_times_seconds"], "phase3_mdn"):
+        with Timer("Optimizacion y Entrenamiento Fase 3 (Generative)", logger, metrics["training_times_seconds"], "phase3_total"):
             df_unified = pd.read_csv(os.path.join(config["paths"]["processed_data"], "unified_ct_sdm_dataset.csv"))
             df_unified_scaled, super_vector_dim = prepare_data_phase3_4(config, df_unified, models_dir, spec_cols, logger)
             
-            dataset_phase3 = Phase3GenerativeDataset(df_unified_scaled, spec_cols)
-            dataloader_p3 = DataLoader(dataset_phase3, batch_size=config['phases_benchmarks']['phase3_generative']['batch_size'], shuffle=True)
+            # Split Train/Val para HPO
+            df_train, df_val = train_test_split(df_unified_scaled, test_size=0.15, random_state=42)
+            train_loader = DataLoader(Phase3GenerativeDataset(df_train, spec_cols), batch_size=256, shuffle=True)
+            val_loader = DataLoader(Phase3GenerativeDataset(df_val, spec_cols), batch_size=256, shuffle=False)
             
-            mdn_model = MixtureDensityNetwork(spec_dim=len(spec_cols), super_vector_dim=super_vector_dim)
-            criterion_p3 = MaskedNLLLoss()
-            trainer_p3 = GenericTrainer(mdn_model, criterion_p3, lr=1e-3, device=device)
+            model_names = ["MDN", "cVAE", "MCDropout", "TabularDDPM", "cGAN"]
+            best_val_losses = {}
+            best_params = {}
             
-            epochs_p3 = config['phases_benchmarks']['phase3_generative']['epochs']
-            final_loss_p3, _ = trainer_p3.train_full(dataloader_p3, epochs_p3, is_masked=True, logger=logger, phase_name="Fase 3")
+            for name in model_names:
+                logger.info(f"--- Optimizando {name} ---")
+                start_hpo = time.time()
+                
+                def objective(trial, current_name=name):
+                    hidden_dim = trial.suggest_categorical("hidden_dim", [128, 256])
+                    lr = trial.suggest_float("lr", 1e-4, 5e-3, log=True)
+                    
+                    if current_name == "MDN":
+                        model = MixtureDensityNetwork(spec_dim=len(spec_cols), super_vector_dim=super_vector_dim, hidden_dim=hidden_dim)
+                        criterion = MaskedNLLLoss()
+                    elif current_name == "cVAE":
+                        model = ConditionalVAE(spec_dim=len(spec_cols), super_vector_dim=super_vector_dim, hidden_dim=hidden_dim)
+                        criterion = MaskedVAELoss(beta=trial.suggest_float("beta", 0.1, 2.0))
+                    elif current_name == "MCDropout":
+                        model = MCDropoutResNet(spec_dim=len(spec_cols), super_vector_dim=super_vector_dim, hidden_dim=hidden_dim, dropout_rate=trial.suggest_float("dropout", 0.1, 0.5))
+                        criterion = MaskedMSELoss()
+                    elif current_name == "TabularDDPM":
+                        model = TabularDDPM(spec_dim=len(spec_cols), super_vector_dim=super_vector_dim, hidden_dim=hidden_dim)
+                        criterion = MaskedMSELoss()
+                    elif current_name == "cGAN":
+                        model = {
+                            'G': cGANGenerator(spec_dim=len(spec_cols), super_vector_dim=super_vector_dim, hidden_dim=hidden_dim),
+                            'D': cGANDiscriminator(spec_dim=len(spec_cols), super_vector_dim=super_vector_dim, hidden_dim=hidden_dim)
+                        }
+                        criterion = None # Manejado en Trainer
+                    
+                    trainer = GenerativeTrainer(current_name, model, criterion, lr=lr, device=device)
+                    
+                    # Entrenar pocas epochs para HPO rápido
+                    for _ in range(20): trainer.train_epoch(train_loader)
+                    
+                    val_loss = trainer.eval_epoch(val_loader)
+                    return val_loss if current_name != "cGAN" else trainer.train_epoch(train_loader) # Proxy para GAN
+
+                study = optuna.create_study(direction="minimize")
+                optuna.logging.set_verbosity(optuna.logging.WARNING)
+                study.optimize(objective, n_trials=5) # 5 trials por modelo
+                
+                best_params[name] = study.best_params
+                metrics["training_times_seconds"][f"{name}_hpo_time"] = time.time() - start_hpo
+                
+                # --- ENTRENAMIENTO FINAL COMPLETO ---
+                start_train = time.time()
+                bp = study.best_params
+                
+                if name == "MDN":
+                    final_model = MixtureDensityNetwork(spec_dim=len(spec_cols), super_vector_dim=super_vector_dim, hidden_dim=bp['hidden_dim'])
+                    final_crit = MaskedNLLLoss()
+                elif name == "cVAE":
+                    final_model = ConditionalVAE(spec_dim=len(spec_cols), super_vector_dim=super_vector_dim, hidden_dim=bp['hidden_dim'])
+                    final_crit = MaskedVAELoss(beta=bp['beta'])
+                elif name == "MCDropout":
+                    final_model = MCDropoutResNet(spec_dim=len(spec_cols), super_vector_dim=super_vector_dim, hidden_dim=bp['hidden_dim'], dropout_rate=bp['dropout'])
+                    final_crit = MaskedMSELoss()
+                elif name == "TabularDDPM":
+                    final_model = TabularDDPM(spec_dim=len(spec_cols), super_vector_dim=super_vector_dim, hidden_dim=bp['hidden_dim'])
+                    final_crit = MaskedMSELoss()
+                elif name == "cGAN":
+                    final_model = {
+                        'G': cGANGenerator(spec_dim=len(spec_cols), super_vector_dim=super_vector_dim, hidden_dim=bp['hidden_dim']),
+                        'D': cGANDiscriminator(spec_dim=len(spec_cols), super_vector_dim=super_vector_dim, hidden_dim=bp['hidden_dim'])
+                    }
+                    final_crit = None
+                
+                trainer = GenerativeTrainer(name, final_model, final_crit, lr=bp['lr'], device=device)
+                
+                train_losses, val_losses = [], []
+                epochs = config['phases_benchmarks']['phase3_generative']['epochs'] # Ej. 200
+                
+                for epoch in range(1, epochs + 1):
+                    t_loss = trainer.train_epoch(train_loader)
+                    v_loss = trainer.eval_epoch(val_loader)
+                    train_losses.append(t_loss)
+                    if name != "cGAN": val_losses.append(v_loss)
+                    
+                    if epoch % 50 == 0:
+                        logger.info(f"[{name}] Epoch {epoch}/{epochs} | Train Loss: {t_loss:.4f} | Val Loss: {v_loss:.4f}")
+                        
+                metrics["training_times_seconds"][f"{name}_train_time"] = time.time() - start_train
+                
+                # Guardar Plots y Modelos
+                plot_training_curves(train_losses, val_losses, name, "Phase3", plots_dir)
+                trainer.save_model(os.path.join(models_dir, f'phase3_{name.lower()}.pth'))
+                
+                best_val_losses[name] = val_losses[-1] if val_losses else t_loss
+                metrics["phase3_generative_metrics"][name] = {"best_val_loss": best_val_losses[name], "params": bp}
+
+            # Seleccionar el ganador global (para inferencia downstream)
+            winner = min(best_val_losses, key=best_val_losses.get)
+            logger.info(f"Mejor Modelo Fase 3: {winner} (Val Loss: {best_val_losses[winner]:.4f})")
+            metrics["best_model"] = winner
             
-            metrics["phase3_generative_loss"]["final_masked_nll"] = final_loss_p3
-            trainer_p3.save_model(os.path.join(models_dir, 'phase3_mdn.pth'))
     except Exception as e:
         logger.error("Error en Fase 3", exc_info=True)
     finally:
@@ -233,8 +324,8 @@ def main():
     # ==========================================
     
     # run_phase1_ood(config)
-    run_phase2_router(config)
-    # run_phase3_mdn(config, device)
+    # run_phase2_router(config)
+    run_phase3_generative(config, device)
     # run_phase4_surrogate(config, device)
 
 if __name__ == "__main__":
