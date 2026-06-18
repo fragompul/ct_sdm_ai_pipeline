@@ -11,17 +11,21 @@ import joblib
 import optuna
 from torch.utils.data import DataLoader
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import log_loss
+from sklearn.metrics import log_loss, mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
+from xgboost import XGBRegressor
+from lightgbm import LGBMRegressor
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.multioutput import MultiOutputRegressor
 
 sys.path.append('src')
 
 from utils.logger import set_global_seeds, setup_logger, Timer, save_metrics_to_json
-from utils.metrics_plotter import plot_roc_curve, plot_confusion_matrix, plot_training_curves
+from utils.metrics_plotter import plot_roc_curve, plot_confusion_matrix, plot_training_curves, plot_parity
 from models.phase1_ood import OODDetectorBenchmark
 from models.phase2_router import TopologicalRouterBenchmark
 from models.phase3_gen import MixtureDensityNetwork, ConditionalVAE, MCDropoutResNet, cGANGenerator, cGANDiscriminator, TabularDDPM
-from models.phase4_surrogate import SurrogateMLP, PINNSurrogateLoss
+from models.phase4_surrogate import SurrogateMLP, PINNSurrogateLoss, SurrogateResNet
 from data.dataloaders import Phase3GenerativeDataset, Phase4SurrogateDataset
 from training.custom_losses import MaskedNLLLoss, MaskedMSELoss, MaskedVAELoss
 from training.trainer import GenerativeTrainer
@@ -285,27 +289,171 @@ def run_phase3_generative(config, device):
 
 def run_phase4_surrogate(config, device):
     logger = setup_logger(name="phase4_logger", log_file="logs/phase4_surrogate.log")
-    metrics = {"training_times_seconds": {}, "phase4_surrogate_loss": {}}
+    metrics = {"training_times_seconds": {}, "phase4_surrogate_metrics": {}}
     models_dir = config['paths']['models_dir']
+    plots_dir = "logs/plots/phase4/"
     spec_cols = config["data"]["input_specs"]
     
     try:
-        with Timer("Entrenamiento Fase 4 (MLP Surrogate)", logger, metrics["training_times_seconds"], "phase4_surrogate"):
+        with Timer("Optimizacion y Entrenamiento Fase 4 (Surrogate Models)", logger, metrics["training_times_seconds"], "phase4_total"):
             df_unified = pd.read_csv(os.path.join(config["paths"]["processed_data"], "unified_ct_sdm_dataset.csv"))
             df_unified_scaled, super_vector_dim = prepare_data_phase3_4(config, df_unified, models_dir, spec_cols, logger)
             
-            dataset_phase4 = Phase4SurrogateDataset(df_unified_scaled, spec_cols)
-            dataloader_p4 = DataLoader(dataset_phase4, batch_size=config['phases_benchmarks']['phase4_surrogate']['batch_size'], shuffle=True)
+            # Preparar arrays para Sklearn y Loaders para PyTorch
+            # X = OneHot(Topology) + y_design (escalado) | Y = specs (escalado)
+            topology_ids = torch.tensor(df_unified_scaled['topology_id'].values - 1, dtype=torch.long)
+            topology_onehot = torch.nn.functional.one_hot(topology_ids, num_classes=12).float().numpy()
             
-            mlp_surrogate = SurrogateMLP(super_vector_dim=super_vector_dim, output_metrics=len(spec_cols))
-            criterion_p4 = PINNSurrogateLoss(lambda_physics=0.1)
-            trainer_p4 = GenericTrainer(mlp_surrogate, criterion_p4, lr=1e-3, device=device)
+            dv_cols = sorted([c for c in df_unified_scaled.columns if c.startswith('dv_')])
+            X_all = np.hstack((topology_onehot, df_unified_scaled[dv_cols].values))
+            y_all = df_unified_scaled[spec_cols].values
             
-            epochs_p4 = config['phases_benchmarks']['phase4_surrogate']['epochs']
-            final_loss_p4, _ = trainer_p4.train_full(dataloader_p4, epochs_p4, is_masked=False, logger=logger, phase_name="Fase 4")
+            # Split 80/10/10
+            X_train, X_temp, y_train, y_temp = train_test_split(X_all, y_all, test_size=0.2, random_state=42)
+            X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42)
             
-            metrics["phase4_surrogate_loss"]["final_surrogate_loss"] = final_loss_p4
-            trainer_p4.save_model(os.path.join(models_dir, 'phase4_surrogate.pth'))
+            # Dataset PyTorch
+            class Phase4ArrayDataset(torch.utils.data.Dataset):
+                def __init__(self, X, y):
+                    self.X = torch.tensor(X, dtype=torch.float32)
+                    self.y = torch.tensor(y, dtype=torch.float32)
+                def __len__(self): return len(self.X)
+                def __getitem__(self, idx): return {'x': self.X[idx], 'y': self.y[idx]}
+
+            train_loader = DataLoader(Phase4ArrayDataset(X_train, y_train), batch_size=256, shuffle=True)
+            val_loader = DataLoader(Phase4ArrayDataset(X_val, y_val), batch_size=256, shuffle=False)
+            test_loader = DataLoader(Phase4ArrayDataset(X_test, y_test), batch_size=256, shuffle=False)
+
+            model_names = ["DeepMLP", "ResNet", "Multi_XGBoost", "Multi_LightGBM", "Multi_RF"]
+            best_r2_scores = {}
+            best_params = {}
+            trained_models = {}
+
+            for name in model_names:
+                logger.info(f"--- Optimizando {name} ---")
+                start_hpo = time.time()
+                
+                def objective(trial, current_name=name):
+                    if current_name in ["DeepMLP", "ResNet"]:
+                        hidden_dim = trial.suggest_categorical("hidden_dim", [128, 256, 512])
+                        lr = trial.suggest_float("lr", 1e-4, 5e-3, log=True)
+                        
+                        if current_name == "DeepMLP":
+                            model = SurrogateMLP(super_vector_dim=super_vector_dim, output_metrics=len(spec_cols), hidden_dim=hidden_dim)
+                        else:
+                            model = SurrogateResNet(super_vector_dim=super_vector_dim, output_metrics=len(spec_cols), hidden_dim=hidden_dim, dropout=trial.suggest_float("dropout", 0.0, 0.3))
+                        
+                        trainer = GenericTrainer(model, PINNSurrogateLoss(), lr=lr, device=device)
+                        for _ in range(10): trainer.train_epoch(train_loader, is_masked=False) # HPO rápido
+                        
+                        # Evaluar MSE en validación
+                        model.eval()
+                        val_loss = 0.0
+                        with torch.no_grad():
+                            for batch in val_loader:
+                                preds = model(batch['x'].to(device))
+                                val_loss += nn.MSELoss()(preds, batch['y'].to(device)).item()
+                        return val_loss / len(val_loader)
+                    
+                    else:
+                        # Machine Learning Tradicional
+                        n_est = trial.suggest_int("n_estimators", 50, 200)
+                        if current_name == "Multi_XGBoost":
+                            base_model = XGBRegressor(n_estimators=n_est, learning_rate=trial.suggest_float("lr", 1e-3, 0.3, log=True), random_state=42)
+                        elif current_name == "Multi_LightGBM":
+                            base_model = LGBMRegressor(n_estimators=n_est, learning_rate=trial.suggest_float("lr", 1e-3, 0.3, log=True), verbose=-1, random_state=42)
+                        elif current_name == "Multi_RF":
+                            base_model = RandomForestRegressor(n_estimators=n_est, max_depth=trial.suggest_int("max_depth", 5, 20), random_state=42)
+                            
+                        model = MultiOutputRegressor(base_model)
+                        model.fit(X_train, y_train)
+                        preds = model.predict(X_val)
+                        return mean_squared_error(y_val, preds)
+
+                study = optuna.create_study(direction="minimize")
+                optuna.logging.set_verbosity(optuna.logging.WARNING)
+                study.optimize(objective, n_trials=5)
+                
+                best_params[name] = study.best_params
+                metrics["training_times_seconds"][f"{name}_hpo_time"] = time.time() - start_hpo
+                
+                # --- ENTRENAMIENTO FINAL COMPLETO ---
+                start_train = time.time()
+                bp = study.best_params
+                
+                if name in ["DeepMLP", "ResNet"]:
+                    if name == "DeepMLP":
+                        final_model = SurrogateMLP(super_vector_dim=super_vector_dim, output_metrics=len(spec_cols), hidden_dim=bp['hidden_dim'])
+                    else:
+                        final_model = SurrogateResNet(super_vector_dim=super_vector_dim, output_metrics=len(spec_cols), hidden_dim=bp['hidden_dim'], dropout=bp['dropout'])
+                    
+                    trainer = GenericTrainer(final_model, PINNSurrogateLoss(), lr=bp['lr'], device=device)
+                    train_losses, val_losses = [], []
+                    epochs = config['phases_benchmarks']['phase4_surrogate']['epochs']
+                    
+                    for epoch in range(1, epochs + 1):
+                        t_loss = trainer.train_epoch(train_loader, is_masked=False)
+                        
+                        final_model.eval()
+                        v_loss = 0.0
+                        with torch.no_grad():
+                            for batch in val_loader:
+                                p = final_model(batch['x'].to(device))
+                                v_loss += nn.MSELoss()(p, batch['y'].to(device)).item()
+                        v_loss /= len(val_loader)
+                        
+                        train_losses.append(t_loss)
+                        val_losses.append(v_loss)
+                        if epoch % 50 == 0:
+                            logger.info(f"[{name}] Epoch {epoch}/{epochs} | Train MSE: {t_loss:.4f} | Val MSE: {v_loss:.4f}")
+                            
+                    plot_training_curves(train_losses, val_losses, name, "Phase4", plots_dir)
+                    trainer.save_model(os.path.join(models_dir, f'phase4_{name.lower()}.pth'))
+                    
+                    # Predecir en Test para métricas finales
+                    final_model.eval()
+                    test_preds, test_trues = [], []
+                    with torch.no_grad():
+                        for batch in test_loader:
+                            test_preds.append(final_model(batch['x'].to(device)).cpu().numpy())
+                            test_trues.append(batch['y'].numpy())
+                    preds = np.vstack(test_preds)
+                    y_test_eval = np.vstack(test_trues)
+
+                else:
+                    if name == "Multi_XGBoost":
+                        base_model = XGBRegressor(n_estimators=bp["n_estimators"], learning_rate=bp["lr"], random_state=42)
+                    elif name == "Multi_LightGBM":
+                        base_model = LGBMRegressor(n_estimators=bp["n_estimators"], learning_rate=bp["lr"], verbose=-1, random_state=42)
+                    elif name == "Multi_RF":
+                        base_model = RandomForestRegressor(n_estimators=bp["n_estimators"], max_depth=bp["max_depth"], random_state=42)
+                        
+                    final_model = MultiOutputRegressor(base_model)
+                    final_model.fit(np.vstack((X_train, X_val)), np.vstack((y_train, y_val))) # Aprovechamos val para entrenar final
+                    joblib.dump(final_model, os.path.join(models_dir, f'phase4_{name.lower()}.pkl'))
+                    
+                    preds = final_model.predict(X_test)
+                    y_test_eval = y_test
+                
+                metrics["training_times_seconds"][f"{name}_train_time"] = time.time() - start_train
+
+                # Calcular Métricas Regresión Test
+                mae = mean_absolute_error(y_test_eval, preds)
+                mse = mean_squared_error(y_test_eval, preds)
+                r2 = r2_score(y_test_eval, preds)
+                
+                logger.info(f"[{name}] Test MAE: {mae:.4f} | Test MSE: {mse:.4f} | Test R2: {r2:.4f}")
+                metrics["phase4_surrogate_metrics"][name] = {"MAE": mae, "MSE": mse, "R2_Score": r2, "params": bp}
+                best_r2_scores[name] = r2
+                
+                # Generar Parity Plot
+                plot_parity(y_test_eval, preds, spec_cols, name, "Phase4", plots_dir)
+
+            # Selección del Ganador
+            winner = max(best_r2_scores, key=best_r2_scores.get)
+            logger.info(f"Mejor Modelo Fase 4: {winner} (R2 Score: {best_r2_scores[winner]:.4f})")
+            metrics["best_model"] = winner
+            
     except Exception as e:
         logger.error("Error en Fase 4", exc_info=True)
     finally:
@@ -328,7 +476,7 @@ def main():
     # run_phase1_ood(config)
     # run_phase2_router(config)
     run_phase3_generative(config, device)
-    # run_phase4_surrogate(config, device)
+    run_phase4_surrogate(config, device)
 
 if __name__ == "__main__":
     main()

@@ -2,40 +2,59 @@
 
 import torch
 import torch.nn as nn
-import xgboost as xgb
-from sklearn.multioutput import MultiOutputRegressor
 
 class SurrogateMLP(nn.Module):
-    """
-    Proxy ultra-rápido para NGSpice.
-    Entrada: OneHot(Topología) + Súper-Vector de Diseño.
-    Salida: [SNDR, Bw, Power].
-    """
-    def __init__(self, num_topologies=12, super_vector_dim=50, output_metrics=3):
+    """Proxy ultra-rápido MLP clásico para NGSpice [cite: 140-144]."""
+    def __init__(self, num_topologies=12, super_vector_dim=50, output_metrics=3, hidden_dim=256):
         super(SurrogateMLP, self).__init__()
-        
         input_dim = num_topologies + super_vector_dim
         
-        # Uso de activaciones SiLU (Swish) para garantizar un gradiente suave
         self.network = nn.Sequential(
-            nn.Linear(input_dim, 256),
-            nn.SiLU(),
-            nn.BatchNorm1d(256),
-            nn.Linear(256, 256),
-            nn.SiLU(),
-            nn.BatchNorm1d(256),
-            nn.Linear(256, 128),
-            nn.SiLU(),
-            nn.Linear(128, output_metrics)
+            nn.Linear(input_dim, hidden_dim), nn.SiLU(),
+            nn.BatchNorm1d(hidden_dim),
+            nn.Linear(hidden_dim, hidden_dim), nn.SiLU(),
+            nn.BatchNorm1d(hidden_dim),
+            nn.Linear(hidden_dim, hidden_dim // 2), nn.SiLU(),
+            nn.Linear(hidden_dim // 2, output_metrics)
         )
 
     def forward(self, x_surrogate):
         return self.network(x_surrogate)
 
+class SurrogateResNet(nn.Module):
+    """Arquitectura Residual para datos tabulares (SOTA en Regresión Tabular)."""
+    def __init__(self, num_topologies=12, super_vector_dim=50, output_metrics=3, hidden_dim=256, dropout=0.1):
+        super(SurrogateResNet, self).__init__()
+        input_dim = num_topologies + super_vector_dim
+        
+        self.in_proj = nn.Linear(input_dim, hidden_dim)
+        
+        # Bloque Residual 1
+        self.res1 = nn.Sequential(
+            nn.BatchNorm1d(hidden_dim), nn.ReLU(), nn.Dropout(dropout),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.BatchNorm1d(hidden_dim), nn.ReLU(), nn.Dropout(dropout),
+            nn.Linear(hidden_dim, hidden_dim)
+        )
+        
+        # Bloque Residual 2
+        self.res2 = nn.Sequential(
+            nn.BatchNorm1d(hidden_dim), nn.ReLU(), nn.Dropout(dropout),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.BatchNorm1d(hidden_dim), nn.ReLU(), nn.Dropout(dropout),
+            nn.Linear(hidden_dim, hidden_dim)
+        )
+        
+        self.out_proj = nn.Linear(hidden_dim, output_metrics)
+
+    def forward(self, x):
+        x = self.in_proj(x)
+        x = x + self.res1(x)
+        x = x + self.res2(x)
+        return self.out_proj(x)
+
 class PINNSurrogateLoss(nn.Module):
-    """
-    Función de pérdida para la PINN: L_total = L_data + lambda * L_physics.
-    """
+    """Función de pérdida para la PINN [cite: 145-147]."""
     def __init__(self, lambda_physics=0.1):
         super(PINNSurrogateLoss, self).__init__()
         self.mse = nn.MSELoss()
@@ -43,25 +62,16 @@ class PINNSurrogateLoss(nn.Module):
 
     def physics_constraints(self, y_design_inputs, y_metrics_preds):
         """
-        Penaliza predicciones que violen leyes fundamentales.
-        Ejemplo conceptual: El ruido térmico (kT/C) impone un límite al SNDR.
+        Placeholder: Se definirá analíticamente cuando tengamos las ecuaciones exactas.
+        Devolvemos 0.0 para no interferir con la optimización actual.
         """
-        # Supongamos que el índice 0 en y_metrics_preds es SNDR y el índice 5 en y_design es Cint1
-        sndr_pred = y_metrics_preds[:, 0]
-        cint1 = y_design_inputs[:, 5]
-        
-        # Lógica física simulada: Si Cint1 es muy pequeño, un SNDR altísimo es físically imposible.
-        # constraint_violation = ReLU(SNDR_pred - Max_Theoretical_SNDR_from_Cint)
-        # Esto es un placeholder; los expertos en hardware definirían las ecuaciones exactas.
-        physical_penalty = torch.mean(torch.relu(sndr_pred - (10 * torch.log10(cint1 + 1e-8) + 200))) 
-        return physical_penalty
+        return 0.0 
 
     def forward(self, y_design_inputs, y_metrics_preds, y_metrics_true):
         l_data = self.mse(y_metrics_preds, y_metrics_true)
         l_physics = self.physics_constraints(y_design_inputs, y_metrics_preds)
+        
+        if isinstance(l_physics, float) and l_physics == 0.0:
+            return l_data # Evita errores del autograd al sumar escalares puros
+            
         return l_data + self.lambda_physics * l_physics
-
-def build_xgb_surrogate(random_state=42):
-    """Fallback no diferenciable usando Multi-output XGBoost."""
-    xgb_estimator = xgb.XGBRegressor(objective='reg:squarederror', random_state=random_state)
-    return MultiOutputRegressor(xgb_estimator)

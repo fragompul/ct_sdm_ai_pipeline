@@ -74,3 +74,32 @@ def plot_training_curves(train_losses, val_losses, model_name, phase, out_dir):
     plt.grid(True, alpha=0.3)
     plt.savefig(os.path.join(out_dir, f"{phase}_{model_name}_LearningCurve.png"), dpi=300, bbox_inches='tight')
     plt.close()
+
+def plot_parity(y_true, y_pred, metric_names, model_name, phase, out_dir):
+    """Genera Parity Plots (True vs Predicted) para evaluar regresores multivariables."""
+    os.makedirs(out_dir, exist_ok=True)
+    n_metrics = y_true.shape[1]
+    fig, axes = plt.subplots(1, n_metrics, figsize=(6 * n_metrics, 5))
+    
+    if n_metrics == 1: 
+        axes = [axes]
+        
+    for i in range(n_metrics):
+        ax = axes[i]
+        ax.scatter(y_true[:, i], y_pred[:, i], alpha=0.4, color='teal')
+        
+        # Línea ideal (x=y)
+        min_val = min(y_true[:, i].min(), y_pred[:, i].min())
+        max_val = max(y_true[:, i].max(), y_pred[:, i].max())
+        ax.plot([min_val, max_val], [min_val, max_val], 'r--', lw=2, label='Ideal')
+        
+        ax.set_title(f'{metric_names[i]}')
+        ax.set_xlabel('True Scaled Value')
+        ax.set_ylabel('Predicted Scaled Value')
+        ax.legend()
+        ax.grid(alpha=0.3)
+        
+    plt.suptitle(f'Parity Plot - {model_name} ({phase})', y=1.05, fontsize=14)
+    plt.tight_layout()
+    plt.savefig(os.path.join(out_dir, f"{phase}_{model_name}_Parity.png"), dpi=300, bbox_inches='tight')
+    plt.close()
