@@ -1,0 +1,202 @@
+{
+    "training_times_seconds": {
+        "phase2_router": 16094.41656446457
+    },
+    "phase2_router_metrics": {
+        "LogisticRegression": {
+            "Accuracy": 0.7136579973873405,
+            "Top3_Accuracy": 0.9363917893063664,
+            "Precision": 0.7416908928628091,
+            "Recall": 0.7218472920632077,
+            "F1": 0.7156609698090824,
+            "LogLoss": 0.8202541205984214
+        },
+        "NaiveBayes": {
+            "Accuracy": 0.7911790767994007,
+            "Top3_Accuracy": 0.9043181963514119,
+            "Precision": 0.7943461946963027,
+            "Recall": 0.7934849822183226,
+            "F1": 0.7813850137477583,
+            "LogLoss": 0.9379655263183884
+        },
+        "KNN": {
+            "Accuracy": 0.873112444846392,
+            "Top3_Accuracy": 0.9890012515187225,
+            "Precision": 0.8755698181983272,
+            "Recall": 0.8752184768545469,
+            "F1": 0.8751113055098819,
+            "LogLoss": 0.5895942801570756
+        },
+        "DecisionTree": {
+            "Accuracy": 0.9738185937314442,
+            "Top3_Accuracy": 0.9991504288963797,
+            "Precision": 0.9748620289902998,
+            "Recall": 0.9740637157449866,
+            "F1": 0.9742381877226914,
+            "LogLoss": 0.10119754092960787
+        },
+        "RandomForest": {
+            "Accuracy": 0.9814007874519262,
+            "Top3_Accuracy": 0.9994792951300392,
+            "Precision": 0.9819817335809073,
+            "Recall": 0.9815731825994649,
+            "F1": 0.9816204972838287,
+            "LogLoss": 0.061200081321642945
+        },
+        "ExtraTrees": {
+            "Accuracy": 0.9746407593155928,
+            "Top3_Accuracy": 0.9982003708880302,
+            "Precision": 0.9752807599631591,
+            "Recall": 0.9748972471207386,
+            "F1": 0.9749680835232271,
+            "LogLoss": 0.15430264259207108
+        },
+        "AdaBoost": {
+            "Accuracy": 0.17707619647930425,
+            "Top3_Accuracy": 0.5171147469100277,
+            "Precision": 0.02951239169497331,
+            "Recall": 0.16665792693585038,
+            "F1": 0.05014337951933423,
+            "LogLoss": 2.475900686721741
+        },
+        "XGBoost": {
+            "Accuracy": 0.9808983529282798,
+            "Top3_Accuracy": 0.9997533503247554,
+            "Precision": 0.9815133068274787,
+            "Recall": 0.98110572147257,
+            "F1": 0.9811494397542004,
+            "LogLoss": 0.05669784173369408
+        },
+        "LightGBM": {
+            "Accuracy": 0.9809166232745942,
+            "Top3_Accuracy": 0.999689404112655,
+            "Precision": 0.9815068894876812,
+            "Recall": 0.9811014941932923,
+            "F1": 0.9811491494769641,
+            "LogLoss": 0.0575200991425808
+        },
+        "CatBoost": {
+            "Accuracy": 0.9760019001160167,
+            "Top3_Accuracy": 0.9991686992426941,
+            "Precision": 0.9768676643110553,
+            "Recall": 0.9762959293581166,
+            "F1": 0.9763647266249734,
+            "LogLoss": 0.07637389486480607
+        },
+        "MLP": {
+            "Accuracy": 0.9703563631048626,
+            "Top3_Accuracy": 0.999250915801109,
+            "Precision": 0.9715381822042475,
+            "Recall": 0.9705692338458533,
+            "F1": 0.9707334136163445,
+            "LogLoss": 0.09498487811664673
+        },
+        "SVM_RBF": {
+            "Accuracy": 0.5578119433253858,
+            "Top3_Accuracy": 0.912439365288169,
+            "Precision": 0.6569441730940923,
+            "Recall": 0.5670930636395483,
+            "F1": 0.5422612144346034,
+            "LogLoss": 0.9053955125247521
+        },
+        "Voting_All": {
+            "Accuracy": 0.9801401335562315,
+            "Top3_Accuracy": 0.9984378853901176,
+            "Precision": 0.9808439741012793,
+            "Recall": 0.9803291143863788,
+            "F1": 0.9803949818385486,
+            "LogLoss": 0.277113117939593
+        },
+        "Stacking_All": {
+            "Accuracy": 0.9815104095298126,
+            "Top3_Accuracy": 0.9995889172079256,
+            "Precision": 0.9819927302909134,
+            "Recall": 0.9816972244192245,
+            "F1": 0.9817403175853695,
+            "LogLoss": 0.05908877220349335
+        },
+        "Voting_Top3": {
+            "Accuracy": 0.9816931129929568,
+            "Top3_Accuracy": 0.9996528634200261,
+            "Precision": 0.982283178538972,
+            "Recall": 0.9818757922328852,
+            "F1": 0.9819185086075356,
+            "LogLoss": 0.05516464342886094
+        },
+        "Stacking_Top3": {
+            "Accuracy": 0.9816108964345419,
+            "Top3_Accuracy": 0.9995615116884541,
+            "Precision": 0.9820621397358785,
+            "Recall": 0.9818005274677555,
+            "F1": 0.9818339229260412,
+            "LogLoss": 0.06306263626972028
+        },
+        "Voting_Above90": {
+            "Accuracy": 0.980596892214092,
+            "Top3_Accuracy": 0.9993057268400523,
+            "Precision": 0.981313009562551,
+            "Recall": 0.9807832411407444,
+            "F1": 0.9808497676360614,
+            "LogLoss": 0.07332666317586017
+        },
+        "Stacking_Above90": {
+            "Accuracy": 0.981263759854568,
+            "Top3_Accuracy": 0.9995523765152968,
+            "Precision": 0.9817136963622435,
+            "Recall": 0.9814484960784853,
+            "F1": 0.9814890970065254,
+            "LogLoss": 0.060959138477132566
+        }
+    },
+    "best_model": "Voting_Top3",
+    "timings_detailed": {
+        "LogisticRegression_hpo_time": 116.61728572845459,
+        "LogisticRegression_train_time": 43.3544864654541,
+        "NaiveBayes_hpo_time": 0.9727859497070312,
+        "NaiveBayes_train_time": 0.03875541687011719,
+        "KNN_hpo_time": 4.219256162643433,
+        "KNN_train_time": 0.10381007194519043,
+        "DecisionTree_hpo_time": 10.201327323913574,
+        "DecisionTree_train_time": 0.612999439239502,
+        "RandomForest_hpo_time": 262.10568737983704,
+        "RandomForest_train_time": 39.891778230667114,
+        "ExtraTrees_hpo_time": 61.35846781730652,
+        "ExtraTrees_train_time": 9.024397134780884,
+        "AdaBoost_hpo_time": 154.27299213409424,
+        "AdaBoost_train_time": 10.026775360107422,
+        "XGBoost_hpo_time": 42.18630313873291,
+        "XGBoost_train_time": 5.686037302017212,
+        "LightGBM_hpo_time": 33.12397861480713,
+        "LightGBM_train_time": 2.2818949222564697,
+        "CatBoost_hpo_time": 55.33325123786926,
+        "CatBoost_train_time": 4.538663625717163,
+        "MLP_hpo_time": 2710.4290239810944,
+        "MLP_train_time": 361.7954137325287,
+        "SVM_RBF_hpo_time": 5397.44152879715,
+        "SVM_RBF_train_time": 333.77858901023865,
+        "Voting_All_train_time": 805.4300146102905,
+        "Stacking_All_train_time": 2826.279632329941,
+        "Voting_Top3_train_time": 47.22034573554993,
+        "Stacking_Top3_train_time": 146.11645936965942,
+        "Voting_Above90_train_time": 426.61653661727905,
+        "Stacking_Above90_train_time": 1386.7971975803375,
+        "LogisticRegression_inference_time": 0.0307619571685791,
+        "NaiveBayes_inference_time": 0.0829315185546875,
+        "KNN_inference_time": 0.8266158103942871,
+        "DecisionTree_inference_time": 0.008675098419189453,
+        "RandomForest_inference_time": 2.6380908489227295,
+        "ExtraTrees_inference_time": 3.8736050128936768,
+        "AdaBoost_inference_time": 0.7773363590240479,
+        "XGBoost_inference_time": 0.41452980041503906,
+        "LightGBM_inference_time": 0.8500382900238037,
+        "CatBoost_inference_time": 0.04519033432006836,
+        "MLP_inference_time": 0.950965166091919,
+        "SVM_RBF_inference_time": 210.90552806854248,
+        "Voting_All_inference_time": 222.1743311882019,
+        "Stacking_All_inference_time": 221.8965322971344,
+        "Voting_Top3_inference_time": 3.925187349319458,
+        "Stacking_Top3_inference_time": 4.015008926391602,
+        "Voting_Above90_inference_time": 8.753965616226196,
+        "Stacking_Above90_inference_time": 8.732768774032593
+    }
+}
