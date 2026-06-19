@@ -28,7 +28,7 @@ from models.phase3_gen import MixtureDensityNetwork, ConditionalVAE, MCDropoutRe
 from models.phase4_surrogate import SurrogateMLP, PINNSurrogateLoss, SurrogateResNet
 from data.dataloaders import Phase3GenerativeDataset, Phase4SurrogateDataset
 from training.custom_losses import MaskedNLLLoss, MaskedMSELoss, MaskedVAELoss
-from training.trainer import GenerativeTrainer
+from training.trainer import GenerativeTrainer, GenericTrainer
 
 def load_config():
     with open("configs/default_config.yaml", "r") as f:
