@@ -1,0 +1,28 @@
+2026-06-18 22:15:29,986 | INFO     | [INICIO] Optimizacion y Entrenamiento Fase 3 (Generative)...
+2026-06-18 22:15:32,214 | INFO     | --- Optimizando MDN ---
+2026-06-18 22:41:34,022 | INFO     | [MDN] Epoch 50/200 | Train Loss: 20.7498 | Val Loss: 8721640989639.5107
+2026-06-18 22:49:17,415 | INFO     | [MDN] Epoch 100/200 | Train Loss: 19.9535 | Val Loss: 20.3031
+2026-06-18 22:56:49,210 | INFO     | [MDN] Epoch 150/200 | Train Loss: 19.5605 | Val Loss: 28524314240108.5000
+2026-06-18 23:05:09,306 | INFO     | [MDN] Epoch 200/200 | Train Loss: 19.3222 | Val Loss: 5672363880025.5889
+2026-06-18 23:05:09,617 | INFO     | --- Optimizando cVAE ---
+2026-06-18 23:22:57,824 | INFO     | [cVAE] Epoch 50/200 | Train Loss: 0.9499 | Val Loss: 0.9781
+2026-06-18 23:30:43,200 | INFO     | [cVAE] Epoch 100/200 | Train Loss: 0.9353 | Val Loss: 0.9379
+2026-06-18 23:39:40,518 | INFO     | [cVAE] Epoch 150/200 | Train Loss: 0.9314 | Val Loss: 0.9310
+2026-06-18 23:48:27,962 | INFO     | [cVAE] Epoch 200/200 | Train Loss: 0.9295 | Val Loss: 0.9331
+2026-06-18 23:48:28,160 | INFO     | --- Optimizando MCDropout ---
+2026-06-19 00:04:59,170 | INFO     | [MCDropout] Epoch 50/200 | Train Loss: 0.9489 | Val Loss: 0.9463
+2026-06-19 00:10:30,622 | INFO     | [MCDropout] Epoch 100/200 | Train Loss: 0.9437 | Val Loss: 0.9398
+2026-06-19 00:16:17,159 | INFO     | [MCDropout] Epoch 150/200 | Train Loss: 0.9409 | Val Loss: 0.9357
+2026-06-19 00:21:47,294 | INFO     | [MCDropout] Epoch 200/200 | Train Loss: 0.9386 | Val Loss: 0.9361
+2026-06-19 00:21:47,481 | INFO     | --- Optimizando TabularDDPM ---
+2026-06-19 00:38:04,372 | INFO     | [TabularDDPM] Epoch 50/200 | Train Loss: 0.4137 | Val Loss: 0.4098
+2026-06-19 00:45:07,949 | INFO     | [TabularDDPM] Epoch 100/200 | Train Loss: 0.4096 | Val Loss: 0.4025
+2026-06-19 00:52:07,127 | INFO     | [TabularDDPM] Epoch 150/200 | Train Loss: 0.4074 | Val Loss: 0.4045
+2026-06-19 00:58:53,997 | INFO     | [TabularDDPM] Epoch 200/200 | Train Loss: 0.4074 | Val Loss: 0.4014
+2026-06-19 00:58:54,175 | INFO     | --- Optimizando cGAN ---
+2026-06-19 01:26:38,288 | INFO     | [cGAN] Epoch 50/200 | Train Loss: 0.8217 | Val Loss: 0.0000
+2026-06-19 01:34:39,014 | INFO     | [cGAN] Epoch 100/200 | Train Loss: 1.0402 | Val Loss: 0.0000
+2026-06-19 01:42:41,643 | INFO     | [cGAN] Epoch 150/200 | Train Loss: 3.3913 | Val Loss: 0.0000
+2026-06-19 01:50:45,208 | INFO     | [cGAN] Epoch 200/200 | Train Loss: 6.1412 | Val Loss: 0.0000
+2026-06-19 01:50:45,378 | INFO     | Mejor Modelo Fase 3: TabularDDPM (Val Loss: 0.4014)
+2026-06-19 01:50:45,378 | INFO     | [FIN] Optimizacion y Entrenamiento Fase 3 (Generative) completado en 12915.3924 segundos.

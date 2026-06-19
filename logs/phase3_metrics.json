@@ -1,0 +1,55 @@
+{
+    "training_times_seconds": {
+        "MDN_hpo_time": 1110.6801328659058,
+        "MDN_train_time": 1866.411982536316,
+        "cVAE_hpo_time": 620.6082043647766,
+        "cVAE_train_time": 1977.7366921901703,
+        "MCDropout_hpo_time": 707.4200863838196,
+        "MCDropout_train_time": 1291.7132713794708,
+        "TabularDDPM_hpo_time": 646.9842281341553,
+        "TabularDDPM_train_time": 1579.5319459438324,
+        "cGAN_hpo_time": 1180.4661269187927,
+        "cGAN_train_time": 1930.5676617622375,
+        "phase3_total": 12915.39242386818
+    },
+    "phase3_generative_metrics": {
+        "MDN": {
+            "best_val_loss": 5672363880025.589,
+            "params": {
+                "hidden_dim": 128,
+                "lr": 0.0002894344640761464
+            }
+        },
+        "cVAE": {
+            "best_val_loss": 0.9330512782866338,
+            "params": {
+                "hidden_dim": 256,
+                "lr": 0.0005777213706505585,
+                "beta": 0.6757663904084867
+            }
+        },
+        "MCDropout": {
+            "best_val_loss": 0.9360904491207681,
+            "params": {
+                "hidden_dim": 128,
+                "lr": 0.0010684319991344947,
+                "dropout": 0.18583532877266362
+            }
+        },
+        "TabularDDPM": {
+            "best_val_loss": 0.4014133864845442,
+            "params": {
+                "hidden_dim": 256,
+                "lr": 0.000867255241394997
+            }
+        },
+        "cGAN": {
+            "best_val_loss": 6.141217367221551,
+            "params": {
+                "hidden_dim": 128,
+                "lr": 0.0008869457004031615
+            }
+        }
+    },
+    "best_model": "TabularDDPM"
+}
