@@ -6,9 +6,10 @@ import os
 import time
 import pandas as pd
 import numpy as np
-import torch
 import joblib
 import optuna
+import torch
+import torch.nn as nn
 from torch.utils.data import DataLoader
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import log_loss, mean_absolute_error, mean_squared_error, r2_score
@@ -475,7 +476,7 @@ def main():
     
     # run_phase1_ood(config)
     # run_phase2_router(config)
-    run_phase3_generative(config, device)
+    # run_phase3_generative(config, device)
     run_phase4_surrogate(config, device)
 
 if __name__ == "__main__":
