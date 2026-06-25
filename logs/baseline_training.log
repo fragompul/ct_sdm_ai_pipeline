@@ -1,0 +1,31 @@
+2026-06-25 19:39:40,445 | INFO     | Iniciando Entrenamiento del BASELINE. Dispositivo: cpu
+2026-06-25 19:39:41,361 | INFO     | [INICIO] Entrenamiento Clasificador Baseline...
+2026-06-25 19:46:37,609 | INFO     | Clasificador Baseline entrenado. Accuracy: 0.9773
+2026-06-25 19:46:37,609 | INFO     | [FIN] Entrenamiento Clasificador Baseline completado en 416.2475 segundos.
+2026-06-25 19:46:37,609 | INFO     | [INICIO] Entrenamiento de las 12 RNNs independientes...
+2026-06-25 19:46:37,609 | INFO     | --- Entrenando RNN específica para ID 1 (FB_2_Active_RC) ---
+2026-06-25 19:46:57,183 | INFO     | [RNN 1] Entrenada en 18.94s | Test MSE: 0.8093
+2026-06-25 19:46:57,183 | INFO     | --- Entrenando RNN específica para ID 2 (FB_4_Gm_C) ---
+2026-06-25 19:47:12,238 | INFO     | [RNN 2] Entrenada en 14.94s | Test MSE: 0.8597
+2026-06-25 19:47:12,238 | INFO     | --- Entrenando RNN específica para ID 3 (FB_4_Active_RC) ---
+2026-06-25 19:47:34,084 | INFO     | [RNN 3] Entrenada en 21.71s | Test MSE: 0.9199
+2026-06-25 19:47:34,084 | INFO     | --- Entrenando RNN específica para ID 4 (FF_3_Active_RC) ---
+2026-06-25 19:47:57,309 | INFO     | [RNN 4] Entrenada en 23.13s | Test MSE: 0.9348
+2026-06-25 19:47:57,309 | INFO     | --- Entrenando RNN específica para ID 5 (FB_3_Gm_C) ---
+2026-06-25 19:48:18,023 | INFO     | [RNN 5] Entrenada en 20.61s | Test MSE: 0.8597
+2026-06-25 19:48:18,023 | INFO     | --- Entrenando RNN específica para ID 6 (FF_2_Active_RC) ---
+2026-06-25 19:48:37,791 | INFO     | [RNN 6] Entrenada en 19.69s | Test MSE: 0.8369
+2026-06-25 19:48:37,791 | INFO     | --- Entrenando RNN específica para ID 7 (FF_3_Gm_C) ---
+2026-06-25 19:49:09,251 | INFO     | [RNN 7] Entrenada en 31.35s | Test MSE: 0.8529
+2026-06-25 19:49:09,251 | INFO     | --- Entrenando RNN específica para ID 8 (FB_3_Active_RC) ---
+2026-06-25 19:49:44,528 | INFO     | [RNN 8] Entrenada en 35.18s | Test MSE: 0.9844
+2026-06-25 19:49:44,528 | INFO     | --- Entrenando RNN específica para ID 9 (FF_4_Active_RC) ---
+2026-06-25 19:50:10,221 | INFO     | [RNN 9] Entrenada en 25.57s | Test MSE: 0.8799
+2026-06-25 19:50:10,221 | INFO     | --- Entrenando RNN específica para ID 10 (FF_2_Gm_C) ---
+2026-06-25 19:50:32,718 | INFO     | [RNN 10] Entrenada en 22.41s | Test MSE: 0.8174
+2026-06-25 19:50:32,718 | INFO     | --- Entrenando RNN específica para ID 11 (FF_4_Gm_C) ---
+2026-06-25 19:51:01,756 | INFO     | [RNN 11] Entrenada en 28.91s | Test MSE: 0.8703
+2026-06-25 19:51:01,756 | INFO     | --- Entrenando RNN específica para ID 12 (FB_2_Gm_C) ---
+2026-06-25 19:51:26,804 | INFO     | [RNN 12] Entrenada en 24.96s | Test MSE: 0.8217
+2026-06-25 19:51:26,804 | INFO     | [FIN] Entrenamiento de las 12 RNNs independientes completado en 289.1955 segundos.
+2026-06-25 19:51:26,804 | INFO     | ¡Entrenamiento del Baseline finalizado con éxito!
