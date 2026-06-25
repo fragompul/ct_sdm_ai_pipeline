@@ -4,6 +4,7 @@ import sys
 import yaml
 import os
 import time
+import shutil
 import pandas as pd
 import numpy as np
 import joblib
@@ -22,7 +23,7 @@ from sklearn.multioutput import MultiOutputRegressor
 sys.path.append('src')
 
 from utils.logger import set_global_seeds, setup_logger, Timer, save_metrics_to_json
-from utils.metrics_plotter import plot_roc_curve, plot_confusion_matrix, plot_training_curves, plot_parity
+from utils.metrics_plotter import plot_roc_curve, plot_confusion_matrix, plot_training_curves, plot_parity, plot_combined_roc_curves, plot_combined_training_curves, plot_metric_bars
 from models.phase1_ood import OODDetectorBenchmark
 from models.phase2_router import TopologicalRouterBenchmark
 from models.phase3_gen import MixtureDensityNetwork, ConditionalVAE, MCDropoutResNet, cGANGenerator, cGANDiscriminator, TabularDDPM
@@ -71,6 +72,8 @@ def run_phase1_ood(config):
             
             best_model_name = None
             best_auc = 0
+            dict_y_scores = {}
+            auc_dict = {}
             
             for name, data in results.items():
                 logger.info(f"[{name}] AUC: {data['metrics']['ROC-AUC']:.4f} | F1: {data['metrics']['F1']:.4f}")
@@ -78,10 +81,17 @@ def run_phase1_ood(config):
                 plot_confusion_matrix(y_true_binary, data["y_pred_bin"], name, "Phase1", plots_dir, class_names=["Anomaly", "Valid"])
                 
                 metrics["phase1_ood_metrics"][name] = data['metrics']
+                dict_y_scores[name] = data["scores"]
+                auc_dict[name] = data['metrics']['ROC-AUC']
+                
                 if data['metrics']['ROC-AUC'] > best_auc:
                     best_auc = data['metrics']['ROC-AUC']
                     best_model_name = name
-                    
+
+            # Generar los gráficos combinados
+            plot_combined_roc_curves(y_true_binary, dict_y_scores, "Phase1", plots_dir)
+            plot_metric_bars(auc_dict, "ROC-AUC", "Phase1", plots_dir, maximize=True)
+
             logger.info(f"Mejor Modelo Fase 1: {best_model_name} (AUC: {best_auc:.4f})")
             metrics["best_model"] = best_model_name
             metrics["timings_detailed"] = benchmark.timings
@@ -189,6 +199,7 @@ def run_phase3_generative(config, device):
             model_names = ["MDN", "cVAE", "MCDropout", "TabularDDPM", "cGAN"]
             best_val_losses = {}
             best_params = {}
+            dict_all_val_losses = {}
             
             for name in model_names:
                 logger.info(f"--- Optimizando {name} ---")
@@ -277,6 +288,11 @@ def run_phase3_generative(config, device):
                 
                 best_val_losses[name] = val_losses[-1] if val_losses else t_loss
                 metrics["phase3_generative_metrics"][name] = {"best_val_loss": best_val_losses[name], "params": bp}
+
+                dict_all_val_losses[name] = val_losses if name != "cGAN" else train_losses
+
+            plot_combined_training_curves(dict_all_val_losses, "Phase3", plots_dir)
+            plot_metric_bars(best_val_losses, "Validation_Loss", "Phase3", plots_dir, maximize=False)
 
             # Seleccionar el ganador global (para inferencia downstream)
             winner = min(best_val_losses, key=best_val_losses.get)
@@ -454,6 +470,15 @@ def run_phase4_surrogate(config, device):
             winner = max(best_r2_scores, key=best_r2_scores.get)
             logger.info(f"Mejor Modelo Fase 4: {winner} (R2 Score: {best_r2_scores[winner]:.4f})")
             metrics["best_model"] = winner
+
+            # 1. Gráfico de barras de R2 para todos los surrogates
+            plot_metric_bars(best_r2_scores, "R2_Score", "Phase4", plots_dir, maximize=True)
+            
+            # 2. Copiar el Parity Plot del ganador
+            best_parity_source = os.path.join(plots_dir, f"Phase4_{winner}_Parity.png")
+            best_parity_target = os.path.join(plots_dir, f"Phase4_BEST_MODEL_Parity_Paper.png")
+            if os.path.exists(best_parity_source):
+                shutil.copy(best_parity_source, best_parity_target)
             
     except Exception as e:
         logger.error("Error en Fase 4", exc_info=True)
@@ -474,9 +499,9 @@ def main():
     # DESCOMENTA LA FASE QUE QUIERAS EJECUTAR
     # ==========================================
     
-    # run_phase1_ood(config)
-    # run_phase2_router(config)
-    # run_phase3_generative(config, device)
+    run_phase1_ood(config)
+    run_phase2_router(config)
+    run_phase3_generative(config, device)
     run_phase4_surrogate(config, device)
 
 if __name__ == "__main__":

@@ -103,3 +103,77 @@ def plot_parity(y_true, y_pred, metric_names, model_name, phase, out_dir):
     plt.tight_layout()
     plt.savefig(os.path.join(out_dir, f"{phase}_{model_name}_Parity.png"), dpi=300, bbox_inches='tight')
     plt.close()
+
+def plot_combined_roc_curves(y_true, dict_y_scores, phase, out_dir):
+    """Genera la FIGURA 1 del paper: Curvas ROC combinadas de varios modelos."""
+    os.makedirs(out_dir, exist_ok=True)
+    plt.figure(figsize=(10, 8))
+    
+    # Paleta de colores para que se distingan bien en el paper
+    colors = plt.cm.tab10(np.linspace(0, 1, len(dict_y_scores)))
+    
+    for (model_name, y_scores), color in zip(dict_y_scores.items(), colors):
+        fpr, tpr, _ = roc_curve(y_true, y_scores)
+        roc_auc = auc(fpr, tpr)
+        plt.plot(fpr, tpr, color=color, lw=2.5, label=f'{model_name} (AUC = {roc_auc:.4f})')
+        
+    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+    plt.xlabel('False Positive Rate', fontsize=12)
+    plt.ylabel('True Positive Rate', fontsize=12)
+    plt.title(f'Combined ROC Curves - {phase}', fontsize=14)
+    plt.legend(loc="lower right", fontsize=11)
+    plt.grid(alpha=0.3)
+    plt.savefig(os.path.join(out_dir, f"{phase}_Combined_ROC_Paper.png"), dpi=300, bbox_inches='tight')
+    plt.close()
+
+def plot_combined_training_curves(dict_val_losses, phase, out_dir):
+    """Genera la FIGURA 2 del paper: Curvas de Loss combinadas (ideal para ver la explosión del MDN)."""
+    os.makedirs(out_dir, exist_ok=True)
+    plt.figure(figsize=(12, 8))
+    
+    colors = plt.cm.Set1(np.linspace(0, 1, len(dict_val_losses)))
+    
+    for (model_name, val_losses), color in zip(dict_val_losses.items(), colors):
+        if len(val_losses) > 0:
+            epochs = range(1, len(val_losses) + 1)
+            # Líneas más gruesas para DDPM o cVAE si se quiere resaltar, estándar para todos aquí
+            plt.plot(epochs, val_losses, color=color, lw=2.5, label=f'{model_name} (Val Loss)')
+            
+    # CRÍTICO: Escala Logarítmica Simétrica para que la explosión del MDN (10^14) no oculte los modelos buenos (0.4)
+    plt.yscale('symlog', linthresh=1.0)
+    
+    plt.title(f'Combined Validation Loss Trajectories - {phase}', fontsize=14)
+    plt.xlabel('Epochs', fontsize=12)
+    plt.ylabel('Loss (SymLog Scale)', fontsize=12)
+    plt.legend(fontsize=11)
+    plt.grid(True, alpha=0.3, which="both", ls="--")
+    plt.savefig(os.path.join(out_dir, f"{phase}_Combined_LossCurves_Paper.png"), dpi=300, bbox_inches='tight')
+    plt.close()
+
+def plot_metric_bars(metrics_dict, metric_name, phase, out_dir, maximize=True):
+    """Bonus para el Paper: Gráfico de barras comparando el rendimiento global (AUC, LogLoss, R2)."""
+    os.makedirs(out_dir, exist_ok=True)
+    plt.figure(figsize=(12, 6))
+    
+    models = list(metrics_dict.keys())
+    values = [metrics_dict[m] for m in models]
+
+    # Ordenar de mejor a peor
+    sorted_indices = np.argsort(values)
+    if maximize: 
+        sorted_indices = sorted_indices[::-1]
+
+    models = [models[i] for i in sorted_indices]
+    values = [values[i] for i in sorted_indices]
+
+    sns.barplot(x=values, y=models, palette="viridis")
+    plt.title(f'{metric_name} Comparison - {phase}', fontsize=14)
+    plt.xlabel(metric_name, fontsize=12)
+    plt.grid(axis='x', alpha=0.3)
+    
+    # Añadir los valores en texto sobre las barras
+    for index, value in enumerate(values):
+        plt.text(value, index, f' {value:.4f}', va='center')
+        
+    plt.savefig(os.path.join(out_dir, f"{phase}_Comparison_{metric_name}_Paper.png"), dpi=300, bbox_inches='tight')
+    plt.close()
