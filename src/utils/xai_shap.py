@@ -3,38 +3,25 @@
 import shap
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 class ShapleyExplainer:
     def __init__(self, trained_model, X_train_sample, feature_names):
-        """
-        trained_model: El modelo final de la Fase 2 (Idealmente el meta-learner del ensemble).
-        X_train_sample: Una muestra representativa de los datos de entrenamiento para el baseline.
-        """
         self.model = trained_model
         self.feature_names = feature_names
         
-        # Dependiendo del modelo, usamos TreeExplainer (para XGBoost/RF) o KernelExplainer (para Ensembles complejos o MLP)
         try:
-            # Intento de usar el explainer más rápido si es basado en árboles
             self.explainer = shap.TreeExplainer(self.model)
-            print("Usando TreeExplainer.")
+            print("XAI: Usando TreeExplainer.")
         except Exception:
-            # Fallback seguro para StackingClassifier o MLP
-            # Usamos el método predict_proba para explicar las probabilidades
             predict_fn = lambda x: self.model.predict_proba(x)
             self.explainer = shap.KernelExplainer(predict_fn, shap.sample(X_train_sample, 100))
-            print("Usando KernelExplainer (modelo complejo detectado).")
+            print("XAI: Usando KernelExplainer.")
 
-    def generate_explanation(self, input_specs, predicted_topology_index):
-        """
-        Genera el Force Plot para una inferencia concreta.
-        input_specs: Las especificaciones del usuario (SNDR, Bw, Power).
-        predicted_topology_index: El índice de la clase que queremos explicar (ej. la top 1).
-        """
-        # Calcular los valores SHAP
+    def generate_explanation(self, input_specs, predicted_topology_index, final_adj_prob=None, out_dir="logs/plots/xai/"):
+        os.makedirs(out_dir, exist_ok=True)
         shap_values = self.explainer.shap_values(input_specs)
         
-        # KernelExplainer devuelve una lista (una matriz por clase). Seleccionamos la clase predicha.
         if isinstance(shap_values, list):
             class_shap_values = shap_values[predicted_topology_index]
             expected_value = self.explainer.expected_value[predicted_topology_index]
@@ -42,11 +29,9 @@ class ShapleyExplainer:
             class_shap_values = shap_values[0, :, predicted_topology_index]
             expected_value = self.explainer.expected_value[predicted_topology_index]
 
-        # Configurar figura para visualización (se podría guardar en un HTML en producción)
+        # 1. Generar Force Plot
         plt.figure(figsize=(10, 3))
-        
-        # Usamos force_plot_html para web o matplotlib para local
-        force_plot = shap.force_plot(
+        shap.force_plot(
             base_value=expected_value, 
             shap_values=class_shap_values, 
             features=input_specs, 
@@ -54,11 +39,22 @@ class ShapleyExplainer:
             matplotlib=True,
             show=False
         )
-        
         plt.title(f"Lógica de Decisión para Topología {predicted_topology_index + 1}")
         plt.tight_layout()
-        plt.savefig(f"xai/shap_explanation_top_{predicted_topology_index + 1}.png")
+        plt.savefig(os.path.join(out_dir, f"shap_explanation_top_{predicted_topology_index + 1}.png"))
         plt.close()
+
+        # 2. Generar Texto Natural para el Diseñador Analógico 
+        base_prob = expected_value * 100
+        impacts = class_shap_values[0] if len(class_shap_values.shape) > 1 else class_shap_values
         
-        print(f"Force plot generado para la clase {predicted_topology_index + 1}.")
-        return class_shap_values
+        text_report = f"--- INFORME DE INTELIGENCIA EXPLICABLE (XAI) ---\n"
+        text_report += f"La probabilidad base (sesgo del dataset) para esta arquitectura es del {base_prob:.1f}%.\n"
+        if final_prob: text_report += f"Sin embargo, la confianza final se ajustó al {final_prob*100:.1f}%. Esto se debe a:\n"
+        
+        for j, feature in enumerate(self.feature_names):
+            impact_percent = impacts[j] * 100
+            sign = "aumentó" if impact_percent > 0 else "penalizó"
+            text_report += f"  • El requisito de {feature} ({input_specs[0][j]:.2e}) {sign} la probabilidad en un {abs(impact_percent):.2f}%.\n"
+            
+        return impacts, text_report
