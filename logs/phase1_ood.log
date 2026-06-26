@@ -1,7 +1,7 @@
-2026-06-17 09:39:17,493 | INFO     | [INICIO] Optimizacion y Entrenamiento Fase 1 (Detección OOD)...
-2026-06-17 12:12:57,364 | INFO     | [IsolationForest] AUC: 0.9201 | F1: 0.9725
-2026-06-17 12:12:57,854 | INFO     | [OneClassSVM] AUC: 0.9983 | F1: 0.9838
-2026-06-17 12:12:58,215 | INFO     | [GMM] AUC: 0.9917 | F1: 0.9885
-2026-06-17 12:12:58,564 | INFO     | [DenseAutoencoder] AUC: 0.9332 | F1: 0.9566
-2026-06-17 12:12:58,919 | INFO     | Mejor Modelo Fase 1: OneClassSVM (AUC: 0.9983)
-2026-06-17 12:12:58,920 | INFO     | [FIN] Optimizacion y Entrenamiento Fase 1 (Detección OOD) completado en 9221.4267 segundos.
+2026-06-25 20:01:13,164 | INFO     | [INICIO] Optimizacion y Entrenamiento Fase 1 (Detección OOD)...
+2026-06-25 22:56:39,238 | INFO     | [IsolationForest] AUC: 0.9178 | F1: 0.9454
+2026-06-25 22:56:39,711 | INFO     | [OneClassSVM] AUC: 0.9991 | F1: 0.9927
+2026-06-25 22:56:40,074 | INFO     | [GMM] AUC: 0.9917 | F1: 0.9885
+2026-06-25 22:56:40,428 | INFO     | [DenseAutoencoder] AUC: 0.9332 | F1: 0.9566
+2026-06-25 22:56:41,240 | INFO     | Mejor Modelo Fase 1: OneClassSVM (AUC: 0.9991)
+2026-06-25 22:56:41,241 | INFO     | [FIN] Optimizacion y Entrenamiento Fase 1 (Detección OOD) completado en 10528.0773 segundos.

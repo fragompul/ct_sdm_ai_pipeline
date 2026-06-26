@@ -1,53 +1,53 @@
 {
     "training_times_seconds": {
-        "MDN_hpo_time": 1110.6801328659058,
-        "MDN_train_time": 1866.411982536316,
-        "cVAE_hpo_time": 620.6082043647766,
-        "cVAE_train_time": 1977.7366921901703,
-        "MCDropout_hpo_time": 707.4200863838196,
-        "MCDropout_train_time": 1291.7132713794708,
-        "TabularDDPM_hpo_time": 646.9842281341553,
-        "TabularDDPM_train_time": 1579.5319459438324,
-        "cGAN_hpo_time": 1180.4661269187927,
-        "cGAN_train_time": 1930.5676617622375,
-        "phase3_total": 12915.39242386818
+        "MDN_hpo_time": 1103.1276574134827,
+        "MDN_train_time": 1621.2371280193329,
+        "cVAE_hpo_time": 573.8921327590942,
+        "cVAE_train_time": 1192.8743760585785,
+        "MCDropout_hpo_time": 633.7237496376038,
+        "MCDropout_train_time": 1391.0070805549622,
+        "TabularDDPM_hpo_time": 627.1128582954407,
+        "TabularDDPM_train_time": 1449.5358312129974,
+        "cGAN_hpo_time": 1129.952320098877,
+        "cGAN_train_time": 1919.8452098369598,
+        "phase3_total": 11645.662730932236
     },
     "phase3_generative_metrics": {
         "MDN": {
-            "best_val_loss": 5672363880025.589,
+            "best_val_loss": 147782228158.72656,
             "params": {
                 "hidden_dim": 128,
-                "lr": 0.0002894344640761464
+                "lr": 0.003994215449283407
             }
         },
         "cVAE": {
-            "best_val_loss": 0.9330512782866338,
+            "best_val_loss": 0.9302331677107053,
             "params": {
-                "hidden_dim": 256,
-                "lr": 0.0005777213706505585,
-                "beta": 0.6757663904084867
+                "hidden_dim": 128,
+                "lr": 0.0006140256986468447,
+                "beta": 1.0223234193821988
             }
         },
         "MCDropout": {
-            "best_val_loss": 0.9360904491207681,
+            "best_val_loss": 0.9374651557931276,
             "params": {
                 "hidden_dim": 128,
-                "lr": 0.0010684319991344947,
-                "dropout": 0.18583532877266362
+                "lr": 0.0019347901328102036,
+                "dropout": 0.1433553366721843
             }
         },
         "TabularDDPM": {
-            "best_val_loss": 0.4014133864845442,
+            "best_val_loss": 0.4059511146441427,
             "params": {
                 "hidden_dim": 256,
-                "lr": 0.000867255241394997
+                "lr": 0.001436682078767982
             }
         },
         "cGAN": {
-            "best_val_loss": 6.141217367221551,
+            "best_val_loss": 8.483543218428022,
             "params": {
                 "hidden_dim": 128,
-                "lr": 0.0008869457004031615
+                "lr": 0.0005728810016100877
             }
         }
     },

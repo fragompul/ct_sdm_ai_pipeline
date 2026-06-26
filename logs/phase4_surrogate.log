@@ -1,33 +1,33 @@
-2026-06-19 09:20:36,519 | INFO     | [INICIO] Optimizacion y Entrenamiento Fase 4 (Surrogate Models)...
-2026-06-19 09:20:38,521 | INFO     | --- Optimizando DeepMLP ---
-2026-06-19 09:26:34,782 | INFO     | [DeepMLP] Epoch 50/500 | Train MSE: 0.3344 | Val MSE: 0.4407
-2026-06-19 09:29:00,062 | INFO     | [DeepMLP] Epoch 100/500 | Train MSE: 0.3037 | Val MSE: 0.6053
-2026-06-19 09:31:18,754 | INFO     | [DeepMLP] Epoch 150/500 | Train MSE: 0.2967 | Val MSE: 1.9569
-2026-06-19 09:33:41,032 | INFO     | [DeepMLP] Epoch 200/500 | Train MSE: 0.2909 | Val MSE: 1.4471
-2026-06-19 09:36:21,279 | INFO     | [DeepMLP] Epoch 250/500 | Train MSE: 0.2841 | Val MSE: 2.1990
-2026-06-19 09:38:38,008 | INFO     | [DeepMLP] Epoch 300/500 | Train MSE: 0.2819 | Val MSE: 2.0706
-2026-06-19 09:41:07,567 | INFO     | [DeepMLP] Epoch 350/500 | Train MSE: 0.2794 | Val MSE: 2.7362
-2026-06-19 09:43:36,003 | INFO     | [DeepMLP] Epoch 400/500 | Train MSE: 0.2739 | Val MSE: 2.5724
-2026-06-19 09:46:19,244 | INFO     | [DeepMLP] Epoch 450/500 | Train MSE: 0.2706 | Val MSE: 1.7164
-2026-06-19 09:48:38,711 | INFO     | [DeepMLP] Epoch 500/500 | Train MSE: 0.2681 | Val MSE: 1.1162
-2026-06-19 09:48:39,365 | INFO     | [DeepMLP] Test MAE: 0.2966 | Test MSE: 0.4448 | Test R2: 0.4656
-2026-06-19 09:48:40,866 | INFO     | --- Optimizando ResNet ---
-2026-06-19 10:03:05,841 | INFO     | [ResNet] Epoch 50/500 | Train MSE: 0.5434 | Val MSE: 0.3088
-2026-06-19 10:09:28,301 | INFO     | [ResNet] Epoch 100/500 | Train MSE: 0.4811 | Val MSE: 0.4449
-2026-06-19 10:16:15,570 | INFO     | [ResNet] Epoch 150/500 | Train MSE: 0.3883 | Val MSE: 0.5270
-2026-06-19 10:24:13,132 | INFO     | [ResNet] Epoch 200/500 | Train MSE: 0.4216 | Val MSE: 0.4248
-2026-06-19 10:31:55,865 | INFO     | [ResNet] Epoch 250/500 | Train MSE: 0.3878 | Val MSE: 0.3571
-2026-06-19 10:38:50,788 | INFO     | [ResNet] Epoch 300/500 | Train MSE: 0.3843 | Val MSE: 0.5607
-2026-06-19 10:46:19,042 | INFO     | [ResNet] Epoch 350/500 | Train MSE: 0.4868 | Val MSE: 0.6347
-2026-06-19 10:53:53,411 | INFO     | [ResNet] Epoch 400/500 | Train MSE: 0.3703 | Val MSE: 0.7557
-2026-06-19 11:01:45,490 | INFO     | [ResNet] Epoch 450/500 | Train MSE: 0.3736 | Val MSE: 0.3161
-2026-06-19 11:10:01,800 | INFO     | [ResNet] Epoch 500/500 | Train MSE: 0.3816 | Val MSE: 0.4620
-2026-06-19 11:10:02,174 | INFO     | [ResNet] Test MAE: 0.3091 | Test MSE: 0.4371 | Test R2: 0.4719
-2026-06-19 11:10:03,704 | INFO     | --- Optimizando Multi_XGBoost ---
-2026-06-19 11:10:38,509 | INFO     | [Multi_XGBoost] Test MAE: 0.3654 | Test MSE: 0.5067 | Test R2: 0.3732
-2026-06-19 11:10:39,997 | INFO     | --- Optimizando Multi_LightGBM ---
-2026-06-19 11:10:58,971 | INFO     | [Multi_LightGBM] Test MAE: 0.2864 | Test MSE: 0.4197 | Test R2: 0.4953
-2026-06-19 11:11:00,514 | INFO     | --- Optimizando Multi_RF ---
-2026-06-19 14:20:33,063 | INFO     | [Multi_RF] Test MAE: 0.2825 | Test MSE: 0.4648 | Test R2: 0.4229
-2026-06-19 14:20:34,583 | INFO     | Mejor Modelo Fase 4: Multi_LightGBM (R2 Score: 0.4953)
-2026-06-19 14:20:34,583 | INFO     | [FIN] Optimizacion y Entrenamiento Fase 4 (Surrogate Models) completado en 17998.0636 segundos.
+2026-06-26 06:40:18,386 | INFO     | [INICIO] Optimizacion y Entrenamiento Fase 4 (Surrogate Models)...
+2026-06-26 06:40:20,087 | INFO     | --- Optimizando DeepMLP ---
+2026-06-26 06:48:11,673 | INFO     | [DeepMLP] Epoch 50/500 | Train MSE: 0.3205 | Val MSE: 0.4842
+2026-06-26 06:50:58,492 | INFO     | [DeepMLP] Epoch 100/500 | Train MSE: 0.3011 | Val MSE: 1.6092
+2026-06-26 06:53:30,617 | INFO     | [DeepMLP] Epoch 150/500 | Train MSE: 0.2913 | Val MSE: 3.1919
+2026-06-26 06:56:04,012 | INFO     | [DeepMLP] Epoch 200/500 | Train MSE: 0.2865 | Val MSE: 1.8535
+2026-06-26 06:58:49,184 | INFO     | [DeepMLP] Epoch 250/500 | Train MSE: 0.2814 | Val MSE: 1.6942
+2026-06-26 07:01:06,048 | INFO     | [DeepMLP] Epoch 300/500 | Train MSE: 0.2776 | Val MSE: 2.4079
+2026-06-26 07:03:50,701 | INFO     | [DeepMLP] Epoch 350/500 | Train MSE: 0.2746 | Val MSE: 3.8450
+2026-06-26 07:06:16,499 | INFO     | [DeepMLP] Epoch 400/500 | Train MSE: 0.2696 | Val MSE: 2.5964
+2026-06-26 07:08:45,195 | INFO     | [DeepMLP] Epoch 450/500 | Train MSE: 0.2662 | Val MSE: 2.8178
+2026-06-26 07:11:11,713 | INFO     | [DeepMLP] Epoch 500/500 | Train MSE: 0.2637 | Val MSE: 3.2686
+2026-06-26 07:11:12,255 | INFO     | [DeepMLP] Test MAE: 0.3021 | Test MSE: 0.7118 | Test R2: 0.0415
+2026-06-26 07:11:13,731 | INFO     | --- Optimizando ResNet ---
+2026-06-26 07:23:35,345 | INFO     | [ResNet] Epoch 50/500 | Train MSE: 0.3622 | Val MSE: 0.3048
+2026-06-26 07:28:26,343 | INFO     | [ResNet] Epoch 100/500 | Train MSE: 0.3777 | Val MSE: 0.4711
+2026-06-26 07:33:50,334 | INFO     | [ResNet] Epoch 150/500 | Train MSE: 0.3291 | Val MSE: 0.3304
+2026-06-26 07:38:52,597 | INFO     | [ResNet] Epoch 200/500 | Train MSE: 0.3446 | Val MSE: 0.3054
+2026-06-26 07:43:48,393 | INFO     | [ResNet] Epoch 250/500 | Train MSE: 0.3168 | Val MSE: 0.3720
+2026-06-26 07:48:55,045 | INFO     | [ResNet] Epoch 300/500 | Train MSE: 0.3204 | Val MSE: 0.5753
+2026-06-26 07:54:33,949 | INFO     | [ResNet] Epoch 350/500 | Train MSE: 0.3429 | Val MSE: 0.3238
+2026-06-26 07:59:26,135 | INFO     | [ResNet] Epoch 400/500 | Train MSE: 0.3207 | Val MSE: 0.3047
+2026-06-26 08:05:06,272 | INFO     | [ResNet] Epoch 450/500 | Train MSE: 0.3183 | Val MSE: 0.3835
+2026-06-26 08:10:34,902 | INFO     | [ResNet] Epoch 500/500 | Train MSE: 0.3164 | Val MSE: 0.3149
+2026-06-26 08:10:35,273 | INFO     | [ResNet] Test MAE: 0.3052 | Test MSE: 0.4244 | Test R2: 0.4899
+2026-06-26 08:10:36,762 | INFO     | --- Optimizando Multi_XGBoost ---
+2026-06-26 08:11:03,034 | INFO     | [Multi_XGBoost] Test MAE: 0.3418 | Test MSE: 0.5301 | Test R2: 0.3286
+2026-06-26 08:11:04,612 | INFO     | --- Optimizando Multi_LightGBM ---
+2026-06-26 08:11:23,466 | INFO     | [Multi_LightGBM] Test MAE: 0.2874 | Test MSE: 0.4192 | Test R2: 0.4963
+2026-06-26 08:11:25,056 | INFO     | --- Optimizando Multi_RF ---
+2026-06-26 10:07:54,439 | INFO     | [Multi_RF] Test MAE: 0.2944 | Test MSE: 0.4307 | Test R2: 0.4803
+2026-06-26 10:07:55,915 | INFO     | Mejor Modelo Fase 4: Multi_LightGBM (R2 Score: 0.4963)
+2026-06-26 10:07:56,096 | INFO     | [FIN] Optimizacion y Entrenamiento Fase 4 (Surrogate Models) completado en 12457.7099 segundos.

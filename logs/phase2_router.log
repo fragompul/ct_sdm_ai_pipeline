@@ -1,21 +1,21 @@
-2026-06-17 14:26:10,937 | INFO     | [INICIO] Optimizacion y Entrenamiento Fase 2 (Router)...
-2026-06-17 18:54:13,059 | INFO     | [LogisticRegression] Acc: 0.7137 | Top3: 0.9364 | LogLoss: 0.8203
-2026-06-17 18:54:13,836 | INFO     | [NaiveBayes] Acc: 0.7912 | Top3: 0.9043 | LogLoss: 0.9380
-2026-06-17 18:54:14,501 | INFO     | [KNN] Acc: 0.8731 | Top3: 0.9890 | LogLoss: 0.5896
-2026-06-17 18:54:15,078 | INFO     | [DecisionTree] Acc: 0.9738 | Top3: 0.9992 | LogLoss: 0.1012
-2026-06-17 18:54:15,661 | INFO     | [RandomForest] Acc: 0.9814 | Top3: 0.9995 | LogLoss: 0.0612
-2026-06-17 18:54:16,346 | INFO     | [ExtraTrees] Acc: 0.9746 | Top3: 0.9982 | LogLoss: 0.1543
-2026-06-17 18:54:16,967 | INFO     | [AdaBoost] Acc: 0.1771 | Top3: 0.5171 | LogLoss: 2.4759
-2026-06-17 18:54:17,540 | INFO     | [XGBoost] Acc: 0.9809 | Top3: 0.9998 | LogLoss: 0.0567
-2026-06-17 18:54:18,190 | INFO     | [LightGBM] Acc: 0.9809 | Top3: 0.9997 | LogLoss: 0.0575
-2026-06-17 18:54:18,855 | INFO     | [CatBoost] Acc: 0.9760 | Top3: 0.9992 | LogLoss: 0.0764
-2026-06-17 18:54:19,588 | INFO     | [MLP] Acc: 0.9704 | Top3: 0.9993 | LogLoss: 0.0950
-2026-06-17 18:54:20,240 | INFO     | [SVM_RBF] Acc: 0.5578 | Top3: 0.9124 | LogLoss: 0.9054
-2026-06-17 18:54:20,918 | INFO     | [Voting_All] Acc: 0.9801 | Top3: 0.9984 | LogLoss: 0.2771
-2026-06-17 18:54:21,590 | INFO     | [Stacking_All] Acc: 0.9815 | Top3: 0.9996 | LogLoss: 0.0591
-2026-06-17 18:54:22,261 | INFO     | [Voting_Top3] Acc: 0.9817 | Top3: 0.9997 | LogLoss: 0.0552
-2026-06-17 18:54:22,912 | INFO     | [Stacking_Top3] Acc: 0.9816 | Top3: 0.9996 | LogLoss: 0.0631
-2026-06-17 18:54:23,676 | INFO     | [Voting_Above90] Acc: 0.9806 | Top3: 0.9993 | LogLoss: 0.0733
-2026-06-17 18:54:24,341 | INFO     | [Stacking_Above90] Acc: 0.9813 | Top3: 0.9996 | LogLoss: 0.0610
-2026-06-17 18:54:24,994 | INFO     | Mejor Modelo Fase 2: Voting_Top3 (LogLoss: 0.0552)
-2026-06-17 18:54:25,354 | INFO     | [FIN] Optimizacion y Entrenamiento Fase 2 (Router) completado en 16094.4166 segundos.
+2026-06-25 22:56:41,243 | INFO     | [INICIO] Optimizacion y Entrenamiento Fase 2 (Router)...
+2026-06-26 03:26:00,625 | INFO     | [LogisticRegression] Acc: 0.7410 | Top3: 0.9522 | LogLoss: 0.7536
+2026-06-26 03:26:01,382 | INFO     | [NaiveBayes] Acc: 0.7911 | Top3: 0.9043 | LogLoss: 0.9386
+2026-06-26 03:26:02,027 | INFO     | [KNN] Acc: 0.8731 | Top3: 0.9890 | LogLoss: 0.5896
+2026-06-26 03:26:02,614 | INFO     | [DecisionTree] Acc: 0.9711 | Top3: 0.9990 | LogLoss: 0.1084
+2026-06-26 03:26:03,184 | INFO     | [RandomForest] Acc: 0.9815 | Top3: 0.9995 | LogLoss: 0.0649
+2026-06-26 03:26:03,757 | INFO     | [ExtraTrees] Acc: 0.9742 | Top3: 0.9983 | LogLoss: 0.1651
+2026-06-26 03:26:04,362 | INFO     | [AdaBoost] Acc: 0.1771 | Top3: 0.5171 | LogLoss: 2.4761
+2026-06-26 03:26:04,926 | INFO     | [XGBoost] Acc: 0.9808 | Top3: 0.9997 | LogLoss: 0.0567
+2026-06-26 03:26:05,565 | INFO     | [LightGBM] Acc: 0.9809 | Top3: 0.9997 | LogLoss: 0.0574
+2026-06-26 03:26:06,302 | INFO     | [CatBoost] Acc: 0.9793 | Top3: 0.9995 | LogLoss: 0.0650
+2026-06-26 03:26:06,945 | INFO     | [MLP] Acc: 0.9740 | Top3: 0.9992 | LogLoss: 0.0861
+2026-06-26 03:26:07,598 | INFO     | [SVM_RBF] Acc: 0.5590 | Top3: 0.9179 | LogLoss: 0.8988
+2026-06-26 03:26:08,239 | INFO     | [Voting_All] Acc: 0.9804 | Top3: 0.9984 | LogLoss: 0.2734
+2026-06-26 03:26:08,907 | INFO     | [Stacking_All] Acc: 0.9814 | Top3: 0.9996 | LogLoss: 0.0588
+2026-06-26 03:26:09,562 | INFO     | [Voting_Top3] Acc: 0.9816 | Top3: 0.9997 | LogLoss: 0.0551
+2026-06-26 03:26:10,214 | INFO     | [Stacking_Top3] Acc: 0.9815 | Top3: 0.9996 | LogLoss: 0.0628
+2026-06-26 03:26:10,852 | INFO     | [Voting_Above90] Acc: 0.9810 | Top3: 0.9994 | LogLoss: 0.0733
+2026-06-26 03:26:11,632 | INFO     | [Stacking_Above90] Acc: 0.9814 | Top3: 0.9995 | LogLoss: 0.0606
+2026-06-26 03:26:12,274 | INFO     | Mejor Modelo Fase 2: Voting_Top3 (LogLoss: 0.0551)
+2026-06-26 03:26:12,707 | INFO     | [FIN] Optimizacion y Entrenamiento Fase 2 (Router) completado en 16171.4636 segundos.
