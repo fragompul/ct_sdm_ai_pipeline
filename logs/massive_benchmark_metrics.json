@@ -1,0 +1,23 @@
+{
+    "benchmark_settings": {
+        "n_tests": 1000
+    },
+    "baseline_stats": {
+        "mean_fom": 113.06612582514742,
+        "median_fom": 113.16117839983352,
+        "mean_time_ms": 3.1929688453674316
+    },
+    "proposed_stats": {
+        "mean_fom": 98.26546131123727,
+        "median_fom": 98.40406253432991,
+        "mean_time_ms": 200.32457065582275
+    },
+    "comparison": {
+        "proposed_win_rate_percent": 0.0
+    },
+    "global_feature_importance_shap": {
+        "SNDR": 0.09719280182440901,
+        "Bw": 0.006822328612681819,
+        "Power": 0.12104199961055273
+    }
+}
