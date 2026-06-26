@@ -12,3 +12,4 @@ seaborn
 optuna
 lightgbm
 catboost
+git+https://github.com/fragompul/cbadc.git@cbadc_SDMapp
