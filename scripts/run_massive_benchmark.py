@@ -11,16 +11,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from tqdm import tqdm
-import cbadc as cb
 
 sys.path.append('src')
-from utils.logger import setup_logger
+from utils.logger import setup_logger, save_metrics_to_json
 from models.phase3_gen import TabularDDPM
 from models.phase4_surrogate import SurrogateResNet
 from optimization.gradient_ascent import DifferentiableSearch
 from utils.simulator import CBADCSimulator
+from utils.xai_shap import ShapleyExplainer
 
-# Importar la RNN del Baseline para poder cargar sus pesos
 import torch.nn as nn
 class BaselineRNN(nn.Module):
     def __init__(self, input_dim, output_dim, hidden_units=64):
@@ -46,7 +45,7 @@ def plot_benchmark_results(results_df, out_dir):
 
     valid_df = results_df[results_df["FoM_Real"] > 0]
 
-    # 1. Comparativa de Tiempos de Cómputo
+    # 1. Boxplot (Tiempos)
     plt.figure(figsize=(8, 6))
     sns.boxplot(data=results_df, x="Pipeline", y="Time_ms", palette="Set2")
     plt.yscale("log")
@@ -55,19 +54,38 @@ def plot_benchmark_results(results_df, out_dir):
     plt.savefig(os.path.join(out_dir, "Benchmark_Time_Comparison.png"), dpi=300)
     plt.close()
 
-    # 2. Distribución del FoM Real Simulado
     if not valid_df.empty:
+        # 2. KDE Plot (Densidad FoM)
         plt.figure(figsize=(8, 6))
         sns.kdeplot(data=valid_df, x="FoM_Real", hue="Pipeline", fill=True, common_norm=False, palette="Set1", alpha=0.5)
-        plt.title("Distribution of Achieved Figure of Merit (FoMs) in cbadc")
+        plt.title("Distribution of Achieved Figure of Merit (FoMs)")
         plt.xlabel("Schreier FoM (dB)")
         plt.ylabel("Density")
         plt.savefig(os.path.join(out_dir, "Benchmark_FoM_Distribution.png"), dpi=300)
         plt.close()
         
-        # 3. Gráfico de Dispersión
+        # 3. ECDF Plot (Acumulado de Dominancia) - NUEVO
         plt.figure(figsize=(8, 6))
-        sns.scatterplot(data=valid_df, x="Time_ms", y="FoM_Real", hue="Pipeline", style="Pipeline", s=100, palette="Set1", alpha=0.7)
+        sns.ecdfplot(data=valid_df, x="FoM_Real", hue="Pipeline", palette="Set1", linewidth=2.5)
+        plt.title("Empirical Cumulative Distribution Function (ECDF) of FoMs")
+        plt.xlabel("Schreier FoM (dB)")
+        plt.ylabel("Cumulative Probability (Lower = Better Performance)")
+        plt.savefig(os.path.join(out_dir, "Benchmark_FoM_ECDF.png"), dpi=300)
+        plt.close()
+
+        # 4. Countplot (Selección de Topologías) - NUEVO
+        plt.figure(figsize=(10, 6))
+        sns.countplot(data=valid_df, x="Topology", hue="Pipeline", palette="viridis")
+        plt.title("Topology Selection Distribution")
+        plt.xlabel("Topology ID")
+        plt.ylabel("Frequency Count")
+        plt.legend(title="Pipeline")
+        plt.savefig(os.path.join(out_dir, "Benchmark_Topology_Distribution.png"), dpi=300)
+        plt.close()
+
+        # 5. Pareto Front
+        plt.figure(figsize=(8, 6))
+        sns.scatterplot(data=valid_df, x="Time_ms", y="FoM_Real", hue="Pipeline", style="Pipeline", s=80, palette="Set1", alpha=0.6)
         plt.xscale("log")
         plt.title("Efficiency Pareto: Real FoM vs Computational Cost")
         plt.xlabel("AI Computation Time (ms) [Log Scale]")
@@ -94,10 +112,8 @@ def main():
     scaler_specs = joblib.load(os.path.join(models_dir, 'scaler_specs.pkl'))
     scaler_dv = joblib.load(os.path.join(models_dir, 'scaler_design_vars.pkl'))
     ood_model = joblib.load(os.path.join(models_dir, 'phase1_ood_models.pkl'))['OneClassSVM']
-    
     clf_base = joblib.load(os.path.join(baseline_dir, 'baseline_classifier.pkl'))
     scaler_clf_base = joblib.load(os.path.join(baseline_dir, 'baseline_clf_scaler.pkl'))
-    
     router = joblib.load(os.path.join(models_dir, 'phase2_router_model.pkl'))
     
     ddpm_state = torch.load(os.path.join(models_dir, 'phase3_tabularddpm.pth'), map_location=device)
@@ -119,6 +135,7 @@ def main():
 
     N_TESTS = 1000
     results_list = []
+    sampled_inputs_xai = [] # Recolector para SHAP
     
     logger.info("Generando especificaciones y simulando...")
     for i in tqdm(range(N_TESTS), desc="Benchmark Progress"):
@@ -130,15 +147,12 @@ def main():
             
             x_input = np.array([[sndr_req, bw_req, power_req]])
             x_input_scaled = scaler_specs.transform(x_input)
-            
-            if ood_model.predict(x_input_scaled)[0] == 1:
-                is_valid = True
+            if ood_model.predict(x_input_scaled)[0] == 1: is_valid = True
                 
         target_dict = {"SNDR": sndr_req, "Bw": bw_req, "Power": power_req}
+        if len(sampled_inputs_xai) < 150: sampled_inputs_xai.append(x_input_scaled[0])
 
-        # ==========================================
-        # EJECUCIÓN BASELINE
-        # ==========================================
+        # === BASELINE ===
         start_base = time.time()
         x_base_sc = scaler_clf_base.transform(x_input)
         top_id_base = int(clf_base.predict(x_base_sc)[0])
@@ -156,7 +170,6 @@ def main():
             design_vars_base = scaler_y_base.inverse_transform(preds_base_sc.cpu().numpy())[0]
             
         time_base_ms = (time.time() - start_base) * 1000
-        
         top_name_base = router.mapping_info.get(top_id_base, {}).get("name", "") if hasattr(router, "mapping_info") else ""
         sim_base = simulator.simulate(top_id_base, design_vars_base, target_dict, feature_names_base, top_name=top_name_base)
         fom_base = calculate_fom(sim_base["SNDR"], sim_base["Bw"], sim_base["Power"]) if sim_base["Success"] else 0
@@ -166,9 +179,7 @@ def main():
             "Time_ms": time_base_ms, "FoM_Real": fom_base
         })
 
-        # ==========================================
-        # EJECUCIÓN NUEVO PIPELINE
-        # ==========================================
+        # === NUEVO PIPELINE ===
         start_new = time.time()
         raw_probs = router.predict_proba(x_input_scaled)[0]
         adj_probs = (raw_probs * np.exp(-lambda_penalty * cost_matrix))
@@ -191,11 +202,8 @@ def main():
             mask = load_mask_for_topology(topology_id, df_unified)
             best_y_scaled, best_fom = search_algo.optimize(initial_y_scaled, one_hot_t, mask, steps=30) 
             
-            # --- PROTECCIÓN ANTI-DIVERGENCIA (FALLBACK) ---
             if best_y_scaled is None or np.isnan(best_fom):
-                best_y_scaled = initial_y_scaled
-                best_fom = -999.0
-            # ----------------------------------------------
+                best_y_scaled, best_fom = initial_y_scaled, -999.0
             
             if best_fom > best_fom_pred or best_design_new is None:
                 best_fom_pred = best_fom
@@ -214,11 +222,40 @@ def main():
             "Time_ms": time_new_ms, "FoM_Real": fom_new
         })
 
-    logger.info("Benchmark finalizado. Generando gráficas para el paper...")
+    # --- POST-PROCESADO: XAI Y JSON ---
+    logger.info("Calculando XAI Global (SHAP) y extrayendo métricas...")
+    X_sample_shap = np.array(sampled_inputs_xai)
+    X_background = scaler_specs.transform(df_unified[spec_cols].sample(100, random_state=42).values)
+    explainer = ShapleyExplainer(trained_model=router, X_train_sample=X_background, feature_names=spec_cols)
+    shap_impacts = explainer.generate_global_explanation(X_sample_shap, out_dir="logs/plots/benchmark/")
+    
     results_df = pd.DataFrame(results_list)
     results_df.to_csv("logs/massive_benchmark_results.csv", index=False)
+    
+    df_base = results_df[results_df["Pipeline"] == "Baseline (2024)"]
+    df_new = results_df[results_df["Pipeline"] == "Proposed AI-Driven"]
+    merged = pd.merge(df_base, df_new, on="Test_ID", suffixes=("_base", "_new"))
+    win_rate = (merged["FoM_Real_new"] > merged["FoM_Real_base"]).mean() * 100
+    
+    benchmark_metrics = {
+        "benchmark_settings": {"n_tests": N_TESTS},
+        "baseline_stats": {
+            "mean_fom": float(df_base["FoM_Real"].mean()),
+            "median_fom": float(df_base["FoM_Real"].median()),
+            "mean_time_ms": float(df_base["Time_ms"].mean())
+        },
+        "proposed_stats": {
+            "mean_fom": float(df_new["FoM_Real"].mean()),
+            "median_fom": float(df_new["FoM_Real"].median()),
+            "mean_time_ms": float(df_new["Time_ms"].mean())
+        },
+        "comparison": {"proposed_win_rate_percent": float(win_rate)},
+        "global_feature_importance_shap": shap_impacts
+    }
+    save_metrics_to_json(benchmark_metrics, "logs/massive_benchmark_metrics.json")
+    
     plot_benchmark_results(results_df, "logs/plots/benchmark/")
-    logger.info("¡Todo listo! Revisa logs/plots/benchmark/")
+    logger.info(f"¡Benchmark Completado! Win Rate de la IA Propuesta: {win_rate:.1f}%")
 
 if __name__ == "__main__":
     import warnings
