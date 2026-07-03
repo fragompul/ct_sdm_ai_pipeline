@@ -47,15 +47,31 @@ graph TD
     classDef p5 fill:#854d0e,stroke:#eab308,stroke-width:2px,color:#f8fafc;
     classDef sim fill:#047857,stroke:#10b981,stroke-width:3px,color:#f8fafc;
 
-    A["🎯 User Target Specs:<br/>SNDR, Bandwidth, Power<br/>(Γ_req ∈ S)"] ::: input --> B["🛡️ Phase 1: OOD Detection<br/>One-Class SVM / GMM / Autoencoder"] ::: p1
-    B -->|Valid Query| C["🛤️ Phase 2: Probabilistic Router<br/>Voting Top-3 Ensembles + Heuristic Complexity Penalty λ"] ::: p2
-    B -->|Anomalous / Unfeasible Query| B_corr["⚡ Deep Dense Autoencoder<br/>Mathematical Projection to Feasible Boundary:<br/>Γ_proj = D(E(Γ_req))"] ::: p1
+    A["🎯 User Target Specs: SNDR, Bandwidth, Power"]
+    B["🛡️ Phase 1: OOD Detection (OC-SVM / GMM / Autoencoder)"]
+    B_corr["⚡ Deep Dense Autoencoder Projection to Feasible Boundary"]
+    C["🛤️ Phase 2: Probabilistic Router (Voting Ensembles + Cost Penalty)"]
+    D["🧬 Phase 3: Unified Generative Space (TabularDDPM / cVAE)"]
+    E["⚡ Phase 4: Surrogate Active Search (PINN ResNet / LightGBM)"]
+    F["🏁 Ground-Truth Simulator Sign-off (CBADC / NGSpice)"]
+    G["🔍 Phase 5: Transparent XAI (SHAP Feature Analysis)"]
+
+    A --> B
+    B -->|Valid Query| C
+    B -->|Anomalous Query| B_corr
     B_corr --> C
-    
-    C -->|Top-K Architectures (K=3)| D["🧬 Phase 3: Unified Generative Space<br/>TabularDDPM / cVAE with Boolean Masked Loss<br/>Super-vector ϵ ~ p_θ(ϵ | Γ_req, OneHot(T_i))"] ::: p3
-    D --> E["⚡ Phase 4: Surrogate Active Search<br/>PINN-Regularized ResNet / LightGBM<br/>Sub-millisecond Gradient Ascent Trajectory"] ::: p4
-    E -->|Optimal Super-vector ϵ*| F["🏁 Ground-Truth Simulator Sign-off<br/>CBADC / NGSpice Behavioral Verification<br/>H(T_i*, ϵ*)"] ::: sim
-    C -.->|Causal Explanation| G["🔍 Phase 5: Transparent XAI<br/>Shapley Additive exPlanations (SHAP)<br/>Marginal Feature Contribution Analysis"] ::: p5
+    C -->|Top-K Architectures| D
+    D --> E
+    E -->|Optimal Super-vector| F
+    C -.->|Causal Explanation| G
+
+    class A input;
+    class B,B_corr p1;
+    class C p2;
+    class D p3;
+    class E p4;
+    class F sim;
+    class G p5;
 ```
 
 ### 🔹 Phase 1: Domain Constraints & Out-of-Distribution (OOD) Detection
