@@ -243,9 +243,9 @@ if __name__ == "__main__":
     warnings.filterwarnings('ignore')
     
     mi_caso_de_estudio = {
-        "SNDR": 100.0,
+        "SNDR": 120.0,
         "Bw": 10e6,
-        "Power": 5e-3
+        "Power": 5e-2
     }
     
     run_case_study(mi_caso_de_estudio)

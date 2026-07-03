@@ -1,210 +1,76 @@
-2026-07-03 10:33:05,123 | INFO     | ================================================================================
-2026-07-03 10:33:05,123 | INFO     | 🔬 CASE STUDY FOR THE PAPER (TCAS-I / TCAD)
-2026-07-03 10:33:05,123 | INFO     | ================================================================================
-2026-07-03 10:33:06,640 | INFO     | 📡 Target Specifications Input:
-2026-07-03 10:33:06,640 | INFO     |    ➤ SNDR: 100.0
-2026-07-03 10:33:06,640 | INFO     |    ➤ Bw: 10000000.0
-2026-07-03 10:33:06,640 | INFO     |    ➤ Power: 0.005
-2026-07-03 10:33:06,640 | INFO     | 
+2026-07-03 10:38:21,496 | INFO     | ================================================================================
+2026-07-03 10:38:21,497 | INFO     | 🔬 CASE STUDY FOR THE PAPER (TCAS-I / TCAD)
+2026-07-03 10:38:21,497 | INFO     | ================================================================================
+2026-07-03 10:38:22,977 | INFO     | 📡 Target Specifications Input:
+2026-07-03 10:38:22,977 | INFO     |    ➤ SNDR: 120.0
+2026-07-03 10:38:22,977 | INFO     |    ➤ Bw: 10000000.0
+2026-07-03 10:38:22,977 | INFO     |    ➤ Power: 0.005
+2026-07-03 10:38:22,977 | INFO     | 
 --------------------------------------------------------------------------------
-2026-07-03 10:33:06,640 | INFO     | 🏛️  1. BASELINE EXECUTION (NO OOD, NO XAI, RIGID)
-2026-07-03 10:33:06,640 | INFO     | --------------------------------------------------------------------------------
-2026-07-03 10:33:07,317 | INFO     |    [Phase 1] OOD Check: BYPASSED (Baseline assumes feasibility)
-2026-07-03 10:33:07,318 | INFO     |    [Phase 2] Routing: Rigid prediction of ID 3 [Topology_3] (100% confidence).
-2026-07-03 10:33:07,322 | INFO     |    [Phase 3] RNN Raw Physical Output:
-2026-07-03 10:33:07,322 | INFO     |              -> osr: 133.9442 | nlev: 3.4650 | Cint1: 9.41e-13 | gm1: 0.0031 | Ro1: 753586.0000 | Co1: 6.75e-14 | slew_rate1: 580319117312.0000 | V_offset1: 0.0006 | Cint2: 9.88e-13 | gm2: 0.0029 | Ro2: 664865.3125 | Co2: 7.27e-14 | slew_rate2: 630789767168.0000 | V_offset2: -0.0005 | Cint3: 1.05e-12 | gm3: 0.0029 | Ro3: 715174.6875 | Co3: 6.91e-14 | slew_rate3: 569016516608.0000 | V_offset3: 0.0009 | Cint4: 9.14e-13 | gm4: 0.0031 | Ro4: 789285.5625 | Co4: 7.19e-14 | slew_rate4: 699439054848.0000 | V_offset4: 0.0007
-2026-07-03 10:33:07,322 | INFO     | 
+2026-07-03 10:38:22,977 | INFO     | 🏛️  1. BASELINE EXECUTION (NO OOD, NO XAI, RIGID)
+2026-07-03 10:38:22,977 | INFO     | --------------------------------------------------------------------------------
+2026-07-03 10:38:23,613 | INFO     |    [Phase 1] OOD Check: BYPASSED (Baseline assumes feasibility)
+2026-07-03 10:38:23,615 | INFO     |    [Phase 2] Routing: Rigid prediction of ID 3 [Topology_3] (100% confidence).
+2026-07-03 10:38:23,619 | INFO     |    [Phase 3] RNN Raw Physical Output:
+2026-07-03 10:38:23,619 | INFO     |              -> osr: 165.9622 | nlev: 2.7812 | Cint1: 9.58e-13 | gm1: 0.0046 | Ro1: 756457.0000 | Co1: 5.36e-14 | slew_rate1: 657977180160.0000 | V_offset1: 0.0017 | Cint2: 1.06e-12 | gm2: 0.0043 | Ro2: 550965.6250 | Co2: 7.78e-14 | slew_rate2: 667498446848.0000 | V_offset2: -0.0017 | Cint3: 1.26e-12 | gm3: 0.0037 | Ro3: 534544.1875 | Co3: 5.88e-14 | slew_rate3: 543744065536.0000 | V_offset3: 0.0018 | Cint4: 8.44e-13 | gm4: 0.0043 | Ro4: 669625.1250 | Co4: 5.85e-14 | slew_rate4: 898245656576.0000 | V_offset4: 0.0030
+2026-07-03 10:38:23,619 | INFO     | 
 --------------------------------------------------------------------------------
-2026-07-03 10:33:07,322 | INFO     | 🚀 2. PROPOSED PIPELINE EXECUTION (OOD + PROB + XAI + GEN)
-2026-07-03 10:33:07,322 | INFO     | --------------------------------------------------------------------------------
-2026-07-03 10:33:07,344 | INFO     |    [Phase 1] OOD Check: Valid (Margin score: 296.2478)
-2026-07-03 10:33:07,360 | INFO     |    [Phase 2] Routing: Probabilistic prediction computed.
-2026-07-03 10:33:07,360 | INFO     |              -> Rank 1: ID 8 [Top_8] (Prob: 90.20%)
-2026-07-03 10:33:07,360 | INFO     |              -> Rank 2: ID 3 [Top_3] (Prob: 9.23%)
-2026-07-03 10:33:07,360 | INFO     |              -> Rank 3: ID 7 [Top_7] (Prob: 0.26%)
-2026-07-03 10:33:07,709 | INFO     | 
+2026-07-03 10:38:23,619 | INFO     | 🚀 2. PROPOSED PIPELINE EXECUTION (OOD + PROB + XAI + GEN)
+2026-07-03 10:38:23,619 | INFO     | --------------------------------------------------------------------------------
+2026-07-03 10:38:23,640 | INFO     |    [Phase 1] OOD Check: Anomalous (Margin score: -1424.7281)
+2026-07-03 10:38:23,652 | INFO     |    [Phase 2] Routing: Probabilistic prediction computed.
+2026-07-03 10:38:23,652 | INFO     |              -> Rank 1: ID 8 [Top_8] (Prob: 89.15%)
+2026-07-03 10:38:23,652 | INFO     |              -> Rank 2: ID 3 [Top_3] (Prob: 8.63%)
+2026-07-03 10:38:23,652 | INFO     |              -> Rank 3: ID 4 [Top_4] (Prob: 1.03%)
+2026-07-03 10:38:23,996 | INFO     | 
    [Phase 5] Explainability (XAI): Evaluating Top-1 Architecture...
-2026-07-03 10:33:08,242 | INFO     |              📝 PROPOSED PAPER TEXT (XAI SECTION):
-2026-07-03 10:33:08,242 | INFO     |              "The routing model assigned Topology ID 8 with a final probability of 90.2%. The baseline probability for this class in the dataset is only 8.7%. The prediction is explained as follows: the SNDR requirement (1.00e+02) positively pushed the prediction by 45.6%, and the Bw requirement (1.00e+07) positively pushed the prediction by 1.9%, and the Power requirement (5.00e-03) positively pushed the prediction by 32.1%."
-2026-07-03 10:33:08,242 | INFO     | 
+2026-07-03 10:38:24,527 | INFO     |              📝 PROPOSED PAPER TEXT (XAI SECTION):
+2026-07-03 10:38:24,527 | INFO     |              "The routing model assigned Topology ID 8 with a final probability of 89.1%. The baseline probability for this class in the dataset is only 8.7%. The prediction is explained as follows: the SNDR requirement (1.20e+02) positively pushed the prediction by 44.7%, and the Bw requirement (1.00e+07) positively pushed the prediction by 1.5%, and the Power requirement (5.00e-03) positively pushed the prediction by 31.9%."
+2026-07-03 10:38:24,527 | INFO     | 
    [Phase 3] Generative Space (TabularDDPM): Generating Seed Vector for ID 8...
-2026-07-03 10:33:08,252 | INFO     |              -> Generated Raw Seed: dv_Cint1: 8.17e-13 | dv_Cint2: 7.68e-13 | dv_Cint3: 5.29e-13 | dv_Co1: 3.04e-14 | dv_Co2: 1.82e-14 | dv_Co3: 3.28e-14 | dv_Ro1: 166337.5938 | dv_Ro2: -976114.9375 | dv_Ro3: 1325813.3750 | dv_V_offset1: -0.0007 | dv_V_offset2: -0.0002 | dv_V_offset3: 0.0003 | dv_gm1: 0.0032 | dv_gm2: 0.0023 | dv_gm3: 0.0005 | dv_nlev: -1.9674 | dv_osr: 104.0989 | dv_slew_rate1: 632854347776.0000 | dv_slew_rate2: 489103949824.0000 | dv_slew_rate3: 468494188544.0000
-2026-07-03 10:33:08,252 | INFO     |    [Phase 4] Optimization (ResNet Surrogate): Running Gradient Ascent...
-2026-07-03 10:33:08,807 | INFO     |              -> Optimized Output: dv_Cint1: 7.63e-13 | dv_Cint2: 7.83e-13 | dv_Cint3: 5.44e-13 | dv_Co1: 3.13e-14 | dv_Co2: 1.70e-14 | dv_Co3: 3.34e-14 | dv_Ro1: 179798.2500 | dv_Ro2: -1008042.1875 | dv_Ro3: 1332805.2500 | dv_V_offset1: -0.0007 | dv_V_offset2: 6.16e-06 | dv_V_offset3: 0.0002 | dv_gm1: 0.0031 | dv_gm2: 0.0025 | dv_gm3: 0.0010 | dv_nlev: -1.9850 | dv_osr: 105.1440 | dv_slew_rate1: 660993802240.0000 | dv_slew_rate2: 504622383104.0000 | dv_slew_rate3: 501917483008.0000
-2026-07-03 10:33:08,807 | INFO     |              -> Predicted FoM (Schreier): 53.85 dB
-2026-07-03 10:33:08,807 | INFO     | 
+2026-07-03 10:38:24,538 | INFO     |              -> Generated Raw Seed: dv_Cint1: 7.48e-13 | dv_Cint2: 7.21e-13 | dv_Cint3: 5.46e-13 | dv_Co1: 2.71e-14 | dv_Co2: 2.60e-14 | dv_Co3: 2.24e-14 | dv_Ro1: 544860.8125 | dv_Ro2: 615979.1875 | dv_Ro3: 457946.6875 | dv_V_offset1: -0.0002 | dv_V_offset2: -1.75e-05 | dv_V_offset3: 0.0005 | dv_gm1: 0.0028 | dv_gm2: -0.0006 | dv_gm3: 0.0009 | dv_nlev: 3.5504 | dv_osr: 45.6366 | dv_slew_rate1: 370736431104.0000 | dv_slew_rate2: 629341356032.0000 | dv_slew_rate3: 439216930816.0000
+2026-07-03 10:38:24,538 | INFO     |    [Phase 4] Optimization (ResNet Surrogate): Running Gradient Ascent...
+2026-07-03 10:38:25,067 | INFO     |              -> Optimized Output: dv_Cint1: 4.21e-13 | dv_Cint2: 9.86e-13 | dv_Cint3: 9.18e-13 | dv_Co1: 5.07e-14 | dv_Co2: 2.62e-15 | dv_Co3: 2.26e-14 | dv_Ro1: 557472.0625 | dv_Ro2: 517580.8750 | dv_Ro3: 648639.8125 | dv_V_offset1: 0.0011 | dv_V_offset2: -0.0012 | dv_V_offset3: -0.0004 | dv_gm1: -7.00e-05 | dv_gm2: 0.0027 | dv_gm3: 0.0022 | dv_nlev: 4.0405 | dv_osr: 66.9279 | dv_slew_rate1: 695205625856.0000 | dv_slew_rate2: 750142488576.0000 | dv_slew_rate3: 917611872256.0000
+2026-07-03 10:38:25,067 | INFO     |              -> Predicted FoM (Schreier): 117.58 dB
+2026-07-03 10:38:25,067 | INFO     | 
    🏁 [Sign-Off] Physical Simulator Verification (cbadc)...
-2026-07-03 10:33:09,044 | INFO     |       ✅ Validated! (Time: 0.24s)
-2026-07-03 10:33:09,045 | INFO     |       ✅ Real Simulated SNDR: -0.49 dB
-2026-07-03 10:35:01,225 | INFO     | ================================================================================
-2026-07-03 10:35:01,225 | INFO     | 🔬 CASE STUDY FOR THE PAPER (TCAS-I / TCAD)
-2026-07-03 10:35:01,225 | INFO     | ================================================================================
-2026-07-03 10:35:02,722 | INFO     | 📡 Target Specifications Input:
-2026-07-03 10:35:02,722 | INFO     |    ➤ SNDR: 100.0
-2026-07-03 10:35:02,722 | INFO     |    ➤ Bw: 10000000.0
-2026-07-03 10:35:02,722 | INFO     |    ➤ Power: 0.005
-2026-07-03 10:35:02,722 | INFO     | 
+2026-07-03 10:38:25,309 | INFO     |       ✅ Validated! (Time: 0.24s)
+2026-07-03 10:38:25,309 | INFO     |       ✅ Real Simulated SNDR: -0.49 dB
+2026-07-03 10:39:19,023 | INFO     | ================================================================================
+2026-07-03 10:39:19,024 | INFO     | 🔬 CASE STUDY FOR THE PAPER (TCAS-I / TCAD)
+2026-07-03 10:39:19,024 | INFO     | ================================================================================
+2026-07-03 10:39:20,515 | INFO     | 📡 Target Specifications Input:
+2026-07-03 10:39:20,515 | INFO     |    ➤ SNDR: 120.0
+2026-07-03 10:39:20,515 | INFO     |    ➤ Bw: 10000000.0
+2026-07-03 10:39:20,515 | INFO     |    ➤ Power: 0.05
+2026-07-03 10:39:20,515 | INFO     | 
 --------------------------------------------------------------------------------
-2026-07-03 10:35:02,722 | INFO     | 🏛️  1. BASELINE EXECUTION (NO OOD, NO XAI, RIGID)
-2026-07-03 10:35:02,722 | INFO     | --------------------------------------------------------------------------------
-2026-07-03 10:35:03,379 | INFO     |    [Phase 1] OOD Check: BYPASSED (Baseline assumes feasibility)
-2026-07-03 10:35:03,381 | INFO     |    [Phase 2] Routing: Rigid prediction of ID 3 [Topology_3] (100% confidence).
-2026-07-03 10:35:03,385 | INFO     |    [Phase 3] RNN Raw Physical Output:
-2026-07-03 10:35:03,385 | INFO     |              -> osr: 133.9442 | nlev: 3.4650 | Cint1: 9.41e-13 | gm1: 0.0031 | Ro1: 753586.0000 | Co1: 6.75e-14 | slew_rate1: 580319117312.0000 | V_offset1: 0.0006 | Cint2: 9.88e-13 | gm2: 0.0029 | Ro2: 664865.3125 | Co2: 7.27e-14 | slew_rate2: 630789767168.0000 | V_offset2: -0.0005 | Cint3: 1.05e-12 | gm3: 0.0029 | Ro3: 715174.6875 | Co3: 6.91e-14 | slew_rate3: 569016516608.0000 | V_offset3: 0.0009 | Cint4: 9.14e-13 | gm4: 0.0031 | Ro4: 789285.5625 | Co4: 7.19e-14 | slew_rate4: 699439054848.0000 | V_offset4: 0.0007
-2026-07-03 10:35:03,385 | INFO     | 
+2026-07-03 10:39:20,515 | INFO     | 🏛️  1. BASELINE EXECUTION (NO OOD, NO XAI, RIGID)
+2026-07-03 10:39:20,515 | INFO     | --------------------------------------------------------------------------------
+2026-07-03 10:39:21,157 | INFO     |    [Phase 1] OOD Check: BYPASSED (Baseline assumes feasibility)
+2026-07-03 10:39:21,158 | INFO     |    [Phase 2] Routing: Rigid prediction of ID 3 [Topology_3] (100% confidence).
+2026-07-03 10:39:21,162 | INFO     |    [Phase 3] RNN Raw Physical Output:
+2026-07-03 10:39:21,162 | INFO     |              -> osr: 165.9622 | nlev: 2.7812 | Cint1: 9.58e-13 | gm1: 0.0046 | Ro1: 756457.0000 | Co1: 5.36e-14 | slew_rate1: 657977180160.0000 | V_offset1: 0.0017 | Cint2: 1.06e-12 | gm2: 0.0043 | Ro2: 550965.5625 | Co2: 7.78e-14 | slew_rate2: 667498446848.0000 | V_offset2: -0.0017 | Cint3: 1.26e-12 | gm3: 0.0037 | Ro3: 534544.0000 | Co3: 5.88e-14 | slew_rate3: 543744032768.0000 | V_offset3: 0.0018 | Cint4: 8.44e-13 | gm4: 0.0043 | Ro4: 669624.9375 | Co4: 5.85e-14 | slew_rate4: 898245591040.0000 | V_offset4: 0.0030
+2026-07-03 10:39:21,162 | INFO     | 
 --------------------------------------------------------------------------------
-2026-07-03 10:35:03,385 | INFO     | 🚀 2. PROPOSED PIPELINE EXECUTION (OOD + PROB + XAI + GEN)
-2026-07-03 10:35:03,385 | INFO     | --------------------------------------------------------------------------------
-2026-07-03 10:35:03,405 | INFO     |    [Phase 1] OOD Check: Valid (Margin score: 296.2478)
-2026-07-03 10:35:03,420 | INFO     |    [Phase 2] Routing: Probabilistic prediction computed.
-2026-07-03 10:35:03,421 | INFO     |              -> Rank 1: ID 8 [Top_8] (Prob: 90.20%)
-2026-07-03 10:35:03,421 | INFO     |              -> Rank 2: ID 3 [Top_3] (Prob: 9.23%)
-2026-07-03 10:35:03,421 | INFO     |              -> Rank 3: ID 7 [Top_7] (Prob: 0.26%)
-2026-07-03 10:35:03,798 | INFO     | 
+2026-07-03 10:39:21,162 | INFO     | 🚀 2. PROPOSED PIPELINE EXECUTION (OOD + PROB + XAI + GEN)
+2026-07-03 10:39:21,162 | INFO     | --------------------------------------------------------------------------------
+2026-07-03 10:39:21,183 | INFO     |    [Phase 1] OOD Check: Anomalous (Margin score: -1424.7222)
+2026-07-03 10:39:21,197 | INFO     |    [Phase 2] Routing: Probabilistic prediction computed.
+2026-07-03 10:39:21,197 | INFO     |              -> Rank 1: ID 8 [Top_8] (Prob: 89.15%)
+2026-07-03 10:39:21,197 | INFO     |              -> Rank 2: ID 3 [Top_3] (Prob: 8.63%)
+2026-07-03 10:39:21,197 | INFO     |              -> Rank 3: ID 4 [Top_4] (Prob: 1.03%)
+2026-07-03 10:39:21,560 | INFO     | 
    [Phase 5] Explainability (XAI): Evaluating Top-1 Architecture...
-2026-07-03 10:35:04,347 | INFO     |              📝 PROPOSED PAPER TEXT (XAI SECTION):
-2026-07-03 10:35:04,347 | INFO     |              "The routing model assigned Topology ID 8 with a final probability of 90.2%. The baseline probability for this class in the dataset is only 8.7%. The prediction is explained as follows: the SNDR requirement (1.00e+02) positively pushed the prediction by 45.6%, and the Bw requirement (1.00e+07) positively pushed the prediction by 1.9%, and the Power requirement (5.00e-03) positively pushed the prediction by 32.1%."
-2026-07-03 10:35:04,347 | INFO     | 
+2026-07-03 10:39:22,089 | INFO     |              📝 PROPOSED PAPER TEXT (XAI SECTION):
+2026-07-03 10:39:22,090 | INFO     |              "The routing model assigned Topology ID 8 with a final probability of 89.1%. The baseline probability for this class in the dataset is only 8.7%. The prediction is explained as follows: the SNDR requirement (1.20e+02) positively pushed the prediction by 44.7%, and the Bw requirement (1.00e+07) positively pushed the prediction by 1.5%, and the Power requirement (5.00e-02) positively pushed the prediction by 31.9%."
+2026-07-03 10:39:22,090 | INFO     | 
    [Phase 3] Generative Space (TabularDDPM): Generating Seed Vector for ID 8...
-2026-07-03 10:35:04,356 | INFO     |              -> Generated Raw Seed: dv_Cint1: 6.80e-13 | dv_Cint2: 7.09e-13 | dv_Cint3: 6.41e-13 | dv_Co1: 2.07e-14 | dv_Co2: 3.49e-14 | dv_Co3: 2.12e-14 | dv_Ro1: 198970.9375 | dv_Ro2: 571861.3125 | dv_Ro3: 503308.8438 | dv_V_offset1: 0.0008 | dv_V_offset2: 0.0004 | dv_V_offset3: 0.0007 | dv_gm1: 0.0032 | dv_gm2: 0.0028 | dv_gm3: 0.0021 | dv_nlev: 3.6721 | dv_osr: 9.2303 | dv_slew_rate1: 1293036552192.0000 | dv_slew_rate2: -1154650210304.0000 | dv_slew_rate3: 816197140480.0000
-2026-07-03 10:35:04,356 | INFO     |    [Phase 4] Optimization (ResNet Surrogate): Running Gradient Ascent...
-2026-07-03 10:35:04,894 | INFO     |              -> Optimized Output: dv_Cint1: -4.43e-13 | dv_Cint2: 1.33e-12 | dv_Cint3: 1.85e-12 | dv_Co1: 7.54e-14 | dv_Co2: 4.48e-14 | dv_Co3: -2.71e-14 | dv_Ro1: -664784.5000 | dv_Ro2: 167955.5625 | dv_Ro3: 1064296.2500 | dv_V_offset1: 1.36e-05 | dv_V_offset2: 0.0027 | dv_V_offset3: 0.0020 | dv_gm1: -0.0038 | dv_gm2: 0.0122 | dv_gm3: 0.0059 | dv_nlev: 2.2354 | dv_osr: 29.0307 | dv_slew_rate1: 554365353984.0000 | dv_slew_rate2: -1372440100864.0000 | dv_slew_rate3: 1874777604096.0000
-2026-07-03 10:35:04,894 | INFO     |              -> Predicted FoM (Schreier): 58.03 dB
-2026-07-03 10:35:04,894 | INFO     | 
+2026-07-03 10:39:22,098 | INFO     |              -> Generated Raw Seed: dv_Cint1: 6.26e-13 | dv_Cint2: 8.00e-13 | dv_Cint3: -1.20e-13 | dv_Co1: 5.23e-14 | dv_Co2: -2.43e-14 | dv_Co3: 2.11e-14 | dv_Ro1: 1556342.0000 | dv_Ro2: -1378719.5000 | dv_Ro3: 824678.5000 | dv_V_offset1: -0.0003 | dv_V_offset2: 0.0010 | dv_V_offset3: -0.0002 | dv_gm1: 0.0007 | dv_gm2: 0.0022 | dv_gm3: 0.0012 | dv_nlev: 11.8133 | dv_osr: -18.2687 | dv_slew_rate1: 719662219264.0000 | dv_slew_rate2: 753377083392.0000 | dv_slew_rate3: -157874290688.0000
+2026-07-03 10:39:22,098 | INFO     |    [Phase 4] Optimization (ResNet Surrogate): Running Gradient Ascent...
+2026-07-03 10:39:22,654 | INFO     |              -> Optimized Output: dv_Cint1: 7.56e-13 | dv_Cint2: 6.53e-13 | dv_Cint3: 5.63e-14 | dv_Co1: 5.39e-14 | dv_Co2: -1.84e-14 | dv_Co3: 2.73e-14 | dv_Ro1: 1467701.0000 | dv_Ro2: -1220499.7500 | dv_Ro3: 889724.3125 | dv_V_offset1: 0.0006 | dv_V_offset2: -3.01e-05 | dv_V_offset3: -0.0013 | dv_gm1: 0.0007 | dv_gm2: 0.0033 | dv_gm3: 0.0005 | dv_nlev: 12.1295 | dv_osr: 11.8826 | dv_slew_rate1: 841113731072.0000 | dv_slew_rate2: 634232504320.0000 | dv_slew_rate3: -3624697856.0000
+2026-07-03 10:39:22,654 | INFO     |              -> Predicted FoM (Schreier): 91.86 dB
+2026-07-03 10:39:22,654 | INFO     | 
    🏁 [Sign-Off] Physical Simulator Verification (cbadc)...
-2026-07-03 10:35:05,128 | INFO     |       ✅ Validated! (Time: 0.23s)
-2026-07-03 10:35:05,128 | INFO     |       ✅ Real Simulated SNDR: -0.49 dB
-2026-07-03 10:35:37,382 | INFO     | ================================================================================
-2026-07-03 10:35:37,382 | INFO     | 🔬 CASE STUDY FOR THE PAPER (TCAS-I / TCAD)
-2026-07-03 10:35:37,382 | INFO     | ================================================================================
-2026-07-03 10:35:38,898 | INFO     | 📡 Target Specifications Input:
-2026-07-03 10:35:38,898 | INFO     |    ➤ SNDR: 100.0
-2026-07-03 10:35:38,898 | INFO     |    ➤ Bw: 10000000.0
-2026-07-03 10:35:38,898 | INFO     |    ➤ Power: 0.005
-2026-07-03 10:35:38,898 | INFO     | 
---------------------------------------------------------------------------------
-2026-07-03 10:35:38,898 | INFO     | 🏛️  1. BASELINE EXECUTION (NO OOD, NO XAI, RIGID)
-2026-07-03 10:35:38,898 | INFO     | --------------------------------------------------------------------------------
-2026-07-03 10:35:39,543 | INFO     |    [Phase 1] OOD Check: BYPASSED (Baseline assumes feasibility)
-2026-07-03 10:35:39,544 | INFO     |    [Phase 2] Routing: Rigid prediction of ID 3 [Topology_3] (100% confidence).
-2026-07-03 10:35:39,548 | INFO     |    [Phase 3] RNN Raw Physical Output:
-2026-07-03 10:35:39,548 | INFO     |              -> osr: 133.9442 | nlev: 3.4650 | Cint1: 9.41e-13 | gm1: 0.0031 | Ro1: 753586.0000 | Co1: 6.75e-14 | slew_rate1: 580319117312.0000 | V_offset1: 0.0006 | Cint2: 9.88e-13 | gm2: 0.0029 | Ro2: 664865.3125 | Co2: 7.27e-14 | slew_rate2: 630789767168.0000 | V_offset2: -0.0005 | Cint3: 1.05e-12 | gm3: 0.0029 | Ro3: 715174.6875 | Co3: 6.91e-14 | slew_rate3: 569016516608.0000 | V_offset3: 0.0009 | Cint4: 9.14e-13 | gm4: 0.0031 | Ro4: 789285.5625 | Co4: 7.19e-14 | slew_rate4: 699439054848.0000 | V_offset4: 0.0007
-2026-07-03 10:35:39,548 | INFO     | 
---------------------------------------------------------------------------------
-2026-07-03 10:35:39,548 | INFO     | 🚀 2. PROPOSED PIPELINE EXECUTION (OOD + PROB + XAI + GEN)
-2026-07-03 10:35:39,548 | INFO     | --------------------------------------------------------------------------------
-2026-07-03 10:35:39,569 | INFO     |    [Phase 1] OOD Check: Valid (Margin score: 296.2478)
-2026-07-03 10:35:39,586 | INFO     |    [Phase 2] Routing: Probabilistic prediction computed.
-2026-07-03 10:35:39,586 | INFO     |              -> Rank 1: ID 8 [Top_8] (Prob: 90.20%)
-2026-07-03 10:35:39,586 | INFO     |              -> Rank 2: ID 3 [Top_3] (Prob: 9.23%)
-2026-07-03 10:35:39,586 | INFO     |              -> Rank 3: ID 7 [Top_7] (Prob: 0.26%)
-2026-07-03 10:35:39,929 | INFO     | 
-   [Phase 5] Explainability (XAI): Evaluating Top-1 Architecture...
-2026-07-03 10:35:40,481 | INFO     |              📝 PROPOSED PAPER TEXT (XAI SECTION):
-2026-07-03 10:35:40,481 | INFO     |              "The routing model assigned Topology ID 8 with a final probability of 90.2%. The baseline probability for this class in the dataset is only 8.7%. The prediction is explained as follows: the SNDR requirement (1.00e+02) positively pushed the prediction by 45.6%, and the Bw requirement (1.00e+07) positively pushed the prediction by 1.9%, and the Power requirement (5.00e-03) positively pushed the prediction by 32.1%."
-2026-07-03 10:35:40,481 | INFO     | 
-   [Phase 3] Generative Space (TabularDDPM): Generating Seed Vector for ID 8...
-2026-07-03 10:35:40,489 | INFO     |              -> Generated Raw Seed: dv_Cint1: 7.50e-13 | dv_Cint2: 7.44e-13 | dv_Cint3: 4.56e-13 | dv_Co1: -5.83e-14 | dv_Co2: 7.22e-14 | dv_Co3: 2.11e-14 | dv_Ro1: 613550.0625 | dv_Ro2: 669248.0000 | dv_Ro3: 353248.9688 | dv_V_offset1: 0.0001 | dv_V_offset2: -0.0006 | dv_V_offset3: 2.41e-05 | dv_gm1: 0.0047 | dv_gm2: -0.0007 | dv_gm3: 0.0020 | dv_nlev: 3.5140 | dv_osr: -9.9443 | dv_slew_rate1: -185265029120.0000 | dv_slew_rate2: 822582116352.0000 | dv_slew_rate3: 536972558336.0000
-2026-07-03 10:35:40,490 | INFO     |    [Phase 4] Optimization (ResNet Surrogate): Running Gradient Ascent...
-2026-07-03 10:35:59,947 | INFO     | ================================================================================
-2026-07-03 10:35:59,947 | INFO     | 🔬 CASE STUDY FOR THE PAPER (TCAS-I / TCAD)
-2026-07-03 10:35:59,947 | INFO     | ================================================================================
-2026-07-03 10:36:01,431 | INFO     | 📡 Target Specifications Input:
-2026-07-03 10:36:01,431 | INFO     |    ➤ SNDR: 100.0
-2026-07-03 10:36:01,431 | INFO     |    ➤ Bw: 10000000.0
-2026-07-03 10:36:01,431 | INFO     |    ➤ Power: 0.005
-2026-07-03 10:36:01,431 | INFO     | 
---------------------------------------------------------------------------------
-2026-07-03 10:36:01,431 | INFO     | 🏛️  1. BASELINE EXECUTION (NO OOD, NO XAI, RIGID)
-2026-07-03 10:36:01,431 | INFO     | --------------------------------------------------------------------------------
-2026-07-03 10:36:02,090 | INFO     |    [Phase 1] OOD Check: BYPASSED (Baseline assumes feasibility)
-2026-07-03 10:36:02,092 | INFO     |    [Phase 2] Routing: Rigid prediction of ID 3 [Topology_3] (100% confidence).
-2026-07-03 10:36:02,096 | INFO     |    [Phase 3] RNN Raw Physical Output:
-2026-07-03 10:36:02,096 | INFO     |              -> osr: 133.9442 | nlev: 3.4650 | Cint1: 9.41e-13 | gm1: 0.0031 | Ro1: 753586.0000 | Co1: 6.75e-14 | slew_rate1: 580319117312.0000 | V_offset1: 0.0006 | Cint2: 9.88e-13 | gm2: 0.0029 | Ro2: 664865.3125 | Co2: 7.27e-14 | slew_rate2: 630789767168.0000 | V_offset2: -0.0005 | Cint3: 1.05e-12 | gm3: 0.0029 | Ro3: 715174.6875 | Co3: 6.91e-14 | slew_rate3: 569016516608.0000 | V_offset3: 0.0009 | Cint4: 9.14e-13 | gm4: 0.0031 | Ro4: 789285.5625 | Co4: 7.19e-14 | slew_rate4: 699439054848.0000 | V_offset4: 0.0007
-2026-07-03 10:36:02,096 | INFO     | 
---------------------------------------------------------------------------------
-2026-07-03 10:36:02,096 | INFO     | 🚀 2. PROPOSED PIPELINE EXECUTION (OOD + PROB + XAI + GEN)
-2026-07-03 10:36:02,096 | INFO     | --------------------------------------------------------------------------------
-2026-07-03 10:36:02,121 | INFO     |    [Phase 1] OOD Check: Valid (Margin score: 296.2478)
-2026-07-03 10:36:02,134 | INFO     |    [Phase 2] Routing: Probabilistic prediction computed.
-2026-07-03 10:36:02,134 | INFO     |              -> Rank 1: ID 8 [Top_8] (Prob: 90.20%)
-2026-07-03 10:36:02,134 | INFO     |              -> Rank 2: ID 3 [Top_3] (Prob: 9.23%)
-2026-07-03 10:36:02,134 | INFO     |              -> Rank 3: ID 7 [Top_7] (Prob: 0.26%)
-2026-07-03 10:36:02,496 | INFO     | 
-   [Phase 5] Explainability (XAI): Evaluating Top-1 Architecture...
-2026-07-03 10:36:03,032 | INFO     |              📝 PROPOSED PAPER TEXT (XAI SECTION):
-2026-07-03 10:36:03,032 | INFO     |              "The routing model assigned Topology ID 8 with a final probability of 90.2%. The baseline probability for this class in the dataset is only 8.7%. The prediction is explained as follows: the SNDR requirement (1.00e+02) positively pushed the prediction by 45.6%, and the Bw requirement (1.00e+07) positively pushed the prediction by 1.9%, and the Power requirement (5.00e-03) positively pushed the prediction by 32.1%."
-2026-07-03 10:36:03,032 | INFO     | 
-   [Phase 3] Generative Space (TabularDDPM): Generating Seed Vector for ID 8...
-2026-07-03 10:36:03,044 | INFO     |              -> Generated Raw Seed: dv_Cint1: 7.03e-13 | dv_Cint2: 7.76e-13 | dv_Cint3: -2.93e-14 | dv_Co1: -1.15e-13 | dv_Co2: 7.81e-14 | dv_Co3: -9.56e-14 | dv_Ro1: 812334.6250 | dv_Ro2: 318680.8125 | dv_Ro3: 82613.7812 | dv_V_offset1: 0.0005 | dv_V_offset2: -0.0008 | dv_V_offset3: 0.0008 | dv_gm1: 0.0035 | dv_gm2: 0.0014 | dv_gm3: 0.0026 | dv_nlev: 3.0991 | dv_osr: -11.1373 | dv_slew_rate1: 628808876032.0000 | dv_slew_rate2: 657897357312.0000 | dv_slew_rate3: 435272679424.0000
-2026-07-03 10:36:03,044 | INFO     |    [Phase 4] Optimization (ResNet Surrogate): Running Gradient Ascent...
-2026-07-03 10:36:03,575 | INFO     |              -> Optimized Output: dv_Cint1: -2.12e-13 | dv_Cint2: 5.40e-13 | dv_Cint3: 7.44e-13 | dv_Co1: -3.08e-14 | dv_Co2: 4.33e-14 | dv_Co3: -1.54e-13 | dv_Ro1: -315266.1875 | dv_Ro2: 560500.1250 | dv_Ro3: 775612.2500 | dv_V_offset1: -0.0093 | dv_V_offset2: 0.0049 | dv_V_offset3: 0.0052 | dv_gm1: -0.0081 | dv_gm2: 0.0124 | dv_gm3: 0.0088 | dv_nlev: 1.2233 | dv_osr: 38.1349 | dv_slew_rate1: 843719507968.0000 | dv_slew_rate2: 529865080832.0000 | dv_slew_rate3: 1477962235904.0000
-2026-07-03 10:36:03,575 | INFO     |              -> Predicted FoM (Schreier): 94.93 dB
-2026-07-03 10:36:03,575 | INFO     | 
-   🏁 [Sign-Off] Physical Simulator Verification (cbadc)...
-2026-07-03 10:36:03,809 | INFO     |       ✅ Validated! (Time: 0.23s)
-2026-07-03 10:36:03,809 | INFO     |       ✅ Real Simulated SNDR: -0.49 dB
-2026-07-03 10:36:26,277 | INFO     | ================================================================================
-2026-07-03 10:36:26,277 | INFO     | 🔬 CASE STUDY FOR THE PAPER (TCAS-I / TCAD)
-2026-07-03 10:36:26,277 | INFO     | ================================================================================
-2026-07-03 10:36:27,798 | INFO     | 📡 Target Specifications Input:
-2026-07-03 10:36:27,798 | INFO     |    ➤ SNDR: 100.0
-2026-07-03 10:36:27,798 | INFO     |    ➤ Bw: 10000000.0
-2026-07-03 10:36:27,798 | INFO     |    ➤ Power: 0.005
-2026-07-03 10:36:27,798 | INFO     | 
---------------------------------------------------------------------------------
-2026-07-03 10:36:27,798 | INFO     | 🏛️  1. BASELINE EXECUTION (NO OOD, NO XAI, RIGID)
-2026-07-03 10:36:27,798 | INFO     | --------------------------------------------------------------------------------
-2026-07-03 10:36:28,456 | INFO     |    [Phase 1] OOD Check: BYPASSED (Baseline assumes feasibility)
-2026-07-03 10:36:28,458 | INFO     |    [Phase 2] Routing: Rigid prediction of ID 3 [Topology_3] (100% confidence).
-2026-07-03 10:36:28,462 | INFO     |    [Phase 3] RNN Raw Physical Output:
-2026-07-03 10:36:28,462 | INFO     |              -> osr: 133.9442 | nlev: 3.4650 | Cint1: 9.41e-13 | gm1: 0.0031 | Ro1: 753586.0000 | Co1: 6.75e-14 | slew_rate1: 580319117312.0000 | V_offset1: 0.0006 | Cint2: 9.88e-13 | gm2: 0.0029 | Ro2: 664865.3125 | Co2: 7.27e-14 | slew_rate2: 630789767168.0000 | V_offset2: -0.0005 | Cint3: 1.05e-12 | gm3: 0.0029 | Ro3: 715174.6875 | Co3: 6.91e-14 | slew_rate3: 569016516608.0000 | V_offset3: 0.0009 | Cint4: 9.14e-13 | gm4: 0.0031 | Ro4: 789285.5625 | Co4: 7.19e-14 | slew_rate4: 699439054848.0000 | V_offset4: 0.0007
-2026-07-03 10:36:28,462 | INFO     | 
---------------------------------------------------------------------------------
-2026-07-03 10:36:28,462 | INFO     | 🚀 2. PROPOSED PIPELINE EXECUTION (OOD + PROB + XAI + GEN)
-2026-07-03 10:36:28,462 | INFO     | --------------------------------------------------------------------------------
-2026-07-03 10:36:28,484 | INFO     |    [Phase 1] OOD Check: Valid (Margin score: 296.2478)
-2026-07-03 10:36:28,498 | INFO     |    [Phase 2] Routing: Probabilistic prediction computed.
-2026-07-03 10:36:28,498 | INFO     |              -> Rank 1: ID 8 [Top_8] (Prob: 90.20%)
-2026-07-03 10:36:28,498 | INFO     |              -> Rank 2: ID 3 [Top_3] (Prob: 9.23%)
-2026-07-03 10:36:28,498 | INFO     |              -> Rank 3: ID 7 [Top_7] (Prob: 0.26%)
-2026-07-03 10:36:28,840 | INFO     | 
-   [Phase 5] Explainability (XAI): Evaluating Top-1 Architecture...
-2026-07-03 10:36:29,384 | INFO     |              📝 PROPOSED PAPER TEXT (XAI SECTION):
-2026-07-03 10:36:29,385 | INFO     |              "The routing model assigned Topology ID 8 with a final probability of 90.2%. The baseline probability for this class in the dataset is only 8.7%. The prediction is explained as follows: the SNDR requirement (1.00e+02) positively pushed the prediction by 45.6%, and the Bw requirement (1.00e+07) positively pushed the prediction by 1.9%, and the Power requirement (5.00e-03) positively pushed the prediction by 32.1%."
-2026-07-03 10:36:29,385 | INFO     | 
-   [Phase 3] Generative Space (TabularDDPM): Generating Seed Vector for ID 8...
-2026-07-03 10:36:29,395 | INFO     |              -> Generated Raw Seed: dv_Cint1: 8.20e-13 | dv_Cint2: 8.55e-13 | dv_Cint3: 1.57e-13 | dv_Co1: -4.63e-14 | dv_Co2: 4.33e-14 | dv_Co3: 1.71e-14 | dv_Ro1: 1124138.0000 | dv_Ro2: -1415675.5000 | dv_Ro3: 959744.5000 | dv_V_offset1: -0.0006 | dv_V_offset2: -0.0013 | dv_V_offset3: 0.0002 | dv_gm1: 0.0040 | dv_gm2: 0.0044 | dv_gm3: 0.0010 | dv_nlev: 1.2104 | dv_osr: -50.8607 | dv_slew_rate1: 658187681792.0000 | dv_slew_rate2: 654442692608.0000 | dv_slew_rate3: 440061198336.0000
-2026-07-03 10:36:29,395 | INFO     |    [Phase 4] Optimization (ResNet Surrogate): Running Gradient Ascent...
-2026-07-03 10:36:41,489 | INFO     | ================================================================================
-2026-07-03 10:36:41,489 | INFO     | 🔬 CASE STUDY FOR THE PAPER (TCAS-I / TCAD)
-2026-07-03 10:36:41,489 | INFO     | ================================================================================
-2026-07-03 10:36:42,988 | INFO     | 📡 Target Specifications Input:
-2026-07-03 10:36:42,988 | INFO     |    ➤ SNDR: 100.0
-2026-07-03 10:36:42,989 | INFO     |    ➤ Bw: 10000000.0
-2026-07-03 10:36:42,989 | INFO     |    ➤ Power: 0.005
-2026-07-03 10:36:42,989 | INFO     | 
---------------------------------------------------------------------------------
-2026-07-03 10:36:42,989 | INFO     | 🏛️  1. BASELINE EXECUTION (NO OOD, NO XAI, RIGID)
-2026-07-03 10:36:42,989 | INFO     | --------------------------------------------------------------------------------
-2026-07-03 10:36:43,647 | INFO     |    [Phase 1] OOD Check: BYPASSED (Baseline assumes feasibility)
-2026-07-03 10:36:43,648 | INFO     |    [Phase 2] Routing: Rigid prediction of ID 3 [Topology_3] (100% confidence).
-2026-07-03 10:36:43,652 | INFO     |    [Phase 3] RNN Raw Physical Output:
-2026-07-03 10:36:43,652 | INFO     |              -> osr: 133.9442 | nlev: 3.4650 | Cint1: 9.41e-13 | gm1: 0.0031 | Ro1: 753586.0000 | Co1: 6.75e-14 | slew_rate1: 580319117312.0000 | V_offset1: 0.0006 | Cint2: 9.88e-13 | gm2: 0.0029 | Ro2: 664865.3125 | Co2: 7.27e-14 | slew_rate2: 630789767168.0000 | V_offset2: -0.0005 | Cint3: 1.05e-12 | gm3: 0.0029 | Ro3: 715174.6875 | Co3: 6.91e-14 | slew_rate3: 569016516608.0000 | V_offset3: 0.0009 | Cint4: 9.14e-13 | gm4: 0.0031 | Ro4: 789285.5625 | Co4: 7.19e-14 | slew_rate4: 699439054848.0000 | V_offset4: 0.0007
-2026-07-03 10:36:43,652 | INFO     | 
---------------------------------------------------------------------------------
-2026-07-03 10:36:43,652 | INFO     | 🚀 2. PROPOSED PIPELINE EXECUTION (OOD + PROB + XAI + GEN)
-2026-07-03 10:36:43,652 | INFO     | --------------------------------------------------------------------------------
-2026-07-03 10:36:43,673 | INFO     |    [Phase 1] OOD Check: Valid (Margin score: 296.2478)
-2026-07-03 10:36:43,690 | INFO     |    [Phase 2] Routing: Probabilistic prediction computed.
-2026-07-03 10:36:43,690 | INFO     |              -> Rank 1: ID 8 [Top_8] (Prob: 90.20%)
-2026-07-03 10:36:43,690 | INFO     |              -> Rank 2: ID 3 [Top_3] (Prob: 9.23%)
-2026-07-03 10:36:43,690 | INFO     |              -> Rank 3: ID 7 [Top_7] (Prob: 0.26%)
-2026-07-03 10:36:44,038 | INFO     | 
-   [Phase 5] Explainability (XAI): Evaluating Top-1 Architecture...
-2026-07-03 10:36:44,565 | INFO     |              📝 PROPOSED PAPER TEXT (XAI SECTION):
-2026-07-03 10:36:44,565 | INFO     |              "The routing model assigned Topology ID 8 with a final probability of 90.2%. The baseline probability for this class in the dataset is only 8.7%. The prediction is explained as follows: the SNDR requirement (1.00e+02) positively pushed the prediction by 45.6%, and the Bw requirement (1.00e+07) positively pushed the prediction by 1.9%, and the Power requirement (5.00e-03) positively pushed the prediction by 32.1%."
-2026-07-03 10:36:44,565 | INFO     | 
-   [Phase 3] Generative Space (TabularDDPM): Generating Seed Vector for ID 8...
-2026-07-03 10:36:44,575 | INFO     |              -> Generated Raw Seed: dv_Cint1: 5.13e-13 | dv_Cint2: 8.17e-13 | dv_Cint3: 2.39e-13 | dv_Co1: 9.08e-14 | dv_Co2: -5.34e-14 | dv_Co3: 4.60e-14 | dv_Ro1: 1128438.7500 | dv_Ro2: -1326323.5000 | dv_Ro3: 1044373.5000 | dv_V_offset1: -0.0001 | dv_V_offset2: -0.0009 | dv_V_offset3: -0.0008 | dv_gm1: 0.0006 | dv_gm2: -0.0011 | dv_gm3: -0.0010 | dv_nlev: 3.8651 | dv_osr: -70.6852 | dv_slew_rate1: 655919153152.0000 | dv_slew_rate2: 544237027328.0000 | dv_slew_rate3: 225670660096.0000
-2026-07-03 10:36:44,575 | INFO     |    [Phase 4] Optimization (ResNet Surrogate): Running Gradient Ascent...
+2026-07-03 10:39:22,900 | INFO     |       ✅ Validated! (Time: 0.25s)
+2026-07-03 10:39:22,900 | INFO     |       ✅ Real Simulated SNDR: -0.49 dB
