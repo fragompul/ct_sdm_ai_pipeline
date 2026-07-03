@@ -12,14 +12,14 @@ class ShapleyExplainer:
         
         try:
             self.explainer = shap.TreeExplainer(self.model)
-            print("XAI: Usando TreeExplainer.")
+            print("XAI: Using TreeExplainer.")
         except Exception:
             predict_fn = lambda x: self.model.predict_proba(x)
             self.explainer = shap.KernelExplainer(predict_fn, shap.sample(X_train_sample, 100))
-            print("XAI: Usando KernelExplainer.")
+            print("XAI: Using KernelExplainer.")
 
     def generate_explanation(self, input_specs, predicted_topology_index, final_adj_prob=None, out_dir="logs/plots/xai/"):
-        """Inferencia única: Genera Force Plot y texto natural."""
+        """Inferencia única: Genera Force Plot sin recortes y texto natural en inglés."""
         os.makedirs(out_dir, exist_ok=True)
         shap_values = self.explainer.shap_values(input_specs)
         
@@ -30,7 +30,9 @@ class ShapleyExplainer:
             class_shap_values = shap_values[0, :, predicted_topology_index]
             expected_value = self.explainer.expected_value[predicted_topology_index]
 
-        plt.figure(figsize=(10, 3))
+        # 1. Ampliar el tamaño base para dar respiro lateral
+        fig = plt.figure(figsize=(12, 3.5)) 
+        
         shap.force_plot(
             base_value=expected_value, 
             shap_values=class_shap_values, 
@@ -39,22 +41,27 @@ class ShapleyExplainer:
             matplotlib=True,
             show=False
         )
-        plt.title(f"Lógica de Decisión para Topología {predicted_topology_index + 1}")
-        plt.tight_layout()
-        plt.savefig(os.path.join(out_dir, f"shap_explanation_top_{predicted_topology_index + 1}.png"))
+        
+        plt.title(f"Decision Logic for Topology {predicted_topology_index + 1}", pad=15)
+        
+        # 2. Ajuste manual de márgenes para evitar el solapamiento del Force Plot
+        plt.subplots_adjust(left=0.1, right=0.9) 
+        
+        # 3. Guardar con bbox_inches='tight' para atrapar todo el texto
+        plt.savefig(os.path.join(out_dir, f"shap_explanation_top_{predicted_topology_index + 1}.png"), bbox_inches='tight', dpi=300)
         plt.close()
 
         base_prob = expected_value * 100
         impacts = class_shap_values[0] if len(class_shap_values.shape) > 1 else class_shap_values
         
-        text_report = f"--- INFORME DE INTELIGENCIA EXPLICABLE (XAI) ---\n"
-        text_report += f"La probabilidad base (sesgo del dataset) para esta arquitectura es del {base_prob:.1f}%.\n"
-        if final_adj_prob: text_report += f"Sin embargo, la confianza final se ajustó al {final_adj_prob*100:.1f}%. Esto se debe a:\n"
+        text_report = f"--- EXPLAINABLE AI (XAI) REPORT ---\n"
+        text_report += f"The baseline probability (dataset bias) for this architecture is {base_prob:.1f}%.\n"
+        if final_adj_prob: text_report += f"However, the final confidence was adjusted to {final_adj_prob*100:.1f}%. This is due to:\n"
         
         for j, feature in enumerate(self.feature_names):
             impact_percent = impacts[j] * 100
-            sign = "aumentó" if impact_percent > 0 else "penalizó"
-            text_report += f"  • El requisito de {feature} ({input_specs[0][j]:.2e}) {sign} la probabilidad en un {abs(impact_percent):.2f}%.\n"
+            sign = "increased" if impact_percent > 0 else "penalized"
+            text_report += f"  • The {feature} requirement ({input_specs[0][j]:.2e}) {sign} the probability by {abs(impact_percent):.2f}%.\n"
             
         return impacts, text_report
 
@@ -63,16 +70,13 @@ class ShapleyExplainer:
         os.makedirs(out_dir, exist_ok=True)
         shap_values = self.explainer.shap_values(X_sample)
         
-        # 1. Extracción matemática segura (Bypass del bug de la librería SHAP)
         if isinstance(shap_values, list):
-            # shap_values es una lista de 12 clases, cada una con un array (samples, features)
             mean_abs_impact = np.mean([np.abs(sv).mean(axis=0) for sv in shap_values], axis=0)
         else:
             mean_abs_impact = np.abs(shap_values).mean(axis=(0, 2)) if len(shap_values.shape) > 2 else np.abs(shap_values).mean(axis=0)
             
         importance_dict = {feat: float(imp) for feat, imp in zip(self.feature_names, mean_abs_impact)}
 
-        # 2. Generación del gráfico de barras horizontal (Global Importance)
         sorted_indices = np.argsort(mean_abs_impact)
         sorted_features = [self.feature_names[i] for i in sorted_indices]
         sorted_impacts = [mean_abs_impact[i] for i in sorted_indices]
@@ -80,7 +84,6 @@ class ShapleyExplainer:
         plt.figure(figsize=(10, 6))
         bars = plt.barh(sorted_features, sorted_impacts, color='teal', edgecolor='black', alpha=0.8)
         
-        # Añadir las etiquetas de valor al lado de cada barra
         for bar in bars:
             plt.text(bar.get_width() + (max(sorted_impacts)*0.01), bar.get_y() + bar.get_height()/2, 
                      f'{bar.get_width():.4f}', va='center', ha='left', fontsize=10)
@@ -88,8 +91,6 @@ class ShapleyExplainer:
         plt.xlabel("Mean Absolute SHAP Value (Global Impact on Routing)", fontsize=12)
         plt.title("Global Feature Importance for Topological Routing", fontsize=14, pad=15)
         plt.grid(axis='x', linestyle='--', alpha=0.5)
-        
-        # Ampliar un poco el eje X para que quepa el texto
         plt.xlim(0, max(sorted_impacts) * 1.15) 
         
         plt.tight_layout()
