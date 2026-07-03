@@ -14,7 +14,7 @@
 
 ---
 
-[📖 Paper (Draft PDF)](file:///c:/Users/frang/Desktop/ct_sdm_ai_pipeline/A_Full_Stack_AI_Driven_Framework_and_Comprehensive_Benchmark_in_ML_Assisted_Design_of_Sigma_Delta_Modulators.pdf) • [🚀 Quickstart](#-quickstart--installation) • [⚙️ Architecture & Pipeline](#-the-5-phase-ai-driven-architecture) • [📊 Massive Benchmark](#-massive-benchmark--experimental-results) • [🔬 End-to-End Case Study](#-end-to-end-case-study--xai-application) • [📁 Codebase Directory](#-repository-structure--module-reference)
+[🚀 Quickstart](#-quickstart--installation) • [⚙️ Architecture & Pipeline](#-the-5-phase-ai-driven-architecture) • [📊 Massive Benchmark](#-massive-benchmark--experimental-results) • [🔬 End-to-End Case Study](#-end-to-end-case-study--xai-application) • [📁 Codebase Directory](#-repository-structure--module-reference)
 
 </div>
 
