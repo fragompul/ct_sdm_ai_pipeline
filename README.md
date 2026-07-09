@@ -86,7 +86,7 @@ graph TD
 * **Objective:** Replace deterministic hard labels with calibrated Softmax probability distributions across $N=12$ continuous-time architectures (CIFF and CIFB topologies of orders $L=2, 3, 4$ in Active-RC or Gm-C implementations).
 * **Heuristic Complexity Modulation:** Raw probabilities from advanced soft-voting ensembles (*Voting_Top3* combining Random Forest, XGBoost, and LightGBM) are dynamically modulated by a static complexity cost vector $\mathbf{C} \in \mathbb{R}^N$ (penalizing higher loop orders and power-hungry Gm-C integrators):
   $$P_{adj}(T_i) = \frac{P(T_i | \Gamma_{req}) e^{-\lambda C_i}}{\sum_{j=1}^{N} P(T_j | \Gamma_{req}) e^{-\lambda C_j}}$$
-  where $\lambda = 0.25$ is the temperature hyperparameter regulating trade-offs between statistical statistical confidence and silicon area/stability penalties. The Top-$K$ ($K=3$) candidates are forwarded to Phase 3.
+  where $\lambda = 0.25$ is the temperature hyperparameter regulating trade-offs between statistical statistical confidence and silicon area/stability penalties. The Top - $K$ ($K=3$) candidates are forwarded to Phase 3.
 
 ### 🔹 Phase 3: Unified Generative Space & Masked Loss
 * **Module:** [src/models/phase3_gen.py](file:///c:/Users/frang/Desktop/ct_sdm_ai_pipeline/src/models/phase3_gen.py) & [src/training/custom_losses.py](file:///c:/Users/frang/Desktop/ct_sdm_ai_pipeline/src/training/custom_losses.py)
@@ -102,7 +102,7 @@ graph TD
   $$\mathcal{L}_{total} = \mathcal{L}_{data}(\mathcal{S}_\psi(T_i, \epsilon), \Gamma_{true}) + \lambda_{phys} \mathcal{L}_{physics}(\epsilon, \mathcal{S}_\psi)$$
 * **Differentiable Gradient Ascent:** Freezing surrogate weights $\psi$ unlocks a continuous, differentiable landscape, replacing slow metaheuristic evolutionary algorithms with rapid gradient ascent over design features:
   $$\epsilon^{(t+1)} = \epsilon^{(t)} + \alpha \nabla_\epsilon FoM_S\left(\mathcal{S}_\psi(T_i, \epsilon^{(t)})\right)$$
-* **Sign-Off Simulator Verification:** Only the singular best candidate super-vector $\epsilon^*$ for each Top-$K$ topology is routed to the ground-truth behavioral electrical simulator ([src/utils/simulator.py](file:///c:/Users/frang/Desktop/ct_sdm_ai_pipeline/src/utils/simulator.py) leveraging `cbadc` / NGSpice) for definitive hardware sign-off!
+* **Sign-Off Simulator Verification:** Only the singular best candidate super-vector $\epsilon^*$ for each Top - $K$ topology is routed to the ground-truth behavioral electrical simulator ([src/utils/simulator.py](file:///c:/Users/frang/Desktop/ct_sdm_ai_pipeline/src/utils/simulator.py) leveraging `cbadc` / NGSpice) for definitive hardware sign-off!
 
 ### 🔹 Phase 5: Transparent Decision Making via Explainable AI (XAI)
 * **Module:** [src/utils/xai_shap.py](file:///c:/Users/frang/Desktop/ct_sdm_ai_pipeline/src/utils/xai_shap.py)
@@ -252,9 +252,9 @@ cd ct_sdm_ai_pipeline
 # Create and activate a clean virtual environment (Recommended)
 python -m venv venv
 # On Windows PowerShell:
-.\venv\Scripts\Activate.ps1
+# .\venv\Scripts\Activate.ps1
 # On Linux/macOS:
-# source venv/bin/activate
+source venv/bin/activate
 
 # Install core dependencies and custom cbadc simulator
 pip install --upgrade pip
